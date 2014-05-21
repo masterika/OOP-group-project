@@ -12,7 +12,8 @@
 
 <form action="Create" method="post">
     UserName: <input type="text" name="name"/> <br/>
-    Password: <input type="text" name="password"/>
+    Email: <input type="text" name="name"/> <br/>
+    Password: <input type="password" name="password"/>
     <input type="submit" value="Login" name="login"/>
 </form>
 

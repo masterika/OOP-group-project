@@ -1,5 +1,5 @@
 package model.data;
 
-public class Admin {
+public class Room {
 
 }
