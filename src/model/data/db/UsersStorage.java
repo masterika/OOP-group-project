@@ -15,12 +15,35 @@ public class UsersStorage implements UsersStorageInterface{
 		boolean retVal = false;
 		Connection conn = DBConnection.createConnection();
 		try {
-            String query = "INSERT INTO users (username,password,email) VALUES (?,?,?,?);";
+            String query = "INSERT INTO users (username,password,email) VALUES (?,?,?);";
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
-            retVal = statement.execute();
+            statement.execute();
+            retVal = true;
+        } catch (SQLException e) {
+            retVal = false;
+        }finally{
+        	DBConnection.closeConnection();
+        }
+		return retVal;
+	}
+	
+	public boolean isValidUser(User user){
+		boolean retVal = false;
+		Connection conn = DBConnection.createConnection();
+		try {
+            String query = "select * from users where username = ? and password = ?;";
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getPassword());
+            ResultSet res = statement.executeQuery();
+            if(res.next()){
+                retVal = true;
+           } else {
+                retVal = false;
+           }
         } catch (SQLException e) {
             retVal = false;
         }finally{

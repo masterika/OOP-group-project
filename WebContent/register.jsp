@@ -11,10 +11,10 @@
 <h1>Create New Account</h1>
 
 <form action="Create" method="post">
-    UserName: <input type="text" name="name"/> <br/>
-    Email: <input type="text" name="name"/> <br/>
+    UserName: <input type="text" name="username"/> <br/>
+    Email: <input type="text" name="email"/> <br/>
     Password: <input type="password" name="password"/>
-    <input type="submit" value="Login" name="login"/>
+    <input type="submit" value="Create" name="create"/>
 </form>
 
 </body>

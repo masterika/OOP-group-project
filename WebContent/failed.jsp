@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>LogIn</title>
+<title>Insert title here</title>
 </head>
 <body>
+<h1>Please Try Again</h1>
 
-<p> Please Enter User Name and Password</p>
+<p>Your user name or password are incorrect. Please try again</p>
 
-<div>
 <form action="Login" method="post"> 
 	UserName: <input type="text" name="username"/> <br>
     Password: <input type="password" name="password"/>
@@ -18,6 +18,5 @@
 
 </form>
 
-</div>
 </body>
 </html>

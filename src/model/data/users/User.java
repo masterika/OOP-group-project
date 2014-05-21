@@ -6,8 +6,12 @@ public class User {
 	private String password;
 	private String email;
 	
-	public User(int id) {
-		this.id  = id;
+	public User() {
+		
+	}
+	
+	public void SetId(int id){
+		this.id = id;
 	}
 	
 	public int getId(){

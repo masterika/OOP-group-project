@@ -4,20 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>LogIn</title>
+<title>Insert title here</title>
 </head>
 <body>
+<h1>Please Try Again</h1>
 
-<p> Please Enter User Name and Password</p>
+<p>account creation failed. Please try again</p>
 
-<div>
-<form action="Login" method="post"> 
-	UserName: <input type="text" name="username"/> <br>
-    Password: <input type="password" name="password"/>
-    <input type="submit" value="Login" name="login"/>
-
-</form>
-
-</div>
 </body>
 </html>

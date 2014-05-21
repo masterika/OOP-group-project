@@ -4,20 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>LogIn</title>
+<title>Welcome <%= request.getParameter("username")%></title>
 </head>
 <body>
-
-<p> Please Enter User Name and Password</p>
-
-<div>
-<form action="Login" method="post"> 
-	UserName: <input type="text" name="username"/> <br>
-    Password: <input type="password" name="password"/>
-    <input type="submit" value="Login" name="login"/>
-
-</form>
-
-</div>
+   <h1>Welcome <%= request.getParameter("username")%></h1>
 </body>
 </html>

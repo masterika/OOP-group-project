@@ -14,4 +14,6 @@ public interface UsersStorageInterface {
 	 */
 	public User loadUser(int id);
 	
+	public boolean isValidUser(User user);
+	
 }
