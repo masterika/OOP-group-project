@@ -1,9 +1,18 @@
 package model.data.users;
 
-public class Agency extends User{
+import java.util.HashMap;
 
-	public Agency(int id) {
-		super();
+import model.data.Trip;
+
+public class Agency extends Sellers{
+	private String name;
+	private HashMap<String,Trip> trips;	
+	public Agency() {		
 	}
-
+	public Trip getTrip(int tripID) {
+		return trips.get(tripID);
+	}
+	public void addTrip (Trip trip) {
+		trips.put(trip.getId(),trip);
+	}	
 }
