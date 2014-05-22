@@ -12,7 +12,7 @@ public class BasicUser {
 	
 	public BasicUser() {		
 	}
-	public String getUserName() {
+	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String userName) {
