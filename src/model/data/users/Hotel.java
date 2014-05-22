@@ -1,9 +1,6 @@
 package model.data.users;
 
-public class Hotel extends User{
-
-	public Hotel(int id) {
-		super();
+public class Hotel extends Sellers{
+	public Hotel() {		
 	}
-
 }
