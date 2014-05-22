@@ -7,16 +7,16 @@ package model.data.users;
  */
 
 public class BasicUser {
-	private String userName;
+	private String username;
 	private String password;
 	
 	public BasicUser() {		
 	}
 	public String getUserName() {
-		return userName;
+		return username;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String userName) {
+		this.username = username;
 	}
 	public String getPassword() {
 		return password;
