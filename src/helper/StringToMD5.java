@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class StringToMD5 {
+	
 	public static String generate(String password){
 		MessageDigest md = null;
 		try {
