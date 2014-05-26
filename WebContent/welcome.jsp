@@ -8,5 +8,6 @@
 </head>
 <body>
    <h1>Welcome <%= request.getParameter("username")%></h1>
+   <a  href="edit_user_profile.jsp"> edit profile</a>
 </body>
 </html>
