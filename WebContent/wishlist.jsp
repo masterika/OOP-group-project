@@ -15,7 +15,7 @@
 <body>
 	<h1>Items:</h1>
 	<%
-		Wishlist list = ((Client) session.getAttribute("userId"))
+		Wishlist list = ((Client) session.getAttribute("user"))
 				.getWishlist();
 		ArrayList<Hotel> hotels = list.getHotels();
 		ArrayList<Trip> trips = list.getTrips();

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h1> Welcome to our touristic website TURISTA  </h1>
+<h1> Welcome to TURISTA!!!  </h1>
 
 <a href="login.jsp">Log In</a><br>
 <a href="register.jsp">Registration</a>
