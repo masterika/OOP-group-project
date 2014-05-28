@@ -144,6 +144,7 @@ CREATE TABLE `trip_package` (
   `id` INTEGER NULL AUTO_INCREMENT,
   `trip_id` INTEGER NULL,
   `location_id` INTEGER NULL,
+  `period` INTEGER,
   PRIMARY KEY (`id`)
 );
 
@@ -247,8 +248,8 @@ ALTER TABLE `wishlist_items` ADD FOREIGN KEY (item_id) REFERENCES `hotel_rooms` 
 -- ('','','','');
 -- INSERT INTO `trip_package` (`id`,`trip_id`,`location_id`) VALUES
 -- ('','','');
--- INSERT INTO `locations` (`id`,`location_name`,`hotel_id`) VALUES
--- ('','','');
+-- INSERT INTO `locations` (`id`,`location_name`,`hotel_id`,`period`) VALUES
+-- ('','','','');
 -- INSERT INTO `wishlist` (`id`,`item_id`,`client_id`) VALUES
 -- ('','','');
 -- INSERT INTO `wishlist_items` (`id`,`type`,`item_id`) VALUES
