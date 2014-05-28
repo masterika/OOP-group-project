@@ -1,6 +1,6 @@
 package model.data.users;
 
 public interface Product {
-	public String getID();
-	public void setID();
+	public String getId();
+	public void setId(String id);
 }
