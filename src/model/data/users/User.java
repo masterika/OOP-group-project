@@ -1,6 +1,5 @@
 package model.data.users;
 
-import model.data.Wishlist;
 
 public class User {
 	private int id;

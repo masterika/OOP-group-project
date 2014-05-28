@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import model.data.users.Hotel;
 import model.data.users.User;
 
 public class UsersStorage implements UsersStorageInterface {

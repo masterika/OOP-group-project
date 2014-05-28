@@ -1,7 +1,5 @@
 package model.data.users;
 
-import java.util.HashMap;
-
 import model.data.Wishlist;
 
 public class Client extends User{
