@@ -48,8 +48,10 @@ public class AccountCreateServlet extends HttpServlet {
 		user.setEmail(request.getParameter("email"));
 		user.setPassword(StringToMD5.generate(request.getParameter("password")));
 
+		
 		UsersStorage storage = new UsersStorage();
 		if (storage.saveUser(user)) {
+			request.getSession().setAttribute("user", storage.loadUser(user.getUsername()));
 			RequestDispatcher r = request.getRequestDispatcher("welcome.jsp");
 			r.forward(request, response);
 		}else{

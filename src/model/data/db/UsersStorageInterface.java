@@ -12,8 +12,12 @@ public interface UsersStorageInterface {
 	/*
 	 * retrieve user from database
 	 */
-	public User loadUser(int id);
+	public User loadUser(String username);
+	
 	
 	public boolean isValidUser(User user);
+	
+	
+	public void changePassword(int id, String pass);
 	
 }

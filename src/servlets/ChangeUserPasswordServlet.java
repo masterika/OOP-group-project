@@ -15,16 +15,16 @@ import model.data.db.UsersStorage;
 import model.data.users.User;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class ChangeUserPasswordServlet
  */
-@WebServlet(urlPatterns = {"/LoginServlet", "/Login"})
-public class LoginServlet extends HttpServlet {
+@WebServlet("/ChangeUserPasswordServlet")
+public class ChangeUserPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public ChangeUserPasswordServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,16 +40,22 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = new User();
-		user.setUsername(request.getParameter("username"));
-		user.setPassword(StringToMD5.generate(request.getParameter("password")));
-		UsersStorage storage = new UsersStorage();
-		if(storage.isValidUser(user)){
-			request.getSession().setAttribute("user", storage.loadUser(user.getUsername()));
-			RequestDispatcher r = request.getRequestDispatcher("welcome.jsp");
+		UsersStorage us = new UsersStorage();
+		
+		String previousPassword = ((User)request.getSession().getAttribute("user")).getPassword();
+		String typedPrevPass = StringToMD5.generate(request.getParameter("prevpass"));
+		if (previousPassword.equals(typedPrevPass) && request.getParameter("newpass").equals(request.getParameter("confnewpass"))){
+			
+			us.changePassword(((User)request.getSession().getAttribute("user")).getId(), StringToMD5.generate(request.getParameter("newpass")));
+			RequestDispatcher r = request.getRequestDispatcher("edit_profile_client.jsp");
 			r.forward(request, response);
-		}else{
-			RequestDispatcher r = request.getRequestDispatcher("failed.jsp");
+		}
+		else if (!previousPassword.equals(typedPrevPass)){
+			RequestDispatcher r = request.getRequestDispatcher("prev_pass_misspelled.jsp");
+			r.forward(request, response);
+		}
+		else{
+			RequestDispatcher r = request.getRequestDispatcher("confirmation_failed.jsp");
 			r.forward(request, response);
 		}
 	}

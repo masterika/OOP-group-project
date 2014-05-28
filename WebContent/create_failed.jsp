@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Failed</title>
 </head>
 <body>
 <h1>Please Try Again</h1>
 
-<p>account creation failed. Please try again</p>
+<p>account creation failed</p>
 
 </body>
 </html>

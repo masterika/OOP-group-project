@@ -8,5 +8,7 @@
 </head>
 <body>
    <h1>Welcome <%= request.getParameter("username")%></h1>
+   <a href= <%="edit_profile_client.jsp?username=" +request.getParameter("username") %> > edit profile</a>
+   
 </body>
 </html>
