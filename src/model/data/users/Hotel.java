@@ -1,11 +1,11 @@
 package model.data.users;
 
 public class Hotel extends Sellers{
-	public Hotel(int arg) {		
+	public Hotel() {		
 	}
 	
-	public int getId(){
-		return 0;
+	public String getId(){
+		return "";
 	}
 	
 	public String getName(){
