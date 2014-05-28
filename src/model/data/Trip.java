@@ -1,7 +1,6 @@
 package model.data;
 import java.util.ArrayList;
 import java.util.List;
-import model.data.users.Location;
 import model.data.users.Product;
 public class Trip implements Product{
 	private String id;
