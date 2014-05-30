@@ -6,6 +6,8 @@ package model.data.users;
 public class Sellers extends User {
 	private String name;
 	private String adress;
+	private String telephone;
+	
 	public Sellers() {		
 	}
 	public String getName() {
@@ -20,6 +22,15 @@ public class Sellers extends User {
 	public void setAdress(String adress) {
 		this.adress = adress;
 	}
+	
+	public String getTelephone() {
+		return telephone;
+	}
+	
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	
 	
 	/* these last to methods doesn't take part in registration */
 	public void setRating() {}

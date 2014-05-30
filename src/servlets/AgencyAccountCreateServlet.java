@@ -11,46 +11,53 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.data.db.UsersStorage;
-import model.data.users.User;
+import model.data.db.AgencyStorage;
+import model.data.users.Agency;
+
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class AgencyAccountCreateServlet
  */
-@WebServlet(urlPatterns = {"/LoginServlet", "/Login"})
-public class LoginServlet extends HttpServlet {
+@WebServlet("/CreateAgency")
+public class AgencyAccountCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public AgencyAccountCreateServlet() {
         super();
-        // TODO Auto-generated constructor stub
+      
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = new User();
-		user.setUsername(request.getParameter("username"));
-		user.setPassword(StringToMD5.generate(request.getParameter("password")));
-		UsersStorage storage = new UsersStorage();
-		if(storage.isValidUser(user)){
-			request.getSession().setAttribute("user", storage.loadUser(user.getId()));
+		Agency agency = new Agency();
+		agency.setUsername(request.getParameter("username"));
+		agency.setPassword(StringToMD5.generate(request.getParameter("password")));
+		agency.setEmail(request.getParameter("email"));
+		agency.setName(request.getParameter("agency_name"));
+		agency.setAdress(request.getParameter("adress"));
+		agency.setTelephone(request.getParameter("telephone"));
+		
+		AgencyStorage storage = new AgencyStorage();
+		if(storage.saveAgency(agency)){
+			request.getSession().setAttribute("agency", storage.loadAgency(agency.getUsername()));
 			RequestDispatcher r = request.getRequestDispatcher("welcome.jsp");
 			r.forward(request, response);
 		}else{
-			RequestDispatcher r = request.getRequestDispatcher("failed.jsp");
+			RequestDispatcher r = request.getRequestDispatcher("create_failed.jsp");
 			r.forward(request, response);
+			
 		}
 	}
 

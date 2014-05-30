@@ -7,8 +7,31 @@ import model.data.Trip;
 public class Agency extends Sellers{
 	private String name;
 	private HashMap<String,Trip> trips;	
+	
+	private int agencyId;
+	
+	
+	
+	
 	public Agency() {		
 	}
+	
+	
+	public void setAgencyId(int agencyId){
+		this.agencyId = agencyId;
+	}
+	
+	public int getAgencyId(){
+		return agencyId;
+	}
+	
+
+	
+	
+	
+	
+	
+	
 	public Trip getTrip(int tripID) {
 		return trips.get(tripID);
 	}

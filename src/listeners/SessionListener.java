@@ -5,7 +5,9 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 import model.data.users.User;
-
+import model.data.users.Client;
+import model.data.users.Agency;
+import model.data.users.Hotel;
 /**
  * Application Lifecycle Listener implementation class SessionListener
  *
@@ -25,7 +27,13 @@ public class SessionListener implements HttpSessionListener {
      */
     public void sessionCreated(HttpSessionEvent arg0) {
        User user  = new User();
+       Client client = new Client();
+       Agency agency = new Agency();
+       Hotel hotel = new Hotel();
        arg0.getSession().setAttribute("user", user);
+       arg0.getSession().setAttribute("client", client);
+       arg0.getSession().setAttribute("agency", agency);
+       arg0.getSession().setAttribute("hotel", hotel);
     }
 
 	/**
