@@ -2,20 +2,26 @@
 	<form action="Create" method="post">
 		<h1>Sign up</h1>
 		<div class="line">
+			<select id="type">
+				<option value="client">Client</option>
+				<option value="hotel">Hotel</option>
+				<option value="agency">Agency</option>
+			</select>
+		</div>
+		<div class="line">
 			<label for="username">Username *: </label><input type="text"
 				id="username" />
 		</div>
 		<div class="line">
-			<label for="email">Email *: </label><input type="email"
-				id="username" />
+			<label for="email">Email *: </label><input type="email" id="username" />
 		</div>
 		<div class="line">
 			<label for="password">Password *: </label><input type="password"
 				id="password" />
 		</div>
 		<div class="line">
-			<label for="confPassword">Confirm Password *: </label><input type="password"
-				id="confPassword" />
+			<label for="confPassword">Confirm Password *: </label><input
+				type="password" id="confPassword" />
 		</div>
 		<div class="line submit">
 			<input type="submit" value="Sign in" />
