@@ -10,8 +10,8 @@
 
 <h1> Welcome to TURISTA!!!  </h1>
 
-<a href="login.jsp">Log In</a><br>
-<a href="register.jsp">Registration</a>
+<a href="/Turista/signin">Log In</a><br>
+<a href="/Turista/signup">Registration</a>
 
 
 </body>

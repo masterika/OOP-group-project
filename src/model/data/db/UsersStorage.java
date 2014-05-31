@@ -33,33 +33,33 @@ public class UsersStorage implements UsersStorageInterface {
 		return retVal;
 	}
 
-	public boolean isValidUser(User user) {
-		boolean retVal = false;
+	public int isValidUser(User user) {
+		int retVal = -1;
 		try {
-			String query = "select * from users where username = ? and password = ?;";
+			String query = "select id from users where username = ? and password = ?;";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setString(1, user.getUsername());
 			statement.setString(2, user.getPassword());
 			ResultSet res = statement.executeQuery();
 			if (res.next()) {
-				retVal = true;
+				retVal = res.getInt(1);
 			} else {
-				retVal = false;
+				retVal = -1;
 			}
 		} catch (SQLException e) {
-			retVal = false;
+			retVal = -1;
 		} finally {
 			DBConnection.closeConnection();
 		}
 		return retVal;
 	}
 
-	public User loadUser(String username) {
+	public User loadUser(int id) {
 		User user = null;
 		try {
-			String query = "SELECT * FROM users WHERE username = ?;";
+			String query = "SELECT * FROM users WHERE id = ?;";
 			PreparedStatement statement = conn.prepareStatement(query);
-			statement.setString(1, username);
+			statement.setInt(1, id);
 			ResultSet rs = statement.executeQuery();
 
 			if (rs.next()) {

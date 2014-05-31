@@ -43,21 +43,33 @@ public class AccountCreateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
+		String username = request.getParameter("username");
+		String email = request.getParameter("email");
+		String password = StringToMD5.generate(request.getParameter("password"));
+		String confPassword = StringToMD5.generate(request.getParameter("confPassword"));
+		
+		if(!password.equals(confPassword)){
+			RequestDispatcher r = request.getRequestDispatcher("/Turista/signup/?notmatch");
+			r.forward(request, response);
+			return;
+		}
+		
 		User user = new User();
-		user.setUsername(request.getParameter("username"));
-		user.setEmail(request.getParameter("email"));
-		user.setPassword(StringToMD5.generate(request.getParameter("password")));
-
+		user.setUsername(username);
+		user.setEmail(email);
+		user.setPassword(password);
 		
 		UsersStorage storage = new UsersStorage();
-		if (storage.saveUser(user)) {
-			request.getSession().setAttribute("user", storage.loadUser(user.getUsername()));
+		int userId = storage.isValidUser(user);
+		if(storage.isValidUser(user) != -1){
+			storage.saveUser(user);
+			request.getSession().setAttribute("user", storage.loadUser(userId));
 			RequestDispatcher r = request.getRequestDispatcher("welcome.jsp");
 			r.forward(request, response);
 		}else{
-			RequestDispatcher r = request.getRequestDispatcher("create_failed.jsp");
+			RequestDispatcher r = request.getRequestDispatcher("/Turista/signup/?failed");
 			r.forward(request, response);
-			
 		}
 	}
 

@@ -44,8 +44,9 @@ public class LoginServlet extends HttpServlet {
 		user.setUsername(request.getParameter("username"));
 		user.setPassword(StringToMD5.generate(request.getParameter("password")));
 		UsersStorage storage = new UsersStorage();
-		if(storage.isValidUser(user)){
-			request.getSession().setAttribute("user", storage.loadUser(user.getId()));
+		int userId = storage.isValidUser(user);
+		if(userId != -1){
+			request.getSession().setAttribute("user", storage.loadUser(userId));
 			RequestDispatcher r = request.getRequestDispatcher("welcome.jsp");
 			r.forward(request, response);
 		}else{
