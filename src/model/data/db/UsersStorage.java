@@ -12,10 +12,11 @@ public class UsersStorage implements UsersStorageInterface {
 	private Connection conn;
 
 	public UsersStorage() {
-		conn = DBConnection.createConnection();
+		
 	}
 
 	public boolean saveUser(User user) {
+		conn = DBConnection.createConnection();
 		boolean retVal = false;
 		try {
 			String query = "INSERT INTO users (username,password,email) VALUES (?,?,?);";
@@ -34,6 +35,7 @@ public class UsersStorage implements UsersStorageInterface {
 	}
 
 	public int isValidUser(User user) {
+		conn = DBConnection.createConnection();
 		int retVal = -1;
 		try {
 			String query = "select id from users where username = ? and password = ?;";
@@ -55,6 +57,7 @@ public class UsersStorage implements UsersStorageInterface {
 	}
 
 	public User loadUser(int id) {
+		conn = DBConnection.createConnection();
 		User user = null;
 		try {
 			String query = "SELECT * FROM users WHERE id = ?;";
@@ -79,6 +82,7 @@ public class UsersStorage implements UsersStorageInterface {
 	}
 
 	public void changePassword(int id, String pass) {
+		conn = DBConnection.createConnection();
 		System.out.println(id + " " + pass);
 		try {
 			String query = "UPDATE users SET password = \"" + pass

@@ -17,7 +17,7 @@ import model.data.users.User;
 /**
  * Servlet implementation class AccountCreateServlet
  */
-@WebServlet(urlPatterns = { "/AccountCreateServlet", "/Create" })
+@WebServlet(urlPatterns = { "/AccountCreateServlet", "/signup/create" })
 public class AccountCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -50,8 +50,7 @@ public class AccountCreateServlet extends HttpServlet {
 		String confPassword = StringToMD5.generate(request.getParameter("confPassword"));
 		
 		if(!password.equals(confPassword)){
-			RequestDispatcher r = request.getRequestDispatcher("/Turista/signup/?notmatch");
-			r.forward(request, response);
+			response.sendRedirect("/Turista/signup/?notmatch");
 			return;
 		}
 		
@@ -62,14 +61,12 @@ public class AccountCreateServlet extends HttpServlet {
 		
 		UsersStorage storage = new UsersStorage();
 		int userId = storage.isValidUser(user);
-		if(storage.isValidUser(user) != -1){
+		if(storage.isValidUser(user) == -1){
 			storage.saveUser(user);
 			request.getSession().setAttribute("user", storage.loadUser(userId));
-			RequestDispatcher r = request.getRequestDispatcher("welcome.jsp");
-			r.forward(request, response);
+			response.sendRedirect("/Turista/welcome.jsp");
 		}else{
-			RequestDispatcher r = request.getRequestDispatcher("/Turista/signup/?failed");
-			r.forward(request, response);
+			response.sendRedirect("/Turista/signup/?failed");
 		}
 	}
 
