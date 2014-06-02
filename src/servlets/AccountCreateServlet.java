@@ -60,11 +60,10 @@ public class AccountCreateServlet extends HttpServlet {
 		user.setPassword(password);
 		
 		UsersStorage storage = new UsersStorage();
-		int userId = storage.isValidUser(user);
 		if(storage.isValidUser(user) == -1){
 			storage.saveUser(user);
-			request.getSession().setAttribute("user", storage.loadUser(userId));
-			response.sendRedirect("/Turista/welcome.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
+		    rd.forward(request, response);
 		}else{
 			response.sendRedirect("/Turista/signup/?failed");
 		}

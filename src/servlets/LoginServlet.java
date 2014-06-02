@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 			request.getSession().setAttribute("user", storage.loadUser(userId));
 			response.sendRedirect("/Turista/welcome.jsp");
 		}else{
-			response.sendRedirect("/Turista/failed.jsp");
+			response.sendRedirect("/Turista/signin/?failed");
 		}
 	}
 
