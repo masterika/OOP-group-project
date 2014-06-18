@@ -129,22 +129,8 @@ CREATE TABLE `agency_trips` (
   `id` INTEGER NULL AUTO_INCREMENT,
   `agency_id` INTEGER NULL,
   `trip_type` VARCHAR(20) NULL,
+  `trip_name` VARCHAR(20) NULL,  
   `price` DECIMAL NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'trip_package'
--- 
--- ---
-
-DROP TABLE IF EXISTS `trip_package`;
-		
-CREATE TABLE `trip_package` (
-  `id` INTEGER NULL AUTO_INCREMENT,
-  `trip_id` INTEGER NULL,
-  `location_id` INTEGER NULL,
-  `period` INTEGER,
   PRIMARY KEY (`id`)
 );
 
@@ -155,10 +141,12 @@ CREATE TABLE `trip_package` (
 
 DROP TABLE IF EXISTS `locations`;
 		
-CREATE TABLE `locations` (
+CREATE TABLE `locations` 
   `id` INTEGER NULL AUTO_INCREMENT,
   `location_name` VARCHAR(20) NULL,
-  `hotel_id` INTEGER NULL,
+  `hotel_id` INTEGER NULL,  
+  `trip_id` INTEGER NULL,
+  `period` INTEGER,
   PRIMARY KEY (`id`)
 );
 
@@ -246,8 +234,7 @@ ALTER TABLE `wishlist_items` ADD FOREIGN KEY (item_id) REFERENCES `hotel_rooms` 
 -- ('','');
 -- INSERT INTO `agency_trips` (`id`,`agency_id`,`trip_type`,`price`) VALUES
 -- ('','','','');
--- INSERT INTO `trip_package` (`id`,`trip_id`,`location_id`) VALUES
--- ('','','');
+
 -- INSERT INTO `locations` (`id`,`location_name`,`hotel_id`,`period`) VALUES
 -- ('','','','');
 -- INSERT INTO `wishlist` (`id`,`item_id`,`client_id`) VALUES
