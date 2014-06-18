@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
+import java.util.ArrayList;
+
 import model.data.users.User;
 import model.data.users.Agency;
 
@@ -120,7 +122,31 @@ public class AgencyStorage {
 		 return agency;
 	}
 
-	
-	
+	public ArrayList<Agency> getAgenciesFromDB(){
+		ArrayList<Agency> list =  new ArrayList<Agency>();
+		try {
+            String query = "SELECT * FROM user_agency, users WHERE users.id = user_agency.user_id;";
+            PreparedStatement statement = con.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+            	Agency agency = new Agency();
+            	agency.setName(rs.getString("agency_name"));
+            	agency.setAdress(rs.getString("adress"));
+            	agency.setTelephone(rs.getString("telephone"));
+            	agency.setId(rs.getInt("user_id"));
+            	agency.setUsername(rs.getString("username"));
+            	agency.setEmail(rs.getString("email"));
+            	agency.setPassword(rs.getString("password"));
+            	agency.setAgencyId(rs.getInt("user_agency.id"));	
+            	list.add(agency);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+        	DBConnection.closeConnection();
+        }
+		return list;
+	}
 	
 }
