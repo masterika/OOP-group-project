@@ -8,14 +8,14 @@ import model.data.users.Hotel;
  * hotel - where you are staying, duration - how many days are you staying and city
  */
 public class Location { // this class is trip helper class
-	private Hotel hotel = new Hotel(); // hotel, where you are staying
+	private String hotel; // hotel name, where you are staying
 	private int duration; // duration in days
-	private String city; // name of city
-	public Hotel getHotel() {
+	private String city; // name of the city
+	public String getHotel() {
 		return hotel;
 	}
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
+	public void setHotel(String name) {
+		this.hotel = name;
 	}
 	public int getDuration() {
 		return duration;
@@ -30,4 +30,3 @@ public class Location { // this class is trip helper class
 		this.city = city;
 	}
 }
-
