@@ -141,7 +141,7 @@ CREATE TABLE `agency_trips` (
 
 DROP TABLE IF EXISTS `locations`;
 		
-CREATE TABLE `locations` 
+CREATE TABLE `locations` (
   `id` INTEGER NULL AUTO_INCREMENT,
   `location_name` VARCHAR(20) NULL,
   `hotel_id` INTEGER NULL,  
@@ -189,9 +189,8 @@ ALTER TABLE `hotel_rooms` ADD FOREIGN KEY (hotel_id) REFERENCES `user_hotel` (`i
 ALTER TABLE `galleries` ADD FOREIGN KEY (room_id) REFERENCES `hotel_rooms` (`id`);
 ALTER TABLE `galleries` ADD FOREIGN KEY (picture_id) REFERENCES `pictures` (`id`);
 ALTER TABLE `agency_trips` ADD FOREIGN KEY (agency_id) REFERENCES `user_agency` (`id`);
-ALTER TABLE `trip_package` ADD FOREIGN KEY (trip_id) REFERENCES `agency_trips` (`id`);
-ALTER TABLE `trip_package` ADD FOREIGN KEY (location_id) REFERENCES `locations` (`id`);
 ALTER TABLE `locations` ADD FOREIGN KEY (hotel_id) REFERENCES `user_hotel` (`id`);
+ALTER TABLE `locations` ADD FOREIGN KEY (trip_id) REFERENCES `agency_trips` (`id`);
 ALTER TABLE `wishlist` ADD FOREIGN KEY (item_id) REFERENCES `wishlist_items` (`id`);
 ALTER TABLE `wishlist` ADD FOREIGN KEY (client_id) REFERENCES `user_client` (`id`);
 ALTER TABLE `wishlist_items` ADD FOREIGN KEY (item_id) REFERENCES `agency_trips` (`id`);
