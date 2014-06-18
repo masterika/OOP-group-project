@@ -68,21 +68,21 @@ public class AgencyStorage {
 	}
 	
 	
-	public boolean isValidAgency(Agency agency){
-		boolean retVal = false;
+	public int isValidAgency(Agency agency){
+		int retVal = -1;
 		try {
-			String query = "select * from user_agency,users where users.username = ? and users.password = ? and users.id = user_agency.user_id;";
+			String query = "select users.id,user_agency.user_id from user_agency,users where users.username = ? and users.password = ? and users.id = user_agency.user_id;";
 			PreparedStatement statement = con.prepareStatement(query);
 			statement.setString(1, agency.getUsername());
 			statement.setString(2, agency.getPassword());
 			ResultSet res = statement.executeQuery();
 			if (res.next()) {
-				retVal = true;
+				retVal = res.getInt(1);
 			} else {
-				retVal = false;
+				retVal = -1;
 			}
 		} catch (SQLException e) {
-			retVal = false;
+			retVal = -1;
 		} finally {
 			DBConnection.closeConnection();
 		}
@@ -90,12 +90,12 @@ public class AgencyStorage {
 		
 	}
 	
-	public Agency loadAgency(String username) {
+	public Agency loadAgency(int id) {
 		Agency agency = null;
 		try {
-            String query = "SELECT * FROM user_agency, users WHERE users.username = ? and users.id = user_agency.user_id;";
+            String query = "SELECT * FROM user_agency, users WHERE users.id = ? and users.id = user_agency.user_id;";
             PreparedStatement statement = con.prepareStatement(query);
-            statement.setString(1, username);
+            statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {

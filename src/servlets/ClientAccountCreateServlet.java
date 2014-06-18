@@ -51,9 +51,8 @@ public class ClientAccountCreateServlet extends HttpServlet {
 		
 		ClientStorage storage = new ClientStorage();
 		if(storage.saveClient(client)){
-			request.getSession().setAttribute("client", storage.loadClient(client.getUsername()));
-			RequestDispatcher r = request.getRequestDispatcher("welcome.jsp");
-			r.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
+		    rd.forward(request, response);
 		}else{
 			RequestDispatcher r = request.getRequestDispatcher("create_failed.jsp");
 			r.forward(request, response);
