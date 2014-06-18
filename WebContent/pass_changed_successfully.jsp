@@ -4,17 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MainPage</title>
+<title>Insert title here</title>
 </head>
 <body>
-
-<h1> Welcome to TURISTA!!!  </h1>
-
-<a href="/Turista/signin">Log In</a><br>
-<a href="/Turista/signup">Registration</a><br>
-<a href="list_hotels.jsp">Hotels</a><br>
-<a href="list_agency.jsp">Agencies</a>
-
-
+	<h1> <% 
+		 request.getAttribute("num");
+		%>
+		</h1>
+	
 </body>
 </html>

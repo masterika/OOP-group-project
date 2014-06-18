@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
+import java.util.ArrayList;
+
 import model.data.users.Hotel;
 import model.data.users.User;
 
@@ -123,4 +125,33 @@ public class HotelStorage {
 		 return hotel;
 	}
 
+	public ArrayList<Hotel> getHotelsFromDB(){
+		ArrayList<Hotel> list =  new ArrayList<Hotel>();
+		try {
+            String query = "SELECT * FROM user_hotel, users WHERE users.id = user_hotel.user_id;";
+            PreparedStatement statement = con.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+            	Hotel hotel = new Hotel();
+            	hotel.setName(rs.getString("hotel_name"));
+            	hotel.setAdress(rs.getString("adress"));
+            	hotel.setTelephone(rs.getString("telephone"));
+            	hotel.setId(rs.getInt("user_id"));
+            	hotel.setUsername(rs.getString("username"));
+            	hotel.setEmail(rs.getString("email"));
+            	hotel.setPassword(rs.getString("password"));
+            	hotel.setHotelId(rs.getInt("user_hotel.id"));
+            	hotel.setRoomNum(rs.getInt("rooms_num"));
+            	hotel.setStars(rs.getInt("stars"));
+            	list.add(hotel);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+        	DBConnection.closeConnection();
+        }
+		return list;
+	}
 }
