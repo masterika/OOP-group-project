@@ -46,19 +46,19 @@ public class StaticStorage {
 			statement.setString(3, seller.getAdress());
 			statement.setString(4, seller.getTelephone());
 			statement.execute();
-			retVal = getSellerId(seller.getUsername()); // insert_id unda sinqronizebuli ogond!!!
+			retVal = getSellerId(userid); // insert_id unda sinqronizebuli ogond!!!
 		} catch (SQLException e) {			
 		} finally {
 			DBConnection.closeConnection();
 		}
 		return retVal;				
 	}
-	private static int getSellerId(String userid) {
+	private static int getSellerId(int userid) {
 		int id = -1;
 		try {
 			String q = "SELECT * FROM user_seller WHERE user_id = ?;"; // aq pirdapir select id minda 1 xazzshi ar sheileba?
 			PreparedStatement statement = conn.prepareStatement(q);
-			statement.setString(1, userid);		
+			statement.setInt(1, userid);		
 			ResultSet rs = statement.executeQuery();
 			if (rs.next())
 				id = rs.getInt("id");			
@@ -90,7 +90,8 @@ public class StaticStorage {
 		conn = DBConnection.createConnection();
 		boolean retVal = false;
 		try {
-			String query = "INSERT INTO seller_angency (seller_id) VALUES (?,?);";
+			System.out.println("aq sheveci");
+			String query = "INSERT INTO seller_agency (seller_id) VALUES (?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, sellerid);					
 			statement.execute();

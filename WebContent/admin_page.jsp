@@ -37,7 +37,7 @@
 				<div class="title">Total number of registered users</div>
 
 				<div class="numbers">
-					<jsp:include page="/RegUsersNumServlet" flush="true" />
+					<!--jsp:include page="/RegUsersNumServlet" flush="true" /-->
 					<%=session.getAttribute("numOfRegUsers")%>
 				</div>
 				<br>
