@@ -48,38 +48,16 @@
 			<div class="notifications-box-tabs">
 			
 			<!-- RECENTLY REGISTERED USERS -->
-				<div class="title">Recent Users</div>
+			 	<div class="title">Recent Users</div>
 				<div class="user-box">
 
-					<form action=RecentUsersServlet method="post">
+					<form action=RecentUsersServlet method="get">
 						Date: <input type="text" name="date"/> <br/>
-						 <input	type="submit" value="Show Users" name="showUsers"/>
-						 
+						 <input	type="submit" value="Show Users" name="showUsers"/>	 
 					</form>
 				</div>
-				<%
-					ArrayList<User> users = null;
-					if ((ArrayList<User>) session.getAttribute("listOfRecentUsers") != null) {
-						users = (ArrayList<User>) session
-								.getAttribute("listOfRecentUsers");
-				%>
-				<ul>
-					<%
-						for (int i = 0; i < users.size(); i++) {
-								User user = users.get(i);
-					%>
-					<li><a href=<%="user_page.jsp?id=" + user.getId()%>> <%=user.getUsername()%>
-							<br> is approved: <%=user.getApprStatus()%>
-					</a>
-						<form action=ApproveUserServlet method="post">
-							<input type="submit" value="Approve" name="approve">
-						</form></li>
-					<%
-						}
-					}
-					%>
-				</ul>
-
+				
+			 
 			</div>
 			<div class="notifications-box-tabs">
 				<div class="title">Recent Comments</div>
