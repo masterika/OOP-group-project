@@ -253,3 +253,7 @@ ALTER TABLE `wishlist_items` ADD FOREIGN KEY (item_id) REFERENCES `hotel_rooms` 
 -- INSERT INTO `wishlist_items` (`id`,`type`,`item_id`) VALUES
 -- ('','','');
 
+
+ALTER TABLE `turista`.`users` 
+ADD COLUMN `is_approved` INT NULL DEFAULT 1 AFTER `email`,
+ADD COLUMN `date` DATE NULL AFTER `is_approved`;
