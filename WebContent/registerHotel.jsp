@@ -11,11 +11,11 @@
 
 <h1>Create New Hotel</h1>
 
-<form action="CreateHotel" method="post">
+<form  method="post">
     UserName: <input type="text" name="username"/> <br/>
     Email: <input type="text" name="email"/> <br/>
     Password: <input type="password" name="password"/> <br/>
-    HotelName: <input type="text" name="hotel_name"/> <br/>
+    HotelName: <input type="text" name="name"/> <br/>
     HotelAdress: <input type="text" name="adress"/> <br/>
    	Telephone: <input type="text" name="telephone"/> <br/>
    	RoomNumber: <input type="text" name="rooms_num"/> <br/>

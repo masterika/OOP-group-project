@@ -12,13 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
 
 
+
+
 import model.data.db.HotelStorage;
+import model.data.db.StaticStorage;
 import model.data.users.Hotel;
 
 /**
  * Servlet implementation class HotelAccountCreateServlet
  */
-@WebServlet("/CreateHotel")
+@WebServlet("/gotohotel")
 public class HotelAccountCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,26 +45,15 @@ public class HotelAccountCreateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Hotel hotel = new Hotel();
-		hotel.setUsername(request.getParameter("username"));
-		hotel.setPassword(StringToMD5.generate(request.getParameter("password")));
-		hotel.setEmail(request.getParameter("email"));
-		hotel.setName(request.getParameter("hotel_name"));
-		hotel.setAdress(request.getParameter("adress"));
-		hotel.setTelephone(request.getParameter("telephone"));
-		int n = Integer.parseInt(request.getParameter("rooms_num")); 
-		hotel.setRoomNum(n);
+		int sellerId = (Integer)request.getAttribute("sellerId");
 		int s = Integer.parseInt(request.getParameter("stars"));
 		hotel.setStars(s);
 		
-		HotelStorage storage = new HotelStorage();
-		if(storage.saveHotel(hotel)){
-			RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
-		    rd.forward(request, response);
-		}else{
-			RequestDispatcher r = request.getRequestDispatcher("create_failed.jsp");
-			r.forward(request, response);
-			
-		}
+		
+		StaticStorage.saveHotel(hotel,sellerId);
+		RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
+	    rd.forward(request, response);
+		
 	}
 
 }

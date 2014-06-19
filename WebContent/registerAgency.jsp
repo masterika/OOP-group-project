@@ -14,7 +14,7 @@
     UserName: <input type="text" name="username"/> <br/>
     Email: <input type="text" name="email"/> <br/>
     Password: <input type="password" name="password"/> <br/>
-    AgencyName: <input type="text" name="agency_name"/> <br/>
+    AgencyName: <input type="text" name="name"/> <br/>
     AgencyAdress: <input type="text" name="adress"/> <br/>
    	Telephone: <input type="text" name="telephone"/> <br/>
     <input type="submit" value="Create" name="create"/>

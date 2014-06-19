@@ -9,24 +9,5 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>RegUsersNumServlet</display-name>
-    <servlet-name>RegUsersNumServlet</servlet-name>
-    <servlet-class>servlets.RegUsersNumServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegUsersNumServlet</servlet-name>
-    <url-pattern>/RegUsersNumServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>RecentUsersServlet</display-name>
-    <servlet-name>RecentUsersServlet</servlet-name>
-    <servlet-class>servlets.RecentUsersServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RecentUsersServlet</servlet-name>
-    <url-pattern>/RecentUsersServlet</url-pattern>
-  </servlet-mapping>
+ 
 </web-app>

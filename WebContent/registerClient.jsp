@@ -10,7 +10,7 @@
 
 <h1>Create New Client</h1>
 
-<form action="CreateClient" method="post">
+<form  method="post">
     UserName: <input type="text" name="username"/> <br/>
     Email: <input type="text" name="email"/> <br/>
     Password: <input type="password" name="password"/> <br/>

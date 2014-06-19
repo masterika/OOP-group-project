@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.data.db.UsersStorage;
+import model.data.db.StaticStorage;
 import model.data.users.User;
 
 /**
@@ -47,22 +48,25 @@ public class AccountCreateServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = StringToMD5.generate(request.getParameter("password"));
-		String confPassword = StringToMD5.generate(request.getParameter("confPassword"));
+		//String confPassword = StringToMD5.generate(request.getParameter("confPassword"));
+		String serAdress = request.getParameter("type");
 		
-		if(!password.equals(confPassword)){
+		/*if(!password.equals(confPassword)){
 			response.sendRedirect("/Turista/signup/?notmatch");
 			return;
-		}
+		}*/
 		
 		User user = new User();
 		user.setUsername(username);
 		user.setEmail(email);
 		user.setPassword(password);
 		
-		UsersStorage storage = new UsersStorage();
-		if(storage.isValidUser(user) == -1){
-			storage.saveUser(user);
-			RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
+		
+		//UsersStorage storage = new UsersStorage();
+		if(StaticStorage.isValidUser(user) == -1){ // bandzi shemowmebaa, wesit unda amowmos ukve arsebobs tu ara aseti usernames mqone useri da egetebi.
+			int id = StaticStorage.saveUser(user);
+			request.setAttribute("userId", id);
+			RequestDispatcher rd = request.getRequestDispatcher(serAdress);
 		    rd.forward(request, response);
 		}else{
 			response.sendRedirect("/Turista/signup/?failed");

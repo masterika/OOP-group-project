@@ -12,13 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
 
 
+
 import model.data.db.ClientStorage;
+import model.data.db.StaticStorage;
 import model.data.users.Client;
 
 /**
  * Servlet implementation class ClientAccountCreateServlet
  */
-@WebServlet("/CreateClient")
+@WebServlet("/client")
 public class ClientAccountCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,20 +44,18 @@ public class ClientAccountCreateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Client client = new Client();
-		client.setUsername(request.getParameter("username"));
-		client.setPassword(StringToMD5.generate(request.getParameter("password")));
-		client.setEmail(request.getParameter("email"));
+		
+		int userId =(Integer)request.getAttribute("userId");
 		client.setName(request.getParameter("name"));
 		client.setSurName(request.getParameter("surname"));
 		client.setTelephone(request.getParameter("telephone"));
 		
-		ClientStorage storage = new ClientStorage();
-		if(storage.saveClient(client)){
+	
+		if(StaticStorage.saveClient(client,userId)){
 			RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
 		    rd.forward(request, response);
 		}else{
-			RequestDispatcher r = request.getRequestDispatcher("create_failed.jsp");
-			r.forward(request, response);
+			response.sendRedirect("/Turista/signup/?failed");
 			
 		}
 		

@@ -9,8 +9,8 @@
 </head>
 <body>
 
-<form>
-	<select id="select">
+<form action="../AccountCreateServlet" method="post">
+	<select id="select" name="type">
 		<option value="client">Client</option>
 		<option value="hotel">Hotel</option>
 		<option value="agency">Agency</option>
@@ -19,7 +19,7 @@
 		<%@include file="../registerClient.jsp" %>
 	</div>
 	
-	<input type="submit" value="Submit">
+	
 </form>
 
 
