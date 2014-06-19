@@ -26,19 +26,31 @@ CREATE TABLE `users` (
 );
 
 -- ---
--- Table 'user_hotel'
+-- Table 'user_seller'
 -- 
 -- ---
 
-DROP TABLE IF EXISTS `user_hotel`;
+DROP TABLE IF EXISTS `user_seller`;
 		
-CREATE TABLE `user_hotel` (
+CREATE TABLE `user_seller` (
   `id` INTEGER NULL AUTO_INCREMENT,
   `user_id` INTEGER NULL,
-  `hotel_name` VARCHAR(50) NULL,
+  `name` VARCHAR(50) NULL,
   `adress` VARCHAR(50) NULL,
   `telephone` VARCHAR(15) NULL,
-  `rooms_num` INTEGER NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'seller_hotel'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `seller_hotel`;
+		
+CREATE TABLE `seller_hotel` (
+  `id` INTEGER NULL AUTO_INCREMENT,
+  `seller_id` INTEGER NULL,    
   `stars` INTEGER NULL,
   PRIMARY KEY (`id`)
 );
@@ -60,18 +72,15 @@ CREATE TABLE `user_client` (
 );
 
 -- ---
--- Table 'user_agency'
+-- Table 'seller_agency'
 -- 
 -- ---
 
-DROP TABLE IF EXISTS `user_agency`;
+DROP TABLE IF EXISTS `seller_agency`;
 		
-CREATE TABLE `user_agency` (
+CREATE TABLE `seller_agency` (
   `id` INTEGER NULL AUTO_INCREMENT,
-  `user_id` INTEGER NULL,
-  `agency_name` VARCHAR(30) NULL,
-  `adress` VARCHAR(30) NULL,
-  `telephone` VARCHAR(20) NULL,
+  `seller_id` INTEGER NULL,  
   PRIMARY KEY (`id`)
 );
 
@@ -182,14 +191,15 @@ CREATE TABLE `wishlist_items` (
 -- Foreign Keys 
 -- ---
 
-ALTER TABLE `user_hotel` ADD FOREIGN KEY (user_id) REFERENCES `users` (`id`);
+ALTER TABLE `user_seller` ADD FOREIGN KEY (user_id) REFERENCES `users` (`id`);
+ALTER TABLE `seller_hotel` ADD FOREIGN KEY (seller_id) REFERENCES `user_seller` (`id`);
 ALTER TABLE `user_client` ADD FOREIGN KEY (user_id) REFERENCES `users` (`id`);
-ALTER TABLE `user_agency` ADD FOREIGN KEY (user_id) REFERENCES `users` (`id`);
-ALTER TABLE `hotel_rooms` ADD FOREIGN KEY (hotel_id) REFERENCES `user_hotel` (`id`);
+ALTER TABLE `seller_agency` ADD FOREIGN KEY (seller_id) REFERENCES `user_seller` (`id`);
+ALTER TABLE `hotel_rooms` ADD FOREIGN KEY (hotel_id) REFERENCES `seller_hotel` (`id`);
 ALTER TABLE `galleries` ADD FOREIGN KEY (room_id) REFERENCES `hotel_rooms` (`id`);
 ALTER TABLE `galleries` ADD FOREIGN KEY (picture_id) REFERENCES `pictures` (`id`);
-ALTER TABLE `agency_trips` ADD FOREIGN KEY (agency_id) REFERENCES `user_agency` (`id`);
-ALTER TABLE `locations` ADD FOREIGN KEY (hotel_id) REFERENCES `user_hotel` (`id`);
+ALTER TABLE `agency_trips` ADD FOREIGN KEY (agency_id) REFERENCES `seller_agency` (`id`);
+ALTER TABLE `locations` ADD FOREIGN KEY (hotel_id) REFERENCES `seller_hotel` (`id`);
 ALTER TABLE `locations` ADD FOREIGN KEY (trip_id) REFERENCES `agency_trips` (`id`);
 ALTER TABLE `wishlist` ADD FOREIGN KEY (item_id) REFERENCES `wishlist_items` (`id`);
 ALTER TABLE `wishlist` ADD FOREIGN KEY (client_id) REFERENCES `user_client` (`id`);
@@ -219,12 +229,14 @@ ALTER TABLE `wishlist_items` ADD FOREIGN KEY (item_id) REFERENCES `hotel_rooms` 
 
 -- INSERT INTO `users` (`id`,`username`,`password`,`email`) VALUES
 -- ('','','','');
--- INSERT INTO `user_hotel` (`id`,`user_id`,`hotel_name`,`adress`,`telephone`,`rooms_num`,`stars`) VALUES
--- ('','','','','','','');
+-- INSERT INTO `user_seller` (`id`,`user_id`,`name`,`adress`,`telephone`,) VALUES
+-- ('','','','','');
+-- INSERT INTO `user_hotel` (`id`,`seller_id`,`stars`) VALUES
+-- ('','','');
 -- INSERT INTO `user_client` (`id`,`user_id`,`name`,`surname`,`telephone`) VALUES
 -- ('','','','','');
--- INSERT INTO `user_agency` (`id`,`user_id`,`agency_name`,`adress`,`telephone`) VALUES
--- ('','','','','');
+-- INSERT INTO `user_agency` (`id`,`seller_id`) VALUES
+-- ('','');
 -- INSERT INTO `hotel_rooms` (`id`,`hotel_id`,`room_type`,`price`,`gallery_id`) VALUES
 -- ('','','','','');
 -- INSERT INTO `galleries` (`id`,`room_id`,`picture_id`) VALUES
