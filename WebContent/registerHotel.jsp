@@ -8,6 +8,9 @@
 </head>
 <body>
 
+
+<h1>Create New Hotel</h1>
+
 <form action="CreateHotel" method="post">
     UserName: <input type="text" name="username"/> <br/>
     Email: <input type="text" name="email"/> <br/>

@@ -11,14 +11,13 @@
 </head>
 <body>
 	<h1> Welcome to page of Hotels </h1>
-	<form action="CartsHandler" method="post">
 		<ul>
 		<%
 		ServletContext context = request.getServletContext();
 		ArrayList<Hotel> hotels = (ArrayList<Hotel>)context.getAttribute("hotels");
 		for (int i = 0; i < hotels.size(); i++) {
 		%>
-		<li><a href=<%="show-hotel.jsp?ID="+hotels.get(i).getId()%>> <%=hotels.get(i).getName() %></a></li>
+		<li><a href=<%="hotel.jsp?ID="+hotels.get(i).getId()%>> <%=hotels.get(i).getName() %></a></li>
 		<%} %>
 		</ul>
 

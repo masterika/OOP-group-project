@@ -16,7 +16,7 @@
 	ArrayList<Agency> agency = (ArrayList<Agency>)context.getAttribute("agencies");
 	for (int i = 0; i < agency.size(); i++) {
 	%>
-	<li><a href=<%="show-hotel.jsp?ID="+agency.get(i).getId()%>> <%=agency.get(i).getName() %></a></li>
+	<li><a href=<%="show_agency.jsp?ID="+agency.get(i).getId()%>> <%=agency.get(i).getName() %></a></li>
 	<%} %>
 	</ul>
 </body>
