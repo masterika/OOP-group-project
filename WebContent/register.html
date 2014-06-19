@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery-1.11.1.min.js"></script>
+
+</head>
+<body>
+
+<form>
+	<select id="select">
+	  <option value="company">Company</option>
+	  <option value="agent">Agent</option>
+	  <option value="client">Client</option>
+	</select>
+	<div id='inputs'>
+		Company <input type="text" name="comp"/>
+	</div>
+	
+	<input type="submit" value="Submit">
+</form>
+
+<script>
+	$("#select").change(function() {
+		var selected = $('#select option:selected').val();
+		$('#inputs').empty();
+
+		if (selected == 'company')
+			$('#inputs').append('Company <input type="text" name="comp"/>');
+		else if (selected == 'agent')
+			$('#inputs').append('Agent Name <input type="text" name="agentName"/></br>Agent Surname <input type="text" name="agentSurn"/>');
+		else
+			$('#inputs').append('Client <input type="text" name="client"/>');
+	});
+</script>
+
+
+</body>
+</html>
