@@ -51,9 +51,8 @@ public class AgencyAccountCreateServlet extends HttpServlet {
 		
 		AgencyStorage storage = new AgencyStorage();
 		if(storage.saveAgency(agency)){
-			request.getSession().setAttribute("agency", storage.loadAgency(agency.getUsername()));
-			RequestDispatcher r = request.getRequestDispatcher("welcome.jsp");
-			r.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
+		    rd.forward(request, response);
 		}else{
 			RequestDispatcher r = request.getRequestDispatcher("create_failed.jsp");
 			r.forward(request, response);

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.data.users.Product;
 public class Trip implements Product{
-	private String id;
+	private int id;
 	private String name;
 	private String type; // 2 men trip, 10 men group team or ect.
 	public String getType() {
@@ -22,14 +22,14 @@ public class Trip implements Product{
 	private List<Location> Locations = new ArrayList<Location>();
 	public Trip(){		
 	}
-	public String getId(){
+	public int getId(){
 		return id;
 	}	
 	public String getName(){
 		return name;
 	}	
-	public void setId(String id) {
-		this.id = id;		
+	public void setId(int i) {
+		this.id = i;		
 	}
 	public List<Location> getLocations() {
 		return Locations;

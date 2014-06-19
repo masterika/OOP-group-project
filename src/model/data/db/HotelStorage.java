@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
+import java.util.ArrayList;
+
 import model.data.users.Hotel;
 import model.data.users.User;
 
@@ -69,21 +71,21 @@ public class HotelStorage {
 	}
 	
 	
-	public boolean isValidHotel(Hotel hotel){
-		boolean retVal = false;
+	public int isValidHotel(Hotel hotel){
+		int retVal = -1;
 		try {
-			String query = "select * from user_hotel,users where users.username = ? and users.password = ? and users.id = user_hotel.user_id;";
+			String query = "select users.id,user_hotel.user_id from user_hotel,users where users.username = ? and users.password = ? and users.id = user_hotel.user_id;";
 			PreparedStatement statement = con.prepareStatement(query);
 			statement.setString(1, hotel.getUsername());
 			statement.setString(2, hotel.getPassword());
 			ResultSet res = statement.executeQuery();
 			if (res.next()) {
-				retVal = true;
+				retVal = res.getInt(1);
 			} else {
-				retVal = false;
+				retVal = -1;
 			}
 		} catch (SQLException e) {
-			retVal = false;
+			retVal = -1;
 		} finally {
 			DBConnection.closeConnection();
 		}
@@ -91,12 +93,12 @@ public class HotelStorage {
 		
 	}
 	
-	public Hotel loadHotel(String username) {
+	public Hotel loadHotel(int id) {
 		Hotel hotel = null;
 		try {
-            String query = "SELECT * FROM user_hotel, users WHERE users.username = ? and users.id = user_hotel.user_id;";
+            String query = "SELECT * FROM user_hotel, users WHERE users.id = ? and users.id = user_hotel.user_id;";
             PreparedStatement statement = con.prepareStatement(query);
-            statement.setString(1, username);
+            statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
@@ -123,4 +125,33 @@ public class HotelStorage {
 		 return hotel;
 	}
 
+	public ArrayList<Hotel> getHotelsFromDB(){
+		ArrayList<Hotel> list =  new ArrayList<Hotel>();
+		try {
+            String query = "SELECT * FROM user_hotel, users WHERE users.id = user_hotel.user_id;";
+            PreparedStatement statement = con.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+            	Hotel hotel = new Hotel();
+            	hotel.setName(rs.getString("hotel_name"));
+            	hotel.setAdress(rs.getString("adress"));
+            	hotel.setTelephone(rs.getString("telephone"));
+            	hotel.setId(rs.getInt("user_id"));
+            	hotel.setUsername(rs.getString("username"));
+            	hotel.setEmail(rs.getString("email"));
+            	hotel.setPassword(rs.getString("password"));
+            	hotel.setHotelId(rs.getInt("user_hotel.id"));
+            	hotel.setRoomNum(rs.getInt("rooms_num"));
+            	hotel.setStars(rs.getInt("stars"));
+            	list.add(hotel);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+        	DBConnection.closeConnection();
+        }
+		return list;
+	}
 }

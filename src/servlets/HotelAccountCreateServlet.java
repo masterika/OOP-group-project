@@ -55,9 +55,8 @@ public class HotelAccountCreateServlet extends HttpServlet {
 		
 		HotelStorage storage = new HotelStorage();
 		if(storage.saveHotel(hotel)){
-			request.getSession().setAttribute("hotel", storage.loadHotel(hotel.getUsername()));
-			RequestDispatcher r = request.getRequestDispatcher("welcome.jsp");
-			r.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
+		    rd.forward(request, response);
 		}else{
 			RequestDispatcher r = request.getRequestDispatcher("create_failed.jsp");
 			r.forward(request, response);

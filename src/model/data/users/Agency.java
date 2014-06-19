@@ -6,7 +6,7 @@ import model.data.Trip;
 
 public class Agency extends Sellers{
 	private String name;
-	private HashMap<String,Trip> trips;	
+	private HashMap<Integer,Trip> trips;	
 	
 	private int agencyId;
 	

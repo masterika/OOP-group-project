@@ -66,21 +66,21 @@ public class ClientStorage{
 	}
 	
 	
-	public boolean isValidClient(Client client){
-		boolean retVal = false;
+	public int isValidClient(Client client){
+		int retVal = -1;
 		try {
-			String query = "select * from user_client,users where users.username = ? and users.password = ? and users.id = user_client.user_id;";
+			String query = "select users.id,user_client.user_id from user_client,users where users.username = ? and users.password = ? and users.id = user_client.user_id;";
 			PreparedStatement statement = con.prepareStatement(query);
 			statement.setString(1, client.getUsername());
 			statement.setString(2, client.getPassword());
 			ResultSet res = statement.executeQuery();
 			if (res.next()) {
-				retVal = true;
+				retVal = res.getInt(1);
 			} else {
-				retVal = false;
+				retVal = -1;
 			}
 		} catch (SQLException e) {
-			retVal = false;
+			retVal = -1;
 		} finally {
 			DBConnection.closeConnection();
 		}
@@ -88,12 +88,12 @@ public class ClientStorage{
 		
 	}
 	
-	public Client loadClient(String username) {
+	public Client loadClient(int id) {
 		Client client = null;
 		try {
-            String query = "SELECT * FROM user_client, users WHERE users.username = ? and users.id = user_client.user_id;";
+            String query = "SELECT * FROM user_client, users WHERE users.id = ? and users.id = user_client.user_id;";
             PreparedStatement statement = con.prepareStatement(query);
-            statement.setString(1, username);
+            statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
