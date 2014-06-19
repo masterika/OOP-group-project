@@ -32,6 +32,6 @@
 	<%
 		}
 	%>
-	<%@include file="form.html"%>
+	<%@include file="register.jsp"%>
 </body>
 </html>
