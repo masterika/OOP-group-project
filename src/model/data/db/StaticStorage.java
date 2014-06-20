@@ -281,14 +281,14 @@ public class StaticStorage {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
             	agency = new Agency();
-            	agency.setName(rs.getString("agency_name"));
+            	agency.setName(rs.getString("name"));
             	agency.setAdress(rs.getString("adress"));
             	agency.setTelephone(rs.getString("telephone"));
             	agency.setId(rs.getInt("id"));
             	agency.setUsername(rs.getString("username"));
             	agency.setEmail(rs.getString("email"));
             	agency.setPassword(rs.getString("password"));
-            	agency.setAgencyId(rs.getInt("user_agency.id")); 
+            	agency.setAgencyId(rs.getInt("seller_agency.id"));  
             	agency.setIdentificator(rs.getInt("identificator"));
             }
 
