@@ -8,14 +8,12 @@
 </head>
 <body>
 
-<h1>Create New Agency</h1>
+<h1>Create New Client</h1>
 
-<form action="CreateAgency" method="post">
-    UserName: <input type="text" name="username"/> <br/>
-    Email: <input type="text" name="email"/> <br/>
-    Password: <input type="password" name="password"/> <br/>
-    AgencyName: <input type="text" name="name"/> <br/>
-    AgencyAdress: <input type="text" name="adress"/> <br/>
+<form  method="post">
+	<%@include file="userFields.html" %>
+    First Name: <input type="text" name="name"/> <br/>
+    Last Name: <input type="text" name="surname"/> <br/>
    	Telephone: <input type="text" name="telephone"/> <br/>
     <input type="submit" value="Create" name="create"/>
 </form>

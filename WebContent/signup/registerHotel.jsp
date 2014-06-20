@@ -4,19 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Register</title>
+<title>Create New Hotel</title>
 </head>
 <body>
 
-<h1>Create New Client</h1>
+
+<h1>Create New Hotel</h1>
 
 <form  method="post">
-    UserName: <input type="text" name="username"/> <br/>
-    Email: <input type="text" name="email"/> <br/>
-    Password: <input type="password" name="password"/> <br/>
-    Name: <input type="text" name="name"/> <br/>
-    SurName: <input type="text" name="surname"/> <br/>
-   	Telephone: <input type="text" name="telephone"/> 
+    <%@include file="userFields.html" %>
+    <%@include file="sellersFields.html" %>
+   	Number of rooms: <input type="text" name="rooms_num"/><br/>
+   	Stars: <input type="text" name="stars"/><br/>
     <input type="submit" value="Create" name="create"/>
 </form>
 

@@ -47,31 +47,22 @@ public class SellerAccountCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("accauntselerreatservlet agency tessti");
 		String name = request.getParameter("name");
 		String adress = request.getParameter("adress");
 		String telephone = request.getParameter("telephone");
+		int identificator = Integer.parseInt(request.getParameter("identificator"));
 		String s = request.getParameter("type");
 		String serAdress = "goto" + s;
-		
-		
 		Sellers seller = new Sellers();
 		seller.setName(name);
 		seller.setAdress(adress);
 		seller.setTelephone(telephone);
+		seller.setIdentificator(identificator);
 		int userId = (Integer)request.getAttribute("userId");
-		
-		
-		
-			int sellerId = StaticStorage.saveSeller(seller,userId);
-			request.setAttribute("sellerId", sellerId);
-			RequestDispatcher rd = request.getRequestDispatcher(serAdress);
-		    rd.forward(request, response);
-		
-		
-		
-		
-		
-		
+		int sellerId = StaticStorage.saveSeller(seller,userId);
+		request.setAttribute("sellerId", sellerId);
+		RequestDispatcher rd = request.getRequestDispatcher(serAdress);
+		rd.forward(request, response);		
 	}
-
 }

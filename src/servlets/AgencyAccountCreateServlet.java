@@ -42,14 +42,12 @@ public class AgencyAccountCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("MULUUUUUUUS");
 		Agency agency = new Agency();
-		int sellerId =  (Integer)request.getAttribute("sellerId");
-		System.out.println(sellerId);
-		if(StaticStorage.saveAgency(agency,sellerId)){
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
-	    rd.forward(request, response);
+		System.out.println("agencyservlet agency tessti");
+		int sellerId =  (Integer)request.getAttribute("sellerId");		
+		if(StaticStorage.saveAgency(agency,sellerId) != -1){		
+			RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
+		    rd.forward(request, response);
 		}
 	}
 

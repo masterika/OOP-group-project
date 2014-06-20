@@ -44,25 +44,20 @@ public class AccountCreateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("accauntcreatservlet javascriptis bralia?!");
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = StringToMD5.generate(request.getParameter("password"));
 		//String confPassword = StringToMD5.generate(request.getParameter("confPassword"));
-		String serAdress = request.getParameter("type");
-		
+		String serAdress = request.getParameter("type");		
 		/*if(!password.equals(confPassword)){
 			response.sendRedirect("/Turista/signup/?notmatch");
 			return;
-		}*/
-		
+		}*/		
 		User user = new User();
 		user.setUsername(username);
 		user.setEmail(email);
-		user.setPassword(password);
-		
-		
-		//UsersStorage storage = new UsersStorage();
+		user.setPassword(password);		
 		if(StaticStorage.isValidUser(user) == -1){ // bandzi shemowmebaa, wesit unda amowmos ukve arsebobs tu ara aseti usernames mqone useri da egetebi.
 			int id = StaticStorage.saveUser(user);
 			request.setAttribute("userId", id);

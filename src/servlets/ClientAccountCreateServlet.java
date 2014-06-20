@@ -13,6 +13,7 @@ import javax.servlet.RequestDispatcher;
 
 
 
+
 import model.data.db.ClientStorage;
 import model.data.db.StaticStorage;
 import model.data.users.Client;
@@ -43,15 +44,13 @@ public class ClientAccountCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Client client = new Client();
-		
+		Client client = new Client();		
 		int userId =(Integer)request.getAttribute("userId");
 		client.setName(request.getParameter("name"));
 		client.setSurName(request.getParameter("surname"));
-		client.setTelephone(request.getParameter("telephone"));
-		
-	
-		if(StaticStorage.saveClient(client,userId)){
+		client.setTelephone(request.getParameter("telephone"));	
+		if(StaticStorage.saveClient(client,userId) !=-1){
+			System.out.print("clientaccountservlet!");
 			RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
 		    rd.forward(request, response);
 		}else{

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.data.users.Agency;
 import model.data.users.Client;
@@ -39,12 +40,13 @@ public class StaticStorage {
 		conn = DBConnection.createConnection();
 		int retVal = -1;
 		try {
-			String query = "INSERT INTO user_seller (user_id,name,adress,telephone) VALUES (?,?,?,?);";
+			String query = "INSERT INTO user_seller (user_id,name,adress,telephone,identificator) VALUES (?,?,?,?,?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, userid);
 			statement.setString(2, seller.getName());
 			statement.setString(3, seller.getAdress());
 			statement.setString(4, seller.getTelephone());
+			statement.setInt(5,seller.getIdentificator());
 			statement.execute();
 			retVal = getSellerId(userid); // insert_id unda sinqronizebuli ogond!!!
 		} catch (SQLException e) {			
@@ -68,45 +70,76 @@ public class StaticStorage {
 		return id;	
 		
 	}
-	
-	public static boolean saveHotel(Hotel hotel, int sellerid) {
+	public static int saveHotel(Hotel hotel, int sellerid) {
 		conn = DBConnection.createConnection();
-		boolean retVal = false;
+		int retVal = -1;
 		try {
 			String query = "INSERT INTO seller_hotel (seller_id,stars) VALUES (?,?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, sellerid);
 			statement.setInt(2, hotel.getStars());			
 			statement.execute();
-			retVal = true;         
+			retVal = getHotelId(sellerid);         
 		} catch (SQLException e) {			
 		}finally{
 			DBConnection.closeConnection();
 		}	
 		return retVal;			
 	}
-	
-	public static boolean saveAgency(Agency agency, int sellerid) {
+	private static int getHotelId(int sellerid) {
 		conn = DBConnection.createConnection();
-		boolean retVal = false;
+		int id = -1;
 		try {
-			System.out.println("aq sheveci");
+			String q = "SELECT * FROM seller_hotel WHERE seller_hotel.seller_id = ?;"; // aq pirdapir select id minda 1 xazzshi ar sheileba?
+			PreparedStatement statement = conn.prepareStatement(q);
+			statement.setInt(1, sellerid);		
+			ResultSet rs = statement.executeQuery();
+			if (rs.next())
+				id = rs.getInt("id");			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBConnection.closeConnection();
+		}		
+		return id;	
+	}
+	public static int saveAgency(Agency agency, int sellerid) {
+		System.out.println("agencybaza");
+		conn = DBConnection.createConnection();
+		int retVal = -1;
+		try {
+			System.out.println("agency warmatebit");
 			String query = "INSERT INTO seller_agency (seller_id) VALUES (?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, sellerid);					
 			statement.execute();
-			retVal = true;         
+			retVal = getAgencyId(sellerid);         
 		} catch (SQLException e) {			
 		}finally{
 			DBConnection.closeConnection();
 		}	
 		return retVal;			
 	}
-	
-	
-	public static boolean saveClient(Client client, int userid) {
+	private static int getAgencyId(int sellerid) {
 		conn = DBConnection.createConnection();
-		boolean retVal = false;
+		int id = -1;		
+		try {
+			String q = "SELECT * FROM seller_agency WHERE seller_agency.seller_id = ?;"; // aq pirdapir select id minda 1 xazzshi ar sheileba?
+			PreparedStatement statement = conn.prepareStatement(q);
+			statement.setInt(1, sellerid);		
+			ResultSet rs = statement.executeQuery();
+			if (rs.next())
+				id = rs.getInt("id");			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBConnection.closeConnection();
+		}		
+		return id;			
+	}
+	public static int saveClient(Client client, int userid) {		
+		conn = DBConnection.createConnection();
+		int retVal = -1;
 		try {
 			String query = "INSERT INTO user_client (user_id,name,surname,telephone) VALUES (?,?,?,?);";
 			PreparedStatement statement = conn.prepareStatement(query);
@@ -114,13 +147,30 @@ public class StaticStorage {
 			statement.setString(2, client.getName());
 			statement.setString(3, client.getSurName());
 			statement.setString(4, client.getTelephone());
-			statement.execute();
-			retVal = true;         
+			statement.execute();			
+			retVal = getClientId(userid);         
 		} catch (SQLException e) {			
 		}finally{
 			DBConnection.closeConnection();
 		}	
 		return retVal;			
+	}
+	private static int getClientId(int userid) {
+		conn = DBConnection.createConnection();
+		int id = -1;
+		try {
+			String q = "SELECT * FROM user_client WHERE user_client.user_id = ?;"; // aq pirdapir select id minda 1 xazzshi ar sheileba?
+			PreparedStatement statement = conn.prepareStatement(q);
+			statement.setInt(1, userid);		
+			ResultSet rs = statement.executeQuery();
+			if (rs.next())
+				id = rs.getInt("id");			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			DBConnection.closeConnection();
+		}		
+		return id;	
 	}
 	private static int getUserId(String username) {
 		conn = DBConnection.createConnection();
@@ -166,13 +216,13 @@ public class StaticStorage {
 		}
 		return retVal;
 	}
-	
-	public Client loadClient(int id) {
+	public static Client loadClient(int userid) {
+		conn = DBConnection.createConnection();
 		Client client = null;
 		try {
             String query = "SELECT * FROM user_client, users WHERE users.id = ? and users.id = user_client.user_id;";
             PreparedStatement statement = conn.prepareStatement(query);
-            statement.setInt(1, id);
+            statement.setInt(1, userid);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
@@ -180,7 +230,7 @@ public class StaticStorage {
             	client.setName(rs.getString("name"));
             	client.setSurName(rs.getString("surname"));
             	client.setTelephone(rs.getString("telephone"));
-            	client.setId(rs.getInt("user_id"));
+            	client.setId(rs.getInt("id"));
             	client.setUsername(rs.getString("username"));
             	client.setEmail(rs.getString("email"));
             	client.setPassword(rs.getString("password"));
@@ -195,25 +245,25 @@ public class StaticStorage {
         }
 		return client;
 	}
-	
-	public Hotel loadHotel(int id) {
+	public static Hotel loadHotel(int userid) {
+		conn = DBConnection.createConnection();
 		Hotel hotel = null;
 		try {
-            String query = "SELECT * FROM seller_hotel,user_seller, users WHERE users.id = ? and users.id = user_seller.user_id and user_seller.id=seller_hotel.seller_id;";
-            PreparedStatement statement = conn.prepareStatement(query);
-            statement.setInt(1, id);
-            ResultSet rs = statement.executeQuery();
+			 String query = "SELECT * FROM seller_hotel,user_seller, users WHERE users.id = ? and users.id = user_seller.user_id and user_seller.id=seller_hotel.seller_id;";
+			 PreparedStatement statement = conn.prepareStatement(query);
+			 statement.setInt(1, userid);
+			 ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-            	hotel = new Hotel(); //testireba!
-            	hotel.setName(rs.getString("hotel_name"));
+            	hotel = new Hotel();
+            	hotel.setName(rs.getString("name"));
             	hotel.setAdress(rs.getString("adress"));
             	hotel.setTelephone(rs.getString("telephone"));
             	hotel.setId(rs.getInt("id"));
             	hotel.setUsername(rs.getString("username"));
             	hotel.setEmail(rs.getString("email"));
             	hotel.setPassword(rs.getString("password"));
-            	hotel.setHotelId(rs.getInt("user_hotel.id"));            	
-            	hotel.setStars(rs.getInt("stars"));            	
+                hotel.setStars(rs.getInt("stars"));
+                hotel.setIdentificator(rs.getInt("identificator"));
             }
 
         } catch (SQLException e) {
@@ -223,23 +273,53 @@ public class StaticStorage {
         }
 		return hotel;
 	}
-	public Agency loadAgency(int id) {
+	public static Agency loadAgency(int userid) {
+		conn = DBConnection.createConnection();
 		Agency agency = null;
 		try {
             String query = "SELECT * FROM seller_agency,user_seller, users WHERE users.id = ? and users.id = user_seller.user_id and user_seller.id=seller_agency.seller_id;";
             PreparedStatement statement = conn.prepareStatement(query);
-            statement.setInt(1, id);
+            statement.setInt(1, userid);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
             	agency = new Agency();
-            	agency.setName(rs.getString("agency_name"));
+            	agency.setName(rs.getString("name"));
             	agency.setAdress(rs.getString("adress"));
             	agency.setTelephone(rs.getString("telephone"));
-            	agency.setId(rs.getInt("user_id"));
+            	agency.setId(rs.getInt("id"));
             	agency.setUsername(rs.getString("username"));
             	agency.setEmail(rs.getString("email"));
             	agency.setPassword(rs.getString("password"));
-            	agency.setAgencyId(rs.getInt("user_agency.id"));            	
+            	agency.setAgencyId(rs.getInt("seller_agency.id"));  
+            	agency.setIdentificator(rs.getInt("identificator"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+        	DBConnection.closeConnection();
+        }        
+		return agency;
+	}
+	public static ArrayList<Hotel> getHotelsFromDB(){
+		conn = DBConnection.createConnection();
+		ArrayList<Hotel> list =  new ArrayList<Hotel>();
+		try {
+			String query = "SELECT * FROM seller_hotel, user_seller, users WHERE users.id = user_seller.user_id and user_seller.id=seller_hotel.seller_id;";
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+            	Hotel hotel = new Hotel();
+            	hotel.setName(rs.getString("name"));
+            	hotel.setAdress(rs.getString("adress"));
+            	hotel.setTelephone(rs.getString("telephone"));
+            	hotel.setId(rs.getInt("user_id"));
+            	hotel.setUsername(rs.getString("username"));
+            	hotel.setEmail(rs.getString("email"));
+            	hotel.setPassword(rs.getString("password"));
+                hotel.setStars(rs.getInt("stars"));
+                list.add(hotel);
             }
 
         } catch (SQLException e) {
@@ -247,11 +327,40 @@ public class StaticStorage {
         }finally{
         	DBConnection.closeConnection();
         }
-
-        
-		return agency;
+		return list;
+	}
+	public static boolean isValidUsername(String username) {
+		conn = DBConnection.createConnection();
+		boolean p = true;
+		try {
+			String query = "select * from users where username = ?;";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setString(1, username);			
+			ResultSet res = statement.executeQuery();
+			if (res.next())
+				p = false;
+		} catch (SQLException e) {
+			// aq ravi ra qnas
+		} finally {
+			DBConnection.closeConnection();
+		}
+		return p;		
+	}		
+	public static boolean isValidIdentificator(int id) {
+		conn = DBConnection.createConnection();
+		boolean p = true;
+		try {
+			String query = "select * from user_seller where identificator = ?;";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setInt(1, id);			
+			ResultSet res = statement.executeQuery();
+			if (res.next())
+				p = false;
+		} catch (SQLException e) {
+			// aq ravi ra qnas
+		} finally {
+			DBConnection.closeConnection();
+		}
+		return p;	
 	}
 }
-
-
-
