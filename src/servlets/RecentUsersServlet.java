@@ -33,21 +33,21 @@ public class RecentUsersServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		try {
+			System.out.println(request.getParameter("date"));
+			Date date = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse((String) request.getParameter("date"));
+			request.getSession().setAttribute("listOfRecentUsers", AdminStorage.getRecentUsers(date));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			System.out.println(request.getAttribute("date"));
-			Date date = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse((String) request.getAttribute("date"));
-			request.getSession().setAttribute("listOfRecentUsers", AdminStorage.getRecentUsers(date));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 
 }
