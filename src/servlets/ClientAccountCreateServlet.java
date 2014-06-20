@@ -51,7 +51,7 @@ public class ClientAccountCreateServlet extends HttpServlet {
 		client.setTelephone(request.getParameter("telephone"));
 		
 	
-		if(StaticStorage.saveClient(client,userId)){
+		if(StaticStorage.saveClient(client,userId) !=-1){
 			RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
 		    rd.forward(request, response);
 		}else{
