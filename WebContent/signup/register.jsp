@@ -16,7 +16,7 @@
 		<option value="agency">Agency</option>
 	</select>
 	<div id='inputs'>
-		<%@include file="../registerClient.jsp" %>
+		<%@include file="registerClient.jsp" %>
 	</div>
 	
 	
@@ -29,11 +29,11 @@
 		$('#inputs').empty();
 
 		if (selected == 'client')
-			$('#inputs').load("../registerClient.jsp");
+			$('#inputs').load("registerClient.jsp");
 		else if (selected == 'hotel')
-			$('#inputs').load("../registerHotel.jsp");
+			$('#inputs').load("registerHotel.jsp");
 		else
-			$('#inputs').load("../registerAgency.jsp");
+			$('#inputs').load("registerAgency.jsp");
 	});
 </script>
 
