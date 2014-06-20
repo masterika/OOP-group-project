@@ -38,6 +38,7 @@ CREATE TABLE `user_seller` (
   `name` VARCHAR(50) NULL,
   `adress` VARCHAR(50) NULL,
   `telephone` VARCHAR(15) NULL,
+  `identificator` INTEGER NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -229,8 +230,8 @@ ALTER TABLE `wishlist_items` ADD FOREIGN KEY (item_id) REFERENCES `hotel_rooms` 
 
 -- INSERT INTO `users` (`id`,`username`,`password`,`email`) VALUES
 -- ('','','','');
--- INSERT INTO `user_seller` (`id`,`user_id`,`name`,`adress`,`telephone`,) VALUES
--- ('','','','','');
+-- INSERT INTO `user_seller` (`id`,`user_id`,`name`,`adress`,`telephone`,`identificator`) VALUES
+-- ('','','','','','');
 -- INSERT INTO `user_hotel` (`id`,`seller_id`,`stars`) VALUES
 -- ('','','');
 -- INSERT INTO `user_client` (`id`,`user_id`,`name`,`surname`,`telephone`) VALUES

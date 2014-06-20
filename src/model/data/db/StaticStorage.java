@@ -40,12 +40,13 @@ public class StaticStorage {
 		conn = DBConnection.createConnection();
 		int retVal = -1;
 		try {
-			String query = "INSERT INTO user_seller (user_id,name,adress,telephone) VALUES (?,?,?,?);";
+			String query = "INSERT INTO user_seller (user_id,name,adress,telephone,identificator) VALUES (?,?,?,?,?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, userid);
 			statement.setString(2, seller.getName());
 			statement.setString(3, seller.getAdress());
 			statement.setString(4, seller.getTelephone());
+			statement.setInt(5,seller.getIdentificator());
 			statement.execute();
 			retVal = getSellerId(userid); // insert_id unda sinqronizebuli ogond!!!
 		} catch (SQLException e) {			
@@ -260,6 +261,7 @@ public class StaticStorage {
             	hotel.setEmail(rs.getString("email"));
             	hotel.setPassword(rs.getString("password"));
                 hotel.setStars(rs.getInt("stars"));
+                hotel.setIdentificator(rs.getInt("identificator"));
             }
 
         } catch (SQLException e) {
@@ -286,7 +288,8 @@ public class StaticStorage {
             	agency.setUsername(rs.getString("username"));
             	agency.setEmail(rs.getString("email"));
             	agency.setPassword(rs.getString("password"));
-            	agency.setAgencyId(rs.getInt("user_agency.id"));            	
+            	agency.setAgencyId(rs.getInt("user_agency.id")); 
+            	agency.setIdentificator(rs.getInt("identificator"));
             }
 
         } catch (SQLException e) {
@@ -324,4 +327,5 @@ public class StaticStorage {
         }
 		return list;
 	}
+	
 }

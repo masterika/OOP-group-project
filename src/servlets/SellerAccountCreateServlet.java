@@ -52,7 +52,7 @@ public class SellerAccountCreateServlet extends HttpServlet {
 		String telephone = request.getParameter("telephone");
 		String s = request.getParameter("type");
 		String serAdress = "goto" + s;
-		
+		// aq aklia identificator is chamatebaaa!
 		
 		Sellers seller = new Sellers();
 		seller.setName(name);
