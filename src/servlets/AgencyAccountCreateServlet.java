@@ -43,11 +43,11 @@ public class AgencyAccountCreateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Agency agency = new Agency();
+		System.out.println("agencyservlet agency tessti");
 		int sellerId =  (Integer)request.getAttribute("sellerId");		
-		if(StaticStorage.saveAgency(agency,sellerId) != -1){
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
-	    rd.forward(request, response);
+		if(StaticStorage.saveAgency(agency,sellerId) != -1){		
+			RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
+		    rd.forward(request, response);
 		}
 	}
 

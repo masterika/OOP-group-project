@@ -47,6 +47,7 @@ public class SellerAccountCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("accauntselerreatservlet agency tessti");
 		String name = request.getParameter("name");
 		String adress = request.getParameter("adress");
 		String telephone = request.getParameter("telephone");

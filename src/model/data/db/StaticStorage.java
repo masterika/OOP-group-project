@@ -104,9 +104,11 @@ public class StaticStorage {
 		return id;	
 	}
 	public static int saveAgency(Agency agency, int sellerid) {
+		System.out.println("agencybaza");
 		conn = DBConnection.createConnection();
 		int retVal = -1;
 		try {
+			System.out.println("agency warmatebit");
 			String query = "INSERT INTO seller_agency (seller_id) VALUES (?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, sellerid);					
@@ -120,7 +122,7 @@ public class StaticStorage {
 	}
 	private static int getAgencyId(int sellerid) {
 		conn = DBConnection.createConnection();
-		int id = -1;
+		int id = -1;		
 		try {
 			String q = "SELECT * FROM seller_agency WHERE seller_agency.seller_id = ?;"; // aq pirdapir select id minda 1 xazzshi ar sheileba?
 			PreparedStatement statement = conn.prepareStatement(q);
@@ -135,7 +137,7 @@ public class StaticStorage {
 		}		
 		return id;			
 	}
-	public static int saveClient(Client client, int userid) {
+	public static int saveClient(Client client, int userid) {		
 		conn = DBConnection.createConnection();
 		int retVal = -1;
 		try {
@@ -145,7 +147,7 @@ public class StaticStorage {
 			statement.setString(2, client.getName());
 			statement.setString(3, client.getSurName());
 			statement.setString(4, client.getTelephone());
-			statement.execute();
+			statement.execute();			
 			retVal = getClientId(userid);         
 		} catch (SQLException e) {			
 		}finally{
