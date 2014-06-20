@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.data.users.Agency;
 import model.data.users.Client;
@@ -90,7 +91,6 @@ public class StaticStorage {
 		conn = DBConnection.createConnection();
 		boolean retVal = false;
 		try {
-			System.out.println("aq sheveci");
 			String query = "INSERT INTO seller_agency (seller_id) VALUES (?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, sellerid);					
@@ -167,7 +167,8 @@ public class StaticStorage {
 		return retVal;
 	}
 	
-	public Client loadClient(int id) {
+	public static Client loadClient(int id) {
+		conn = DBConnection.createConnection();
 		Client client = null;
 		try {
             String query = "SELECT * FROM user_client, users WHERE users.id = ? and users.id = user_client.user_id;";
@@ -196,24 +197,24 @@ public class StaticStorage {
 		return client;
 	}
 	
-	public Hotel loadHotel(int id) {
+	public static Hotel loadHotel(int id) {
+		conn = DBConnection.createConnection();
 		Hotel hotel = null;
 		try {
-            String query = "SELECT * FROM seller_hotel,user_seller, users WHERE users.id = ? and users.id = user_seller.user_id and user_seller.id=seller_hotel.seller_id;";
-            PreparedStatement statement = conn.prepareStatement(query);
-            statement.setInt(1, id);
-            ResultSet rs = statement.executeQuery();
+			 String query = "SELECT * FROM seller_hotel,user_seller, users WHERE users.id = ? and users.id = user_seller.user_id and user_seller.id=seller_hotel.seller_id;";
+			 PreparedStatement statement = conn.prepareStatement(query);
+			 statement.setInt(1, id);
+			 ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-            	hotel = new Hotel(); //testireba!
-            	hotel.setName(rs.getString("hotel_name"));
+            	hotel = new Hotel();
+            	hotel.setName(rs.getString("name"));
             	hotel.setAdress(rs.getString("adress"));
             	hotel.setTelephone(rs.getString("telephone"));
-            	hotel.setId(rs.getInt("id"));
+            	hotel.setId(rs.getInt("user_id"));
             	hotel.setUsername(rs.getString("username"));
             	hotel.setEmail(rs.getString("email"));
             	hotel.setPassword(rs.getString("password"));
-            	hotel.setHotelId(rs.getInt("user_hotel.id"));            	
-            	hotel.setStars(rs.getInt("stars"));            	
+                hotel.setStars(rs.getInt("stars"));
             }
 
         } catch (SQLException e) {
@@ -223,7 +224,8 @@ public class StaticStorage {
         }
 		return hotel;
 	}
-	public Agency loadAgency(int id) {
+	public static Agency loadAgency(int id) {
+		conn = DBConnection.createConnection();
 		Agency agency = null;
 		try {
             String query = "SELECT * FROM seller_agency,user_seller, users WHERE users.id = ? and users.id = user_seller.user_id and user_seller.id=seller_agency.seller_id;";
@@ -250,6 +252,35 @@ public class StaticStorage {
 
         
 		return agency;
+	}
+	
+	public static ArrayList<Hotel> getHotelsFromDB(){
+		conn = DBConnection.createConnection();
+		ArrayList<Hotel> list =  new ArrayList<Hotel>();
+		try {
+			String query = "SELECT * FROM seller_hotel, user_seller, users WHERE users.id = user_seller.user_id and user_seller.id=seller_hotel.seller_id;";
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+            	Hotel hotel = new Hotel();
+            	hotel.setName(rs.getString("name"));
+            	hotel.setAdress(rs.getString("adress"));
+            	hotel.setTelephone(rs.getString("telephone"));
+            	hotel.setId(rs.getInt("user_id"));
+            	hotel.setUsername(rs.getString("username"));
+            	hotel.setEmail(rs.getString("email"));
+            	hotel.setPassword(rs.getString("password"));
+                hotel.setStars(rs.getInt("stars"));
+                list.add(hotel);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+        	DBConnection.closeConnection();
+        }
+		return list;
 	}
 }
 
