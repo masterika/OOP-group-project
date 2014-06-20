@@ -327,5 +327,38 @@ public class StaticStorage {
         }
 		return list;
 	}
-	
+	public static boolean isValidUsername(String username) {
+		conn = DBConnection.createConnection();
+		boolean p = true;
+		try {
+			String query = "select * from users where username = ?;";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setString(1, username);			
+			ResultSet res = statement.executeQuery();
+			if (res.next())
+				p = false;
+		} catch (SQLException e) {
+			// aq ravi ra qnas
+		} finally {
+			DBConnection.closeConnection();
+		}
+		return p;		
+	}		
+	public static boolean isValidIdentificator(int id) {
+		conn = DBConnection.createConnection();
+		boolean p = true;
+		try {
+			String query = "select * from user_seller where identificator = ?;";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setInt(1, id);			
+			ResultSet res = statement.executeQuery();
+			if (res.next())
+				p = false;
+		} catch (SQLException e) {
+			// aq ravi ra qnas
+		} finally {
+			DBConnection.closeConnection();
+		}
+		return p;	
+	}
 }
