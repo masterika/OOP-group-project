@@ -1,4 +1,5 @@
 <%@page import="model.data.db.StaticStorage"%>
+<%@page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="model.data.users.Hotel"%>
@@ -47,7 +48,10 @@ $(document).ready(function() {
 <title>Insert title here</title>
 </head>
 <body>
+	
 	<div id="content">
+	
+		<a href=index.jsp> main page </a>
 		<%
 		Hotel hotel = StaticStorage.loadHotel(Integer.parseInt(request.getParameter("ID")));
 		%>
@@ -59,10 +63,14 @@ $(document).ready(function() {
 		<p> Number of rooms: <%=hotel.getRoomNum()%> </p>
 	</div>
 	<div id="my-slideshow">
-	    <ul class="bjqs">
-	        <li> <img src="pictures/banner01.jpg" /></li>
-	        <li> <img src="pictures/banner02.jpg" /></li>
-	    </ul>
+		<ul class="bjqs">	
+	<%
+		ArrayList<String> images = (ArrayList<String>)request.getAttribute("images");
+		for (int i = 0; i < images.size(); i++) {
+		%>
+		<li><img src="data:image/gif;base64,<%=images.get(i) %>" /></li>
+		<%} %>
+		</ul>
 	</div>
 
 </body>

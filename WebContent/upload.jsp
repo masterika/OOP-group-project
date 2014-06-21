@@ -1,4 +1,4 @@
-<form action="UploadPhoto" method="post" enctype="multipart/form-data">
-	<input type="file" name="image" />
+<form action="ShowPhoto" method="post">
+	<input type="hidden" name="userId" value="6" />
 	<input type="submit" />
 </form>

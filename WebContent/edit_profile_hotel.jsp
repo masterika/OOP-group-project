@@ -19,8 +19,13 @@
 		<input type="submit" value="Change Password">
 	</form>
 	
-	<a href = <%="gallery.jsp?userId=" + session.getAttribute("userId") %> > My Gallery </a>
+	<a href = <%="upload.jsp?userId=" + request.getParameter("id")%> > My Gallery </a>
 	
+	<form action="UploadPhoto" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="userId" value='<%=request.getParameter("id")%>' />
+		<input type="file" name="image[]" multiple />
+		<input type="submit" />
+	</form>
 
 </body>
 </html>

@@ -23,7 +23,7 @@
 	<h1>
 		Welcome
 		<%=name%></h1>
-	<a href=<%="edit_profile_client.jsp?id=" + id%>> edit profile</a>
+	<a href=<%="edit_profile_hotel.jsp?id=" + id%>> edit profile</a>
 	<%@include file="logout.html"%>
 </body>
 </html>

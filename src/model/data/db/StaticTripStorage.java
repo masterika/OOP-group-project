@@ -46,7 +46,7 @@ public class StaticTripStorage {
 			String query = "INSERT INTO locations (location_name,hotel_id,trip_id,period) VALUES (?,?,?,?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setString(1, location.getCity());
-			statement.setInt(2, getHotelId(location.getHotel())); // -1 tu sheinaxavs znachit ar gvaq bazahi egeti hoteli.
+	//		statement.setInt(2, getHotelId(location.getHotel())); // -1 tu sheinaxavs znachit ar gvaq bazahi egeti hoteli.
 			statement.setInt(3, tripId);
 			statement.setInt(4,location.getDuration());
 			statement.execute();			
@@ -117,7 +117,7 @@ public class StaticTripStorage {
 				Location location = new Location();
 				location.setCity(rs.getString("location_name"));
 				location.setDuration(rs.getInt("period"));
-				location.setHotel(getHotelById(rs.getInt("hotel_id")));
+//				location.setHotel(getHotelById(rs.getInt("hotel_id")));
 				locations.add(location);
 			}
 		} catch (SQLException e) {
