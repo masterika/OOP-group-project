@@ -124,12 +124,24 @@ public class HotelStorage {
 				
 		 return hotel;
 	}
+	
+	
+	public ArrayList<Hotel> getHotelsFromDB(String keyword){
+		return getHotels(keyword);
+	}
 
 	public ArrayList<Hotel> getHotelsFromDB(){
+		return getHotels("");
+	}
+	
+	
+	private ArrayList<Hotel> getHotels(String keyword){
 		ArrayList<Hotel> list =  new ArrayList<Hotel>();
 		try {
-            String query = "SELECT * FROM user_hotel, users WHERE users.id = user_hotel.user_id;";
+            String query = "SELECT * FROM user_seller as a join users as b on a.user_id = b.id join seller_hotel as c on c.seller_id = a.id where name like '%?%' or adress like '%?%'";
             PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, keyword);
+            statement.setString(2, keyword);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
