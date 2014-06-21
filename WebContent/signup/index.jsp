@@ -8,30 +8,6 @@
 <link rel="stylesheet" type="text/css" href="/Turista/styles/style.css">
 </head>
 <body>
-	<%
-		String failed = request.getParameter("failed");
-		String notMatch = request.getParameter("notmatch");
-	%>
-	
-	<%
-		if (notMatch != null) {
-	%>
-	<h1>Please Try Again</h1>
-	<p>Passwords do not match</p>
-	<%
-		}
-	%>
-	
-	
-	
-	<%
-		if (failed != null) {
-	%>
-	<h1>Please Try Again</h1>
-	<p>Account already exists</p>
-	<%
-		}
-	%>
 	<%@include file="register.jsp"%>
 </body>
 </html>

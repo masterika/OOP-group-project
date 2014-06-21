@@ -104,11 +104,9 @@ public class StaticStorage {
 		return id;	
 	}
 	public static int saveAgency(Agency agency, int sellerid) {
-		System.out.println("agencybaza");
 		conn = DBConnection.createConnection();
 		int retVal = -1;
 		try {
-			System.out.println("agency warmatebit");
 			String query = "INSERT INTO seller_agency (seller_id) VALUES (?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, sellerid);					

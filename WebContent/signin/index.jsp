@@ -17,6 +17,7 @@
 	<%
 		}
 	%>
-	<%@include file="form.html"%>
+	
+	<%@include file="../login.jsp"%>
 </body>
 </html>

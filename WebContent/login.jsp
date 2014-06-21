@@ -11,11 +11,10 @@
 <p> Please Enter User Name and Password</p>
 
 <div>
-<form action="" method="post"> 
+<form action="../LoginServlet" method="post"> 
 	UserName: <input type="text" name="username"/> <br>
     Password: <input type="password" name="password"/>
     <input type="submit" value="Login" name="login"/>
-
 </form>
 
 </div>

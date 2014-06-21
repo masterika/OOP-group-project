@@ -1,3 +1,4 @@
+<%@page import="model.data.db.StaticStorage"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="model.data.users.Hotel"%>
@@ -48,8 +49,7 @@ $(document).ready(function() {
 <body>
 	<div id="content">
 		<%
-		HotelStorage storage = new HotelStorage();
-		Hotel hotel = storage.loadHotel(Integer.parseInt(request.getParameter("ID")));
+		Hotel hotel = StaticStorage.loadHotel(Integer.parseInt(request.getParameter("ID")));
 		%>
 		<p> Name: <%=hotel.getName()%> </p>
 		<p> Phone: <%=hotel.getTelephone()%> </p>

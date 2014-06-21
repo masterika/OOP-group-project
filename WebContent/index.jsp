@@ -12,8 +12,7 @@
 
 <a href="/Turista/signin">Log In</a><br>
 <a href="/Turista/signup">Registration</a><br>
-<a href="list_hotels.jsp">Hotels</a><br>
-<a href="list_agency.jsp">Agencies</a>
+<a href="/Turista/HotelsServlet">Hotels</a><br>
 
 
 </body>

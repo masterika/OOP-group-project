@@ -48,17 +48,13 @@ public class ClientAccountCreateServlet extends HttpServlet {
 		int userId =(Integer)request.getAttribute("userId");
 		client.setName(request.getParameter("name"));
 		client.setSurName(request.getParameter("surname"));
-		client.setTelephone(request.getParameter("telephone"));	
-		if(StaticStorage.saveClient(client,userId) !=-1){
-			System.out.print("clientaccountservlet!");
-			RequestDispatcher rd = request.getRequestDispatcher("/signin/login");
+		client.setTelephone(request.getParameter("telephone"));
+		int clientId = StaticStorage.saveClient(client,userId);
+		if(clientId !=-1){
+			RequestDispatcher rd = request.getRequestDispatcher("/LoginServlet");
 		    rd.forward(request, response);
 		}else{
-			response.sendRedirect("/Turista/signup/?failed");
-			
-		}
-		
-		
+			response.sendRedirect("/Turista/signup/?failed");	
+		}	
 	}
-
 }

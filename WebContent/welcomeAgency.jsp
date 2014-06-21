@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="model.data.users.Client"%>
+<%@ page import="model.data.users.Agency"%>
 <%!int id;%>
 <%!String name;%>
 <%
-	Client user = (Client) request.getSession().getAttribute("client");
+	Agency user = (Agency) request.getSession().getAttribute("agency");
 	if (user != null) {
 		id = user.getId();
 		name = user.getUsername();

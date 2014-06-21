@@ -18,7 +18,7 @@ import model.data.users.User;
 /**
  * Servlet implementation class AccountCreateServlet
  */
-@WebServlet(urlPatterns = { "/AccountCreateServlet", "/signup/create" })
+@WebServlet(urlPatterns = { "/AccountCreateServlet"})
 public class AccountCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -44,28 +44,17 @@ public class AccountCreateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("accauntcreatservlet javascriptis bralia?!");
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = StringToMD5.generate(request.getParameter("password"));
-		//String confPassword = StringToMD5.generate(request.getParameter("confPassword"));
 		String serAdress = request.getParameter("type");		
-		/*if(!password.equals(confPassword)){
-			response.sendRedirect("/Turista/signup/?notmatch");
-			return;
-		}*/		
 		User user = new User();
 		user.setUsername(username);
 		user.setEmail(email);
 		user.setPassword(password);		
-		if(StaticStorage.isValidUser(user) == -1){ // bandzi shemowmebaa, wesit unda amowmos ukve arsebobs tu ara aseti usernames mqone useri da egetebi.
-			int id = StaticStorage.saveUser(user);
-			request.setAttribute("userId", id);
-			RequestDispatcher rd = request.getRequestDispatcher(serAdress);
-		    rd.forward(request, response);
-		}else{
-			response.sendRedirect("/Turista/signup/?failed");
-		}
+		int id = StaticStorage.saveUser(user);
+		request.setAttribute("userId", id);
+		RequestDispatcher rd = request.getRequestDispatcher(serAdress);
+	    rd.forward(request, response);
 	}
-
 }
