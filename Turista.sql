@@ -262,3 +262,5 @@ ADD COLUMN `date` DATE NULL AFTER `is_approved`;
 
 ALTER TABLE `turista`.`user_seller` 
 ADD COLUMN `is_approved` INT NULL DEFAULT 1 AFTER `identificator`;
+ALTER TABLE `turista`.`user_seller` 
+ADD COLUMN `is_approved` INT NULL DEFAULT 1 AFTER `identificator`;

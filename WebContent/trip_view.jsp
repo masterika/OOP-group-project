@@ -19,7 +19,7 @@
 <title><%=trip.getName()%> view</title>
 </head>
 <body>
-	<a href=<%="agency.jsp?id="+trip.getAgencyId()%>> agency page </a>
+	<a href=<%="agency.jsp?id="+trip.getAgencyId() %>> agency page </a>
 	<h1><%=trip.getName()%></h1>
 	<p> price: <%=trip.getPrice()%> </p>
 	<p> trip type: <%=trip.getType()%> </p>	

@@ -11,9 +11,14 @@ $(function(){
 //		$("#activities").height(100);
 //		$("#activities").width(500);
 		
+		$(".button").hover(function(){
+			$(this).toggleClass("button-hovered");
+		});
 		$(".button").click(function(){
-			$.get('ApproveUserServlet', function(data){
-				$("#approval").text(data);
+
+			$(this).addClass("button-clicked");
+			$.get('/ApproveUserServlet', function(){
+				$("#approval").text(true);
 				
 			});
 			

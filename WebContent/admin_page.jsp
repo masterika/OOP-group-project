@@ -101,7 +101,7 @@
 					approval status:
 					<p id="approval"><%=sellers.get(i).getApprStatus()%></p> 
 					 <%	session.setAttribute("sellerID", sellers.get(i).getId());%>
-					<input type = "submit" name = "submit" value ="Approve" class="button"></li>
+					<div class="button">Approve</li>
 				<%
 					}
 				%>

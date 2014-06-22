@@ -7,12 +7,9 @@ public class User{
 	private String email;
 	private String username;
 	private String password;
-<<<<<<< HEAD
 
-=======
-	private String telephone;
+	protected String telephone;
 	private boolean isApproved;
->>>>>>> 7813c3a15bfb0b5a26ca8ae59432b297468af762
 	private Date date;
 
 

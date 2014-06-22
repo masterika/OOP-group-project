@@ -35,4 +35,13 @@
     <servlet-name>SellersToApproveServlet</servlet-name>
     <url-pattern>/SellersToApproveServlet</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>ApproveUserServlet</servlet-name>
+    <servlet-class>ApproveUserServlet.ApproveUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveUserServlet</servlet-name>
+    <url-pattern>/ApproveUserServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
