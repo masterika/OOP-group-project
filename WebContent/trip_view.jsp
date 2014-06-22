@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import = "model.data.db.TripStorage" %>
 <%@page import = "model.data.Trip" %>
+<%@page import = "model.data.users.Hotel" %>
+<%@page import = "model.data.db.StaticTripStorage" %>
+<%@page import = "model.data.db.StaticStorage" %>
 <%@page import = "model.data.Location" %>
 <%@page import = "java.util.List" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,14 +12,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%/*
 	amit vtestav TripStorages loadTrips.
-	dasaweria comentarebi, reitingi, linki agencyze,dajavshna da listshi chamateba.
+	dasaweria comentarebi, reitingi, dajavshna da listshi chamateba.
 	exla ar tqva aba shen ra dawereo, aqedan titqmis arcerti feature ar gvaq da aq rogor damewera
 */
 %>
-<%	
-	int id = 1; // shesacvlelia, romel gverdsac unda amis view imis requestisgan unda amovigot parametrad id
-	TripStorage storage = new TripStorage(id); //testireba!
-	Trip trip = storage.loadTrip(id);
+<%		
+	Trip trip = StaticTripStorage.loadTrip(10);
 	List<Location> locations = trip.getLocations();
 %>
 <title><%=trip.getName()%> view</title>
@@ -32,7 +32,8 @@
 	%>
 			<p> <%="Location "+(i+1) %>  </p>
 				City: <%=location.getCity() %> 
-				Hotel: <%=location.getHotel()%> 
+				<% Hotel hotel = StaticTripStorage.loadHotel(location.getHotelId());// cudi arqiteqtura %>
+				Hotel: <a href=<%="ShowPhoto?ID="+hotel.getId()%>> <%=hotel.getName() %></a>				
 				Period: <%=location.getDuration() %>
 		<%}%>
 </body>

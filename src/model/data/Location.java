@@ -1,6 +1,5 @@
 package model.data;
 
-import model.data.users.Hotel;
 
 /*
  * during the trip you may visit several "locations"
@@ -8,14 +7,15 @@ import model.data.users.Hotel;
  * hotel - where you are staying, duration - how many days are you staying and city
  */
 public class Location { // this class is trip helper class
-	private String hotel; // hotel name, where you are staying
+	private int hotel; // hotel name, where you are staying
 	private int duration; // duration in days
 	private String city; // name of the city
-	public String getHotel() {
+	private int hotelId;
+	public int getHotel() { // returns hotel's identification 
 		return hotel;
 	}
-	public void setHotel(String name) {
-		this.hotel = name;
+	public void setHotel(int i) {
+		this.hotel = i;
 	}
 	public int getDuration() {
 		return duration;
@@ -29,4 +29,10 @@ public class Location { // this class is trip helper class
 	public void setCity(String city) {
 		this.city = city;
 	}
+	public int getHotelId() {
+		return hotelId;
+	}
+	public void setHotelId(int hotelId) {
+		this.hotelId = hotelId;
+	}	
 }

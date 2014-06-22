@@ -6,6 +6,7 @@ public class Trip implements Product{
 	private int id;
 	private String name;
 	private String type; // 2 men trip, 10 men group team or ect.
+	private int identificator; // unique to all trip	
 	public String getType() {
 		return type;
 	}
@@ -42,6 +43,12 @@ public class Trip implements Product{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getIdentificator() {
+		return identificator;
+	}
+	public void setIdentificator(int identificator) {
+		this.identificator = identificator;
 	}		
 	
 }

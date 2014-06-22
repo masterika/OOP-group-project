@@ -19,7 +19,7 @@
 		<input type="submit" value="Change Password">
 	</form>
 	
-	<a href = <%="trips.jsp?userId=" + session.getAttribute("userId") %> > Trips </a>
+	<a href = <%="trip_edit.jsp?userId=" + session.getAttribute("userId") %> > Trips </a>
 	
 
 </body>
