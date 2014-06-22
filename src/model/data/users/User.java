@@ -7,7 +7,7 @@ public class User{
 	private String email;
 	private String username;
 	private String password;
-	private boolean isApproved;
+
 	private Date date;
 
 
@@ -45,18 +45,12 @@ public class User{
 	}
 	
 	
-	public void setApprStatus(int i){
-		if (i==1) isApproved = false;
-		else isApproved = true;
-	}
 	
 	public void setDate(Date date){
 		this.date = date;
 	}
 	
-	public boolean getApprStatus(){
-		return isApproved;
-	}
+	
 	
 	public Date getDate(){
 		return date;

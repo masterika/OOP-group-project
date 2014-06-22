@@ -1,0 +1,29 @@
+.button {
+	height: 30px;
+	width: 100px;
+	border-radius: 5px;
+	background-color: #3399FF;
+	color: black;
+	font-family: Verdana;
+	text-align: center;
+}
+
+.show-user {
+	width: 500px;
+	 border-radius: 5px;
+	border: 2px solid #C2D6D6;
+}
+
+#reg-users-tabs {
+	height: 100px;
+	 width: 500px ;
+	 border-radius: 5px;
+	border: 2px solid #C2D6D6;
+}
+
+#waiting-users-tab {
+	height: 100px;
+	 width: 500px;
+	  border-radius: 5px;
+	border: 2px solid #C2D6D6;
+}

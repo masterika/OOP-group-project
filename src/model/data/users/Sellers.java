@@ -9,6 +9,7 @@ public class Sellers extends User {
 	private String telephone;
 	private int identificator;
 	private int SellerId;
+	private boolean isApproved;
 	public Sellers() {		
 	}
 	public String getName() {
@@ -38,6 +39,14 @@ public class Sellers extends User {
 		this.telephone = telephone;
 	}
 	
+	public void setApprStatus(int i){
+		if (i==1) isApproved = false;
+		else isApproved = true;
+	}
+	
+	public boolean getApprStatus(){
+		return isApproved;
+	}
 	
 	/* these last to methods doesn't take part in registration */
 	public void setRating() {}

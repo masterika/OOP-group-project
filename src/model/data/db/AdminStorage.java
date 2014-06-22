@@ -34,7 +34,7 @@ public class AdminStorage {
 
 	}
 
-	public static ArrayList<User> getRecentUsers(Date date) {
+	/*public static ArrayList<User> getRecentUsers(Date date) {
 		ArrayList<User> users = new ArrayList<User>();
 		con = DBConnection.createConnection();
 		User user = null;
@@ -61,5 +61,5 @@ public class AdminStorage {
 
 		return users;
 	}
-
+*/
 }

@@ -6,18 +6,11 @@ import java.sql.SQLException;
 
 public class DBConnection {
 	private static final String MYSQL_USERNAME = "root";
-<<<<<<< HEAD
-
 	private static final String MYSQL_PASSWORD = "1234";
 	private static final String MYSQL_DATABASE_SERVER = "localhost";
 	private static final String MYSQL_DATABASE_NAME = "turista";
 
-=======
-	private static final String MYSQL_PASSWORD = "irakli500";
-	private static final String MYSQL_DATABASE_SERVER = "localhost";
-	private static final String MYSQL_DATABASE_NAME = "turista";
-	
->>>>>>> 208c31898e9025f5e894256c3cb375d58ba56b34
+
 	private static Connection conn;
 	public static Connection createConnection() {
 		try {

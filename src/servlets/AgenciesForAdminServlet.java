@@ -1,10 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,19 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.data.db.AdminStorage;
+import model.data.db.StaticStorage;
+import model.data.users.Agency;
+import model.data.users.Hotel;
 
 /**
- * Servlet implementation class RecentUsersServlet
+ * Servlet implementation class AgenciesForAdminServlet
  */
-@WebServlet("/RecentUsersServlet")
-public class RecentUsersServlet extends HttpServlet {
+@WebServlet("/AgenciesForAdminServlet")
+public class AgenciesForAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecentUsersServlet() {
+    public AgenciesForAdminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +32,15 @@ public class RecentUsersServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			System.out.println(request.getParameter("date"));
-			Date date = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse((String) request.getParameter("date"));
-		//	request.getSession().setAttribute("listOfRecentUsers", AdminStorage.getRecentUsers(date));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//ArrayList<Agency> agenciesList =  StaticStorage.getAgenciesFromDB(); 
+    	//request.setAttribute("agencies", agenciesList);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 	}
 
 }

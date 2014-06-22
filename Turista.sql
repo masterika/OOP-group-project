@@ -258,4 +258,10 @@ ALTER TABLE `wishlist_items` ADD FOREIGN KEY (item_id) REFERENCES `hotel_rooms` 
 
 ALTER TABLE `turista`.`users` 
 ADD COLUMN `is_approved` INT NULL DEFAULT 1 AFTER `email`,
+
+ALTER TABLE `turista`.`users` 
+CHANGE COLUMN `is_approved` `is_banned` INT(11) NULL DEFAULT '1' ;
 ADD COLUMN `date` DATE NULL AFTER `is_approved`;
+
+ALTER TABLE `turista`.`user_seller` 
+ADD COLUMN `is_approved` INT NULL DEFAULT 1 AFTER `identificator`;

@@ -9,4 +9,30 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>HotelsForAdminServlet</servlet-name>
+    <servlet-class>HotelsForAdminServlet.HotelsForAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HotelsForAdminServlet</servlet-name>
+    <url-pattern>/HotelsForAdminServlet</url-pattern>
+    
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AgenciesForAdminServlet</servlet-name>
+    <servlet-class>AgenciesForAdminServlet.AgenciesForAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AgenciesForAdminServlet</servlet-name>
+    <url-pattern>/AgenciesForAdminServlet</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>SellersToApproveServlet</servlet-name>
+    <servlet-class>SellersToApproveServlet.SellersToApproveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SellersToApproveServlet</servlet-name>
+    <url-pattern>/SellersToApproveServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
