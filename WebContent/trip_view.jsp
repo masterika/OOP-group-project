@@ -10,19 +10,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%/*
-	amit vtestav TripStorages loadTrips.
-	dasaweria comentarebi, reitingi, dajavshna da listshi chamateba.
-	exla ar tqva aba shen ra dawereo, aqedan titqmis arcerti feature ar gvaq da aq rogor damewera
-*/
-%>
+
 <%		
-	Trip trip = StaticTripStorage.loadTrip(10);
+	System.out.print(request.getAttribute("tripId"));
+	Trip trip = StaticTripStorage.loadTrip((Integer)request.getAttribute("tripId"));
 	List<Location> locations = trip.getLocations();
 %>
 <title><%=trip.getName()%> view</title>
 </head>
 <body>
+	<a href=<%="trip_edit.jsp?id="+trip.getAgencyId()%>> agency page </a>
 	<h1><%=trip.getName()%></h1>
 	<p> price: <%=trip.getPrice()%> </p>
 	<p> trip type: <%=trip.getType()%> </p>	

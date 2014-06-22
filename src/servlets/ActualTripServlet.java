@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.data.Location;
 import model.data.Trip;
 import model.data.db.StaticTripStorage;
+import model.data.users.Agency;
 
 
 /**
@@ -43,10 +44,14 @@ public class ActualTripServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Trip trip = new Trip();
-		fillTrip(trip, request);			
-		int agencyId = 2;// (Integer.parseInt(request.getParameter("agencyId")));
-		if(StaticTripStorage.saveTrip(trip,agencyId)){
-			RequestDispatcher r = request.getRequestDispatcher("trip_view.jsp");
+		fillTrip(trip, request);		
+		 Agency agency = (Agency)request.getSession().getAttribute("agency");		 
+		int agencyId = agency.getAgencyId();
+		trip.setAgencyId(agencyId);	
+		int tripId= StaticTripStorage.saveTrip(trip);
+		if(tripId != -1){			
+			request.setAttribute("tripId",tripId);			
+			RequestDispatcher r = request.getRequestDispatcher("trip_view.jsp");// aq tributis nacvlad ? it ro gadavcet jobia
 			r.forward(request, response);
 		}else{
 			RequestDispatcher r = request.getRequestDispatcher("create_failed.jsp");
@@ -57,8 +62,7 @@ public class ActualTripServlet extends HttpServlet {
 	private void fillTrip(Trip trip, HttpServletRequest request) {		
 		trip.setName(request.getParameter("name"));			
 		trip.setPrice(Integer.parseInt(request.getParameter("price")));		
-		trip.setType(request.getParameter("type"));
-		trip.setIdentificator(Integer.parseInt(request.getParameter("identificator")));
+		trip.setType(request.getParameter("type"));			
 		trip.setLocations(getLocations(request));
 	}
 

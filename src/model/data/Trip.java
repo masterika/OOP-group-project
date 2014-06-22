@@ -5,6 +5,7 @@ import model.data.users.Product;
 public class Trip implements Product{
 	private int id;
 	private String name;
+	private int agencyId;
 	private String type; // 2 men trip, 10 men group team or ect.
 	private int identificator; // unique to all trip	
 	public String getType() {
@@ -49,6 +50,12 @@ public class Trip implements Product{
 	}
 	public void setIdentificator(int identificator) {
 		this.identificator = identificator;
+	}
+	public int getAgencyId() {
+		return agencyId;
+	}
+	public void setAgencyId(int agencyId) {
+		this.agencyId = agencyId;
 	}		
 	
 }

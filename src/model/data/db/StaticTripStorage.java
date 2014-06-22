@@ -12,29 +12,49 @@ import model.data.Trip;
 import model.data.users.Hotel;
 public class StaticTripStorage {	
 	private static Connection conn;	
-	public static boolean saveTrip(Trip trip,int agencyId) {		
+	public static int saveTrip(Trip trip) {			
 		conn = DBConnection.createConnection();
-		boolean retVal = false;		
+		int retVal = -1;	
+		boolean p = true;
 			try { 				
-				String query = "INSERT INTO agency_trips (agency_id,trip_type,trip_name,price,identificator) VALUES (?,?,?,?,?);";
+				String query = "INSERT INTO agency_trips (agency_id,trip_type,trip_name,price) VALUES (?,?,?,?);";
 				PreparedStatement statement = conn.prepareStatement(query);				
-				statement.setInt(1, agencyId);				
-				statement.setString(2, trip.getType());
-				statement.setString(3, trip.getName());
-				statement.setInt(4,trip.getPrice());
-				statement.setInt(5, trip.getIdentificator());
-				statement.execute();				
-				retVal = saveTripLocations(trip);
+				statement.setInt(1, trip.getAgencyId());				
+				statement.setString(2, trip.getType());				
+				statement.setString(3, trip.getName());				
+				statement.setInt(4,trip.getPrice());				
+				statement.execute();
+				if (p) {
+					retVal = getTripId(trip.getName());					
+				}
+				p = saveTripLocations(trip);				
 			} catch (SQLException e) {
-				retVal = false;
+				p = false;				
 			} finally {
 				DBConnection.closeConnection();
-			}		
+			}				
 		return retVal;		
 	}
+	
+	private static int getTripId(String name) { // uewvli gasasworebelia, name sheileba 2 ertnairi iyos/ isnertlastid da misi jani ra
+		int id = -1;
+		try {
+			String q = "SELECT * FROM agency_trips where trip_name = ?;";
+			PreparedStatement statement = conn.prepareStatement(q);
+			statement.setString(1, name);		
+			ResultSet rs = statement.executeQuery();		
+			if (rs.next()) {
+				id = rs.getInt("id");				
+			}
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} 
+		return id;
+	}
+
 	private static boolean saveTripLocations(Trip trip) {		
 		boolean retVal = true;
-		int tripId = getTripId(trip.getIdentificator());
+		int tripId = getTripId(trip.getName());
 		if (tripId != -1) {
 			List<Location> locations = trip.getLocations();
 			for (int i=0; i<locations.size(); i++)
@@ -72,20 +92,6 @@ public class StaticTripStorage {
 		} 
 		return id;		
 	}
-	private static int getTripId(int identificator) {
-		int id = -1;
-		try {
-			String q = "SELECT * FROM agency_trips WHERE identificator = ?;";
-			PreparedStatement statement = conn.prepareStatement(q);
-			statement.setInt(1, identificator);		
-			ResultSet rs = statement.executeQuery();
-			if (rs.next())
-				id = rs.getInt("id");			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		return id;		
-	}	
 	public static Trip loadTrip(int tripId) {
 		conn = DBConnection.createConnection();
 		Trip trip = new Trip();
@@ -95,11 +101,7 @@ public class StaticTripStorage {
 			statement.setInt(1, tripId);
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
-				trip.setId(rs.getInt("id"));
-				trip.setName(rs.getString("trip_name"));
-				trip.setPrice(rs.getInt("price"));
-				trip.setType("trip_type");
-				trip.setLocations(loadLocations(trip.getId()));
+				fillTrip(trip,rs);	
 			}
 
 		} catch (SQLException e) {
@@ -108,6 +110,43 @@ public class StaticTripStorage {
 			DBConnection.closeConnection();
 		}
 		return trip;		
+	}
+	
+
+	public static List<Trip> loadTrips(int agencyId) {		
+		conn = DBConnection.createConnection();
+		List<Trip> trips = new ArrayList<Trip>();
+		try {
+			String query = "SELECT * FROM agency_trips WHERE agency_id = ?;";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setInt(1, agencyId);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {				
+				Trip trip = new Trip();
+				fillTrip(trip,rs);	
+				trips.add(trip);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.closeConnection();
+		}
+		return trips;		
+	}
+	private static void fillTrip(Trip trip, ResultSet rs) {
+		System.out.println("njer");
+		try {
+			trip.setId(rs.getInt("id"));
+			trip.setAgencyId(rs.getInt("agency_id"));
+			trip.setName(rs.getString("trip_name"));
+			trip.setPrice(rs.getInt("price"));
+			trip.setType(rs.getString("trip_type"));
+			trip.setLocations(loadLocations(getTripId(trip.getName())));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 	private static  List<Location> loadLocations(int tripId) {
 		List<Location> locations = new ArrayList<Location>(); // testireba?
