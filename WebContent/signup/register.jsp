@@ -6,20 +6,7 @@
 <head>
 <script src="jquery-1.11.1.min.js"></script>
 <!--<link rel="stylesheet" type="text/css" href="/Turista/styles/registerStyles.css">-->
-
-<style>
-.module{
-  position:relative;
-  top:15%;    
-  height:70%;
-  width:450px;
-  margin-left:auto;
-  margin-right:auto;
-  border-radius:5px;
-  background:RGBA(255,255,255,1);
-}
-</style>
-
+<link rel="stylesheet" type="text/css" href="/Turista/styles/inputStyles.css">
 
 </head>
 <body>

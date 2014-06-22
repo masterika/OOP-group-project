@@ -5,15 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>LogIn</title>
+<link rel="stylesheet" type="text/css" href="/Turista/styles/inputStyles.css">
+
 </head>
 <body>
 
+<div class="module">
 <p> Please Enter User Name and Password</p>
 
-<div>
-<form action="../LoginServlet" method="post"> 
-	UserName: <input type="text" name="username"/> <br>
-    Password: <input type="password" name="password"/>
+<form action="../LoginServlet" method="post">
+	<input type="text" placeholder="Username" class="textbox" name="username"/><br/>
+	<input type="password" placeholder="Password" class="textbox" name="password"/><br/> 
     <input type="submit" value="Login" name="login"/>
 </form>
 

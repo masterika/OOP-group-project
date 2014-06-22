@@ -4,16 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MainPage</title>
+<title>Insert title here</title>
 </head>
 <body>
-
-<h1> Welcome to TURISTA!!!  </h1>
-
-<a href="/Turista/signin">Log In</a><br>
-<a href="/Turista/signup">Registration</a><br>
-<a href="/Turista/HotelsServlet">Hotels</a><br>
-<a href="/Turista/AgenciesServlet">Agencies</a><br>
 
 </body>
 </html>

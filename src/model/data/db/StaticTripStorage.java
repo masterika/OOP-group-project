@@ -135,7 +135,6 @@ public class StaticTripStorage {
 		return trips;		
 	}
 	private static void fillTrip(Trip trip, ResultSet rs) {
-		System.out.println("njer");
 		try {
 			trip.setId(rs.getInt("id"));
 			trip.setAgencyId(rs.getInt("agency_id"));
