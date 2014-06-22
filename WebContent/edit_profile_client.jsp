@@ -14,14 +14,17 @@
 		Upload picture: <input type="file" name="file">
 	</form>
 	
-	<p>
-	<form action="ChangeUserPasswordServlet" method="post">
+	<form action="ChangeUserPasswordServlet" method="post" >
 		Previous password: <input type="password" name="prevpass"><br>
 		New Password: <input type="password" name="newpass"><br>
 		Confirm Password: <input type="password" name="confnewpass"><br>
-
+		
+		<input type="hidden" name="type" value="<%=request.getParameter("id") %>" />
+		<input type="hidden" name="user" value="Client" />
+		
 		<input type="submit" value="Change Password">
 	</form>
+
 
 	<a href=<%="wishlist.jsp?userId=" + session.getAttribute("userId")%>>
 		My Wishlist </a>

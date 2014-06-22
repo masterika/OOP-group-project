@@ -14,10 +14,23 @@
 	<form action="ChangeUserPasswordServlet" method="post">
 		Previous password: <input type="password" name="prevpass"><br> 
 		New Password: <input type="password" name="newpass"><br>
-		Confirm Password: <input type="password" name="newpass"><br>
+		Confirm Password: <input type="password" name="confnewpass"><br>
+		<input type="hidden" name="type" value="<%=request.getParameter("id") %>" />
+		<input type="hidden" name="user" value="Hotel" />
 		
 		<input type="submit" value="Change Password">
 	</form>
+	
+	<form action="ChangeSellerAdressServlet" method="post">	
+		<%@include file="/sellerAdressChange.jsp"%>
+		<input type="hidden" name="user" value="Hotel" />
+	</form>	
+		
+		<form action="ChangeSellerNameServlet" method="post">	
+		<%@include file="/seller_name_change.jsp"%>
+		<input type="hidden" name="user" value="Hotel" />
+	</form>	
+
 	
 	<a href = <%="gallery.jsp?ID=" + request.getParameter("id")%> > My Gallery </a>
 	

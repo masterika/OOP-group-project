@@ -378,19 +378,8 @@ public class StaticStorage {
 		fillUser(seller,rs);
 		try {
 			seller.setName(rs.getString("name"));
-<<<<<<< HEAD
-
 			seller.setAdress(rs.getString("adress"));
-	    	seller.setTelephone(rs.getString("telephone"));
-	    	seller.setSellerId(rs.getInt("id"));
-
-			seller.setAdress(rs.getString("adress"));	    	
-	    	seller.setSellerId(rs.getInt("id"));
-
-=======
-			seller.setAdress(rs.getString("adress"));	    	
-	    	seller.setSellerId(rs.getInt("seller_id"));
->>>>>>> b0606d7a4e2ed7070891b8b3512285e790d4c1d8
+			seller.setSellerId(rs.getInt("seller_id"));
 	    	seller.setIdentificator(rs.getInt("identificator"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

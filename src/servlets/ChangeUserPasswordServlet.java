@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.data.db.UsersStorage;
-import model.data.users.User;
+import model.data.db.ChangeStorage;
+
 
 /**
  * Servlet implementation class ChangeUserPasswordServlet
@@ -40,14 +40,16 @@ public class ChangeUserPasswordServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UsersStorage us = new UsersStorage();
-		
-		String previousPassword = ((User)request.getSession().getAttribute("user")).getPassword();
+		//select * from users,user_seller,seller_hotel where users.id = user_seller.user_id and user_seller.id = seller_hotel.seller_id;
+		//select * from  users,user_client where users.id = user_client.user_id;
+		int id = Integer.parseInt(request.getParameter("type"));
+		String previousPassword = ChangeStorage.getPassword(id);
+		String userType = request.getParameter("user");
+		String adress = "welcome" + userType + ".jsp";
 		String typedPrevPass = StringToMD5.generate(request.getParameter("prevpass"));
 		if (previousPassword.equals(typedPrevPass) && request.getParameter("newpass").equals(request.getParameter("confnewpass"))){
-			
-			us.changePassword(((User)request.getSession().getAttribute("user")).getId(), StringToMD5.generate(request.getParameter("newpass")));
-			RequestDispatcher r = request.getRequestDispatcher("edit_profile_client.jsp");
+			ChangeStorage.changePassword(id, StringToMD5.generate(request.getParameter("newpass")));
+			RequestDispatcher r = request.getRequestDispatcher(adress);
 			r.forward(request, response);
 		}
 		else if (!previousPassword.equals(typedPrevPass)){

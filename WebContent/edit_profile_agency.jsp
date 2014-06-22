@@ -11,13 +11,27 @@
 <body>
 	<h1>Edit Profile Agency</h1>
 	<img src = "profile.jpg" height = "100" width = "95" >
-	<p>
-	<form action="ChangeAgencyPasswordServlet" method="post">
+	<form action="ChangeUserPasswordServlet" method="post">
 		Previous password: <input type="password" name="prevpass"><br> 
 		New Password: <input type="password" name="newpass"><br>
-		Confirm Password: <input type="password" name="newpass"><br>
+		Confirm Password: <input type="password" name="confnewpass"><br>
 		
-		<input type="submit" value="Change Password">
+		
+		<input type="hidden" name="type" value="<%=request.getParameter("id") %>" />
+		<input type="hidden" name="user" value="Agency" />
+		
+		<input type="submit" value="Change Password"><br>
+	</form>
+	
+	
+	<form action="ChangeSellerAdressServlet" method="post">	
+		<%@include file="/sellerAdressChange.jsp"%>
+		<input type="hidden" name="user" value="Agency" />
+	</form>	
+	
+	<form action="ChangeSellerNameServlet" method="post">	
+		<%@include file="/seller_name_change.jsp"%>
+		<input type="hidden" name="user" value="Agency" />
 	</form>	
 	<a href = "trips_edit.jsp" > Trips </a>
 </body>
