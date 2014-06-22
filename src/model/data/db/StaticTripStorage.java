@@ -1,4 +1,5 @@
 package model.data.db;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,30 +9,20 @@ import java.util.List;
 
 import model.data.Location;
 import model.data.Trip;
-
-
-/*
- * aklia reitingi da comentarebi, 
- * agretve mxolod im shemtxvevistvisaa dawerili rodesac tripi mxolod registrirebul sastumroebs stumrobs
- * later-is chasworeba araa rtuli, mosalaparakebelia girs tu ara 
- * */
-public class TripStorage {
-	private int agencyId;
-	private Connection conn;
-	public TripStorage(){}
-	public TripStorage(int id) {
-		this.agencyId=id;		
-	}
-	public boolean saveTrip(Trip trip) {		
+import model.data.users.Hotel;
+public class StaticTripStorage {	
+	private static Connection conn;	
+	public static boolean saveTrip(Trip trip,int agencyId) {		
 		conn = DBConnection.createConnection();
 		boolean retVal = false;		
 			try { 				
-				String query = "INSERT INTO agency_trips (agency_id,trip_type,trip_name,price) VALUES (?,?,?,?);";
+				String query = "INSERT INTO agency_trips (agency_id,trip_type,trip_name,price,identificator) VALUES (?,?,?,?,?);";
 				PreparedStatement statement = conn.prepareStatement(query);				
 				statement.setInt(1, agencyId);				
 				statement.setString(2, trip.getType());
 				statement.setString(3, trip.getName());
-				statement.setInt(4,trip.getPrice());				
+				statement.setInt(4,trip.getPrice());
+				statement.setInt(5, trip.getIdentificator());
 				statement.execute();				
 				retVal = saveTripLocations(trip);
 			} catch (SQLException e) {
@@ -41,9 +32,9 @@ public class TripStorage {
 			}		
 		return retVal;		
 	}
-	private boolean saveTripLocations(Trip trip) {		
+	private static boolean saveTripLocations(Trip trip) {		
 		boolean retVal = true;
-		int tripId = getTripId(trip.getName());		
+		int tripId = getTripId(trip.getIdentificator());
 		if (tripId != -1) {
 			List<Location> locations = trip.getLocations();
 			for (int i=0; i<locations.size(); i++)
@@ -52,7 +43,7 @@ public class TripStorage {
 		}
 		return retVal;		
 	}
-	private boolean insertLocation(Location location, int tripId) {
+	private static boolean insertLocation(Location location, int tripId) {
 		boolean retVal = true;
 		try { 
 			String query = "INSERT INTO locations (location_name,hotel_id,trip_id,period) VALUES (?,?,?,?);";
@@ -67,12 +58,12 @@ public class TripStorage {
 		}
 		return retVal;
 	}
-	private int getHotelId(String name) {
+	private static int getHotelId(int identificator) {
 		int id = -1;
 		try {
-			String q = "SELECT * FROM user_hotel WHERE hotel_name = ?;";
+			String q = "SELECT * FROM seller_hotel,user_seller WHERE user_seller.identificator = ? and seller_hotel.seller_id=user_seller.id;";
 			PreparedStatement statement = conn.prepareStatement(q);
-			statement.setString(1, name);		
+			statement.setInt(1, identificator);		
 			ResultSet rs = statement.executeQuery();
 			if (rs.next())
 				id = rs.getInt("id");			
@@ -81,12 +72,12 @@ public class TripStorage {
 		} 
 		return id;		
 	}
-	private int getTripId(String name) {
+	private static int getTripId(int identificator) {
 		int id = -1;
 		try {
-			String q = "SELECT * FROM agency_trips WHERE trip_name = ?;";
+			String q = "SELECT * FROM agency_trips WHERE identificator = ?;";
 			PreparedStatement statement = conn.prepareStatement(q);
-			statement.setString(1, name);		
+			statement.setInt(1, identificator);		
 			ResultSet rs = statement.executeQuery();
 			if (rs.next())
 				id = rs.getInt("id");			
@@ -95,13 +86,13 @@ public class TripStorage {
 		} 
 		return id;		
 	}	
-	public Trip loadTrip(int id) {
+	public static Trip loadTrip(int tripId) {
 		conn = DBConnection.createConnection();
 		Trip trip = new Trip();
 		try {
 			String query = "SELECT * FROM agency_trips WHERE id = ?;";
 			PreparedStatement statement = conn.prepareStatement(query);
-			statement.setInt(1, id);
+			statement.setInt(1, tripId);
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
 				trip.setId(rs.getInt("id"));
@@ -118,37 +109,49 @@ public class TripStorage {
 		}
 		return trip;		
 	}
-	private List<Location> loadLocations(int id) {
-		List<Location> locations = new ArrayList<Location>();
+	private static  List<Location> loadLocations(int tripId) {
+		List<Location> locations = new ArrayList<Location>(); // testireba?
 		try {			
 			String query = "SELECT * FROM locations WHERE trip_id = ?;";
 			PreparedStatement statement = conn.prepareStatement(query);
-			statement.setInt(1, id);
+			statement.setInt(1, tripId);
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {	
 				Location location = new Location();
 				location.setCity(rs.getString("location_name"));
 				location.setDuration(rs.getInt("period"));
-				location.setHotel(getHotelById(rs.getInt("hotel_id")));
+				location.setHotelId(rs.getInt("hotel_id"));
 				locations.add(location);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return locations;		
-	}
-	private String getHotelById(int id) { // returns hotel's name according to its id
-		String hotelName = "";
-		try {			
-            String query = "SELECT * FROM user_hotel, users WHERE user_hotel.user_id = ?";
-            PreparedStatement statement = conn.prepareStatement(query);
-            statement.setInt(1, id);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next())
-            	hotelName = (rs.getString("hotel_name"));           
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-		return hotelName;		
+	}	
+
+	/*chemi azrit araswori arqiteqturis bralia. 
+	 * memgoni staticstorageshi clientis hotelis agencys loadi
+	 *  tavianti idis mixedvit unda xdebodes da ara userId is mixedvit... 
+	 */
+	
+	public static Hotel loadHotel(int hotelId){ 
+		conn = DBConnection.createConnection();
+		Hotel hotel = new Hotel();
+		int userId = -1;
+		try {
+			String query = "SELECT * FROM seller_hotel,user_seller, users WHERE seller_hotel.id = ? and users.id = user_seller.user_id and user_seller.id=seller_hotel.seller_id;";
+			PreparedStatement statement = conn.prepareStatement(query);
+			 statement.setInt(1, hotelId);
+			 ResultSet rs = statement.executeQuery();
+		     if (rs.next()) {
+		       	userId = rs.getInt("users.id");
+		       	hotel = StaticStorage.loadHotel(userId);
+		     }
+	    } catch (SQLException e) {
+	       e.printStackTrace();
+	    }finally{
+	    	DBConnection.closeConnection();
+	    }
+		return hotel;		
 	}
 }

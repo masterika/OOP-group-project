@@ -5,11 +5,14 @@ import helper.StringToMD5;
 import java.io.IOException;
 
 
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 
 import model.data.users.User;
@@ -19,7 +22,7 @@ import model.data.db.DBForLogin;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet(urlPatterns = {"/LoginServlet", "/signin/login"})
+@WebServlet(urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,18 +51,23 @@ public class LoginServlet extends HttpServlet {
 		
 		int userId = StaticStorage.isValidUser(user);
 		String st = DBForLogin.getTtype(request.getParameter("username"),StringToMD5.generate(request.getParameter("password")));
-	
+		
 		if(userId != -1 && !st.equals("") ){
-			System.out.println("shevedi aq");
 			if(st.equals("client")){
 				request.getSession().setAttribute("client", StaticStorage.loadClient(userId));
-				response.sendRedirect("/Turista/welcome.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("welcomeClient.jsp");
+			    rd.forward(request, response);
+				//response.sendRedirect("welcomeClient.jsp");
 			}else if(st.equals("hotel")){
 				request.getSession().setAttribute("hotel", StaticStorage.loadHotel(userId));
-				response.sendRedirect("/Turista/welcome.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("welcomeHotel.jsp");
+			    rd.forward(request, response);
+				//response.sendRedirect("welcomeHotel.jsp");
 			}else if(st.equals("agency")){
 				request.getSession().setAttribute("agency", StaticStorage.loadAgency(userId));
-				response.sendRedirect("/Turista/welcome.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("welcomeAgency.jsp");
+			    rd.forward(request, response);
+				//response.sendRedirect("welcomeAgency.jsp");
 			}
 		}else{
 			response.sendRedirect("/Turista/signin/?failed");

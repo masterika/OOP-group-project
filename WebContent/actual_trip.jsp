@@ -12,10 +12,11 @@
 </head>
 <body>
 <h1> trip registration  </h1>
-	<form action = "ActualTripServlet" method = "post">
+	<form action = "ActualTripServlet" method = "post">		
 		Name: <input type="text" name="name"/> <br/>
 		Price: <input type="text" name="price"/> <br/>
 		Type: <input type="text" name="type"/> <br/>
+		Identificator: <input type="text" name="identificator"/> <br/>			
 		<% int num = Integer.parseInt((String)request.getAttribute("N_Locations"));%>
 		<input type="hidden" name="N_Locations" value=<%=num %> />
 		<%

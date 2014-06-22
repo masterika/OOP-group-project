@@ -4,19 +4,11 @@ import java.util.HashMap;
 
 import model.data.Trip;
 
-public class Agency extends Sellers{
-	private String name;
-	private HashMap<Integer,Trip> trips;	
-	
-	private int agencyId;
-	
-	
-	
-	
+public class Agency extends Sellers{	
+	private HashMap<Integer,Trip> trips;		
+	private int agencyId;	
 	public Agency() {		
-	}
-	
-	
+	}	
 	public void setAgencyId(int agencyId){
 		this.agencyId = agencyId;
 	}

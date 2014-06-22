@@ -104,11 +104,9 @@ public class StaticStorage {
 		return id;	
 	}
 	public static int saveAgency(Agency agency, int sellerid) {
-		System.out.println("agencybaza");
 		conn = DBConnection.createConnection();
 		int retVal = -1;
 		try {
-			System.out.println("agency warmatebit");
 			String query = "INSERT INTO seller_agency (seller_id) VALUES (?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, sellerid);					
@@ -224,20 +222,10 @@ public class StaticStorage {
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setInt(1, userid);
             ResultSet rs = statement.executeQuery();
-
             if (rs.next()) {
             	client = new Client(); // testirebadoba!!!
-            	client.setName(rs.getString("name"));
-            	client.setSurName(rs.getString("surname"));
-            	client.setTelephone(rs.getString("telephone"));
-            	client.setId(rs.getInt("id"));
-            	client.setUsername(rs.getString("username"));
-            	client.setEmail(rs.getString("email"));
-            	client.setPassword(rs.getString("password"));
-            	client.setClientId(rs.getInt("user_client.id"));
-            	
+            	fillClient(client,rs);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }finally{
@@ -255,15 +243,7 @@ public class StaticStorage {
 			 ResultSet rs = statement.executeQuery();
             if (rs.next()) {
             	hotel = new Hotel();
-            	hotel.setName(rs.getString("name"));
-            	hotel.setAdress(rs.getString("adress"));
-            	hotel.setTelephone(rs.getString("telephone"));
-            	hotel.setId(rs.getInt("id"));
-            	hotel.setUsername(rs.getString("username"));
-            	hotel.setEmail(rs.getString("email"));
-            	hotel.setPassword(rs.getString("password"));
-                hotel.setStars(rs.getInt("stars"));
-                hotel.setIdentificator(rs.getInt("identificator"));
+            	fillHotel(hotel,rs);
             }
 
         } catch (SQLException e) {
@@ -283,15 +263,7 @@ public class StaticStorage {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
             	agency = new Agency();
-            	agency.setName(rs.getString("name"));
-            	agency.setAdress(rs.getString("adress"));
-            	agency.setTelephone(rs.getString("telephone"));
-            	agency.setId(rs.getInt("id"));
-            	agency.setUsername(rs.getString("username"));
-            	agency.setEmail(rs.getString("email"));
-            	agency.setPassword(rs.getString("password"));
-            	agency.setAgencyId(rs.getInt("seller_agency.id"));  
-            	agency.setIdentificator(rs.getInt("identificator"));
+            	fillAgency(agency,rs);
             }
 
         } catch (SQLException e) {
@@ -311,14 +283,7 @@ public class StaticStorage {
 
             while (rs.next()) {
             	Hotel hotel = new Hotel();
-            	hotel.setName(rs.getString("name"));
-            	hotel.setAdress(rs.getString("adress"));
-            	hotel.setTelephone(rs.getString("telephone"));
-            	hotel.setId(rs.getInt("user_id"));
-            	hotel.setUsername(rs.getString("username"));
-            	hotel.setEmail(rs.getString("email"));
-            	hotel.setPassword(rs.getString("password"));
-                hotel.setStars(rs.getInt("stars"));
+            	fillHotel(hotel,rs);
                 list.add(hotel);
             }
 
@@ -363,4 +328,62 @@ public class StaticStorage {
 		}
 		return p;	
 	}
+	
+	private synchronized static void fillUser(User user,ResultSet rs){		
+		try {			
+			user.setId(rs.getInt("user_id"));		
+			user.setUsername(rs.getString("username"));
+	    	user.setEmail(rs.getString("email"));
+	    	user.setPassword(rs.getString("password"));	    	
+		} catch (SQLException e) {
+			System.out.println("useris catch shevida");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    	
+	}
+	private synchronized static void fillClient(Client client,ResultSet rs) {
+		fillUser(client,rs);
+		try {
+			client.setName(rs.getString("name"));
+			client.setSurName(rs.getString("surname"));
+	    	client.setTelephone(rs.getString("telephone"));
+	    	client.setClientId(rs.getInt("id"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    	
+	}
+	private synchronized static void fillSeller(Sellers seller, ResultSet rs) {
+		fillUser(seller,rs);
+		try {
+			seller.setName(rs.getString("name"));
+			seller.setAdress(rs.getString("adress"));
+	    	seller.setTelephone(rs.getString("telephone"));
+	    	seller.setSellerId(rs.getInt("seller_id"));
+	    	seller.setIdentificator(rs.getInt("identificator"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    	
+	}
+	private synchronized static void fillAgency(Agency agency, ResultSet rs) {
+		fillSeller(agency,rs);
+		try {
+			agency.setAgencyId(rs.getInt("id"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	private synchronized static void fillHotel(Hotel hotel, ResultSet rs) {		
+		fillSeller(hotel,rs);
+		try {
+			hotel.setStars(rs.getInt("stars"));
+			hotel.setHotelId(rs.getInt("id"));
+		} catch (SQLException e) {
+			System.out.println("catch");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
 }

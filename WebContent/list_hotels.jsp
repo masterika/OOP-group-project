@@ -10,14 +10,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<a href=index.jsp> main page </a>
 	<h1> Welcome to page of Hotels </h1>
 		<ul>
 		<%
-		ServletContext context = request.getServletContext();
-		ArrayList<Hotel> hotels = (ArrayList<Hotel>)context.getAttribute("hotels");
+		ArrayList<Hotel> hotels = (ArrayList<Hotel>)request.getAttribute("hotels");
 		for (int i = 0; i < hotels.size(); i++) {
 		%>
-		<li><a href=<%="hotel.jsp?ID="+hotels.get(i).getId()%>> <%=hotels.get(i).getName() %></a></li>
+		<li><a href=<%="ShowPhoto?ID="+hotels.get(i).getId()%>> <%=hotels.get(i).getName() %></a></li>
 		<%} %>
 		</ul>
 

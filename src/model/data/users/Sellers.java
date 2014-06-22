@@ -8,7 +8,7 @@ public class Sellers extends User {
 	private String adress;
 	private String telephone;
 	private int identificator;
-	
+	private int SellerId;
 	public Sellers() {		
 	}
 	public String getName() {
@@ -42,4 +42,10 @@ public class Sellers extends User {
 	/* these last to methods doesn't take part in registration */
 	public void setRating() {}
 	public Object getRating() {return null;}
+	public int getSellerId() {
+		return SellerId;
+	}
+	public void setSellerId(int sellerId) {
+		SellerId = sellerId;
+	}
 }

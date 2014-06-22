@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-
 import java.util.ArrayList;
 
 import model.data.users.User;
@@ -121,12 +119,22 @@ public class AgencyStorage {
 				
 		 return agency;
 	}
-
+	
+	public ArrayList<Agency> getAgenciesFromDB(String keyword){
+		return getAgencies(keyword);
+	}
+	
 	public ArrayList<Agency> getAgenciesFromDB(){
+		return getAgencies("");
+	}
+
+	private ArrayList<Agency> getAgencies(String keyword){
 		ArrayList<Agency> list =  new ArrayList<Agency>();
 		try {
-            String query = "SELECT * FROM user_agency, users WHERE users.id = user_agency.user_id;";
+            String query = "SELECT * FROM user_seller as a join users as b on a.user_id = b.id join seller_agency as c on c.seller_id = a.id where name like '%?%' or adress like '%?%'";
             PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, keyword);
+            statement.setString(2, keyword);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {

@@ -137,6 +137,7 @@ DROP TABLE IF EXISTS `agency_trips`;
 		
 CREATE TABLE `agency_trips` (
   `id` INTEGER NULL AUTO_INCREMENT,
+  `identificator` INTEGER NULL,
   `agency_id` INTEGER NULL,
   `trip_type` VARCHAR(20) NULL,
   `trip_name` VARCHAR(20) NULL,  
@@ -244,8 +245,8 @@ ALTER TABLE `wishlist_items` ADD FOREIGN KEY (item_id) REFERENCES `hotel_rooms` 
 -- ('','','');
 -- INSERT INTO `pictures` (`id`,`imagefile`) VALUES
 -- ('','');
--- INSERT INTO `agency_trips` (`id`,`agency_id`,`trip_type`,`price`) VALUES
--- ('','','','');
+-- INSERT INTO `agency_trips` (`id`,`identificator`,`agency_id`,`trip_type`,`price`) VALUES
+-- ('','','','','');
 
 -- INSERT INTO `locations` (`id`,`location_name`,`hotel_id`,`period`) VALUES
 -- ('','','','');

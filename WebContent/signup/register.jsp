@@ -8,6 +8,7 @@
 
 </head>
 <body>
+<a href=../index.jsp> main page </a>
 
 <form action="../AccountCreateServlet" method="post">
 	<select id="select" name="type">
@@ -18,8 +19,6 @@
 	<div id='inputs'>
 		<%@include file="registerClient.jsp" %>
 	</div>
-	
-	
 </form>
 
 
@@ -27,7 +26,6 @@
 		$("#select").change(function() {
 		var selected = $('#select option:selected').val();
 		$('#inputs').empty();
-
 		if (selected == 'client')
 			$('#inputs').load("registerClient.jsp");
 		else if (selected == 'hotel')

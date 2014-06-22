@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>trips:</title>
+<title>Trip Registration</title>
 </head>
 <body>
-	<a href="trip.jsp?id=<%=2%>"> create new trip</a>
+	<h1> trip registration  </h1>
+	<form action="TripServlet" method="post">			
+		Number of locations: <input type="text" name="number"/> <br> 
+		<input type="hidden" name="id" value="<%=request.getParameter("id") %>" /> 
+	    <input type="submit"/>
+	</form>
 </body>
 </html>

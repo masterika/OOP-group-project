@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.data.Location;
 import model.data.Trip;
-import model.data.db.TripStorage;
-import model.data.users.Hotel;
+import model.data.db.StaticTripStorage;
+
 
 /**
  * Servlet implementation class ActualTripServlet
@@ -43,11 +43,11 @@ public class ActualTripServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Trip trip = new Trip();
-		fillTrip(trip, request);
-		TripStorage storage = new TripStorage(1); // aq cxadia 1iani ar unda meweros, romeli failic iyenebs is unda gadascemdes requests parametrad agencys idis.		
-		//TripStorage storage = new TripStorage(Integer.parseInt(request.getParameter("agencyId"))); ase unda gamoiyurebodes realurad
-		if(storage.saveTrip(trip)){
-			// aqedan albat trip_editshi unda gadadiodes an trip_viewshi
+		fillTrip(trip, request);			
+		int agencyId = 2;// (Integer.parseInt(request.getParameter("agencyId")));
+		if(StaticTripStorage.saveTrip(trip,agencyId)){
+			RequestDispatcher r = request.getRequestDispatcher("trip_view.jsp");
+			r.forward(request, response);
 		}else{
 			RequestDispatcher r = request.getRequestDispatcher("create_failed.jsp");
 			r.forward(request, response);			
@@ -55,9 +55,10 @@ public class ActualTripServlet extends HttpServlet {
 	}
 
 	private void fillTrip(Trip trip, HttpServletRequest request) {		
-		trip.setName(request.getParameter("name"));	
-		trip.setPrice(Integer.parseInt(request.getParameter("price")));
+		trip.setName(request.getParameter("name"));			
+		trip.setPrice(Integer.parseInt(request.getParameter("price")));		
 		trip.setType(request.getParameter("type"));
+		trip.setIdentificator(Integer.parseInt(request.getParameter("identificator")));
 		trip.setLocations(getLocations(request));
 	}
 
@@ -69,7 +70,7 @@ public class ActualTripServlet extends HttpServlet {
 			Location location = new Location();
 			location.setCity(request.getParameter("city"+i));				
 			location.setDuration(Integer.parseInt(request.getParameter("period"+i)));			
-			location.setHotel(request.getParameter("hotel"+i));
+			location.setHotel(Integer.parseInt(request.getParameter("hotel"+i)));
 			locations.add(location);
 		}
 		return locations;

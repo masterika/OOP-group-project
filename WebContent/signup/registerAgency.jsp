@@ -10,7 +10,7 @@
 
 <h1>Create New Agency</h1>
 
-<form method="post">
+<form  method="post">
 	<%@include file="userFields.html" %>
 	<%@include file="sellersFields.html" %>
     <input type="submit" value="Create" name="create"/>
