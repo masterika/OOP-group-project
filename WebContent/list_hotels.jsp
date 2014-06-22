@@ -17,7 +17,7 @@
 		ArrayList<Hotel> hotels = (ArrayList<Hotel>)request.getAttribute("hotels");
 		for (int i = 0; i < hotels.size(); i++) {
 		%>
-		<li><a href=<%="ShowPhoto?ID="+hotels.get(i).getId()%>> <%=hotels.get(i).getName() %></a></li>
+		<li><a href=<%="ShowHotel?ID="+hotels.get(i).getId()%>> <%=hotels.get(i).getName() %></a></li>
 		<%} %>
 		</ul>
 

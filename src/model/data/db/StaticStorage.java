@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.data.users.Agency;
@@ -294,6 +293,28 @@ public class StaticStorage {
         }
 		return list;
 	}
+	
+	public static ArrayList<Agency> getAgenciesFromDB(){	
+		conn = DBConnection.createConnection();
+		ArrayList<Agency> list =  new ArrayList<Agency>();
+		try {
+            String query = "SELECT * FROM seller_agency,user_seller, users WHERE users.id = user_seller.user_id and user_seller.id=seller_agency.seller_id;";
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+            	Agency agency = new Agency();
+            	fillAgency(agency,rs);
+            	list.add(agency);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+        	DBConnection.closeConnection();
+        }        
+		return list;
+	}
+	
 	public static boolean isValidUsername(String username) {
 		conn = DBConnection.createConnection();
 		boolean p = true;
@@ -357,6 +378,7 @@ public class StaticStorage {
 		fillUser(seller,rs);
 		try {
 			seller.setName(rs.getString("name"));
+<<<<<<< HEAD
 
 			seller.setAdress(rs.getString("adress"));
 	    	seller.setTelephone(rs.getString("telephone"));
@@ -365,6 +387,10 @@ public class StaticStorage {
 			seller.setAdress(rs.getString("adress"));	    	
 	    	seller.setSellerId(rs.getInt("id"));
 
+=======
+			seller.setAdress(rs.getString("adress"));	    	
+	    	seller.setSellerId(rs.getInt("seller_id"));
+>>>>>>> b0606d7a4e2ed7070891b8b3512285e790d4c1d8
 	    	seller.setIdentificator(rs.getInt("identificator"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -391,44 +417,4 @@ public class StaticStorage {
 			e.printStackTrace();
 		}
 	}	
-	
-	public synchronized static ArrayList<Sellers> getSellersToApprove(){
-		
-		conn = DBConnection.createConnection();
-		ArrayList<Sellers> list =  new ArrayList<Sellers>();
-		try {
-			String query = "SELECT * FROM user_seller, users WHERE users.id = user_seller.id AND user_seller.is_approved = 1";
-            PreparedStatement statement = conn.prepareStatement(query);
-            ResultSet rs = statement.executeQuery();
-
-            while (rs.next()) {
-            	Sellers seller = new Sellers();
-            	fillSeller(seller,rs);
-                list.add(seller);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally{
-        	DBConnection.closeConnection();
-        }
-		return list;
-	}
-	
-	public synchronized static boolean approveSeller(int id){
-		conn = DBConnection.createConnection();
-		boolean res = false;
-		try {
-			String query = "UPDATE user_seller SET is_approved = 0 WHERE id = "+id;
-            Statement statement = conn.createStatement();
-             res = statement.execute(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally{
-        	DBConnection.closeConnection();
-        }
-		System.out.println(res);
-		return res;
-	}
-	
 }

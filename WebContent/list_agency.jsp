@@ -12,11 +12,10 @@
 	<h1> Welcome to page of Agencies </h1>
 	<ul>
 	<%
-	ServletContext context = request.getServletContext();
-	ArrayList<Agency> agency = (ArrayList<Agency>)context.getAttribute("agencies");
+	ArrayList<Agency> agency = (ArrayList<Agency>)request.getAttribute("agencies");
 	for (int i = 0; i < agency.size(); i++) {
 	%>
-	<li><a href=<%="show_agency.jsp?ID="+agency.get(i).getId()%>> <%=agency.get(i).getName() %></a></li>
+	<li><a href=<%="ShowAgency?ID="+agency.get(i).getId()%>> <%=agency.get(i).getName() %></a></li>
 	<%} %>
 	</ul>
 </body>
