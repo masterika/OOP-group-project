@@ -8,7 +8,7 @@
 
 </head>
 <body>
-	<h1>Edit Profile</h1>
+	<h1>Edit Profile Client</h1>
 	<img src="profile.jpg" height="100" width="95">
 	<form action="ChangeUserProfilePictureServlet" method="post">
 		Upload picture: <input type="file" name="file">

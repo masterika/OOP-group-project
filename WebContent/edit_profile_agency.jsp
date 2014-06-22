@@ -8,7 +8,7 @@
 
 </head>
 <body>
-	<h1>Edit Profile</h1>
+	<h1>Edit Profile Agency</h1>
 	<img src = "profile.jpg" height = "100" width = "95" >
 	<p>
 	<form action="ChangeAgencyPasswordServlet" method="post">
@@ -19,8 +19,7 @@
 		<input type="submit" value="Change Password">
 	</form>
 	
-	<a href = <%="trip_edit.jsp?userId=" + session.getAttribute("userId") %> > Trips </a>
-	
+	<a href = <%="trips.jsp?userId=" + session.getAttribute("userId") %> > Trips </a>
 
 </body>
 </html>
