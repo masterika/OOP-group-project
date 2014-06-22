@@ -34,8 +34,8 @@ public class ApproveUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		boolean res = StaticStorage.approveSeller((int)request.getSession().getAttribute("sellerID"));
 		response.setContentType("text/plain");
-		 PrintWriter out = response.getWriter();
-		 out.println(res);
+		PrintWriter out = response.getWriter();
+		out.println(res);
 	}
 
 	/**

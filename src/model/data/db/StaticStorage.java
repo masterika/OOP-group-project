@@ -393,7 +393,7 @@ public class StaticStorage {
 		conn = DBConnection.createConnection();
 		ArrayList<Sellers> list =  new ArrayList<Sellers>();
 		try {
-			String query = "SELECT * FROM user_seller WHERE is_approved = 1";
+			String query = "SELECT * FROM user_seller, users WHERE users.id = user_seller.id AND user_seller.is_approved = 1";
             PreparedStatement statement = conn.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
 
@@ -423,6 +423,7 @@ public class StaticStorage {
         }finally{
         	DBConnection.closeConnection();
         }
+		System.out.println(res);
 		return res;
 	}
 	
