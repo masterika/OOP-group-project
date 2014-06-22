@@ -12,10 +12,10 @@
 
 <form  method="post">
 	<%@include file="userFields.html" %>
-    First Name: <input type="text" name="name"/> <br/>
-    Last Name: <input type="text" name="surname"/> <br/>
-   	Telephone: <input type="text" name="telephone"/> <br/>
-    <input type="submit" value="Create" name="create"/>
+	<input type="text" placeholder="First Name" class="textbox" name="name"/><br/>
+	<input type="text" placeholder="Last Name" class="textbox" name="surname"/><br/>
+	<input type="text" placeholder="Phone" class="textbox" name="telephone"/><br/>
+    <input type="submit" value="Create" class="button" name="create"/>
 </form>
 
 </body>

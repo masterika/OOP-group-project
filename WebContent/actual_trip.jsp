@@ -15,8 +15,7 @@
 	<form action = "ActualTripServlet" method = "post">		
 		Name: <input type="text" name="name"/> <br/>
 		Price: <input type="text" name="price"/> <br/>
-		Type: <input type="text" name="type"/> <br/>
-		Identificator: <input type="text" name="identificator"/> <br/>			
+		Type: <input type="text" name="type"/> <br/>				
 		<% int num = Integer.parseInt((String)request.getAttribute("N_Locations"));%>
 		<input type="hidden" name="N_Locations" value=<%=num %> />
 		<%

@@ -8,15 +8,14 @@
 </head>
 <body>
 
-
 <h1>Create New Hotel</h1>
 
 <form  method="post">
     <%@include file="userFields.html" %>
     <%@include file="sellersFields.html" %>
-   	Number of rooms: <input type="text" name="rooms_num"/><br/>
-   	Stars: <input type="text" name="stars"/><br/>
-    <input type="submit" value="Create" name="create"/>
+    <input type="text" placeholder="Number of rooms" class="textbox" name="rooms_num"/><br/>
+    <input type="text" placeholder="Stars" class="textbox" name="stars"/><br/>
+    <input type="submit" value="Create" class="button" name="create"/>
 </form>
 
 </body>

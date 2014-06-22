@@ -13,7 +13,7 @@
 <form  method="post">
 	<%@include file="userFields.html" %>
 	<%@include file="sellersFields.html" %>
-    <input type="submit" value="Create" name="create"/>
+    <input type="submit" value="Create" class="button" name="create"/>
 </form>
 
 </body>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,7 +9,7 @@
 
 </head>
 <body>
-	<h1>Edit Profile</h1>
+	<h1>Edit Profile Agency</h1>
 	<img src = "profile.jpg" height = "100" width = "95" >
 	<p>
 	<form action="ChangeAgencyPasswordServlet" method="post">
@@ -17,10 +18,7 @@
 		Confirm Password: <input type="password" name="newpass"><br>
 		
 		<input type="submit" value="Change Password">
-	</form>
-	
-	<a href = <%="trip_edit.jsp?userId=" + session.getAttribute("userId") %> > Trips </a>
-	
-
+	</form>	
+	<a href = "trips_edit.jsp" > Trips </a>
 </body>
 </html>

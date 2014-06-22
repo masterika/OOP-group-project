@@ -5,22 +5,46 @@
 <html>
 <head>
 <script src="jquery-1.11.1.min.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="/Turista/styles/registerStyles.css">-->
+
+<style>
+.module{
+  position:relative;
+  top:15%;    
+  height:70%;
+  width:450px;
+  margin-left:auto;
+  margin-right:auto;
+  border-radius:5px;
+  background:RGBA(255,255,255,1);
+}
+</style>
+
 
 </head>
 <body>
 <a href=../index.jsp> main page </a>
 
-<form action="../AccountCreateServlet" method="post">
-	<select id="select" name="type">
-		<option value="client">Client</option>
-		<option value="hotel">Hotel</option>
-		<option value="agency">Agency</option>
-	</select>
-	<div id='inputs'>
-		<%@include file="registerClient.jsp" %>
+<div id="bg">
+	<div class="module">
+		<form action="../AccountCreateServlet" method="post">
+		<!--  <ul>
+      <li class="tab activeTab"><img src="http://i.imgur.com/Fk1Urva.png" alt="" class="icon"/></li>
+      <li class="tab" ><img src="http://i.imgur.com/ZsRgIDD.png" alt="" class="icon"/></li>
+      <li class="tab" ><img src="http://i.imgur.com/34Q50wo.png" alt="" class="icon"/></li>
+      
+    </ul>-->
+			<select id="select" name="type">
+				<option value="client">Client</option>
+				<option value="hotel">Hotel</option>
+				<option value="agency">Agency</option>
+			</select>
+			<div id='inputs'>
+				<%@include file="registerClient.jsp" %>
+			</div>
+		</form>
 	</div>
-</form>
-
+</div>
 
 <script>
 		$("#select").change(function() {

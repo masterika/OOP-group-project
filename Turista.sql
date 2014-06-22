@@ -123,9 +123,8 @@ CREATE TABLE `galleries` (
 DROP TABLE IF EXISTS `pictures`;
 		
 CREATE TABLE `pictures` (
-  `id` INTEGER NULL AUTO_INCREMENT,
-  `imagefile` VARCHAR(64) NULL,
-  PRIMARY KEY (`id`)
+  `id` INTEGER NULL ,
+  `imagefile` MEDIUMBLOB NULL
 );
 
 -- ---
@@ -137,7 +136,6 @@ DROP TABLE IF EXISTS `agency_trips`;
 		
 CREATE TABLE `agency_trips` (
   `id` INTEGER NULL AUTO_INCREMENT,
-  `identificator` INTEGER NULL,
   `agency_id` INTEGER NULL,
   `trip_type` VARCHAR(20) NULL,
   `trip_name` VARCHAR(20) NULL,  
@@ -199,7 +197,7 @@ ALTER TABLE `user_client` ADD FOREIGN KEY (user_id) REFERENCES `users` (`id`);
 ALTER TABLE `seller_agency` ADD FOREIGN KEY (seller_id) REFERENCES `user_seller` (`id`);
 ALTER TABLE `hotel_rooms` ADD FOREIGN KEY (hotel_id) REFERENCES `seller_hotel` (`id`);
 ALTER TABLE `galleries` ADD FOREIGN KEY (room_id) REFERENCES `hotel_rooms` (`id`);
-ALTER TABLE `galleries` ADD FOREIGN KEY (picture_id) REFERENCES `pictures` (`id`);
+
 ALTER TABLE `agency_trips` ADD FOREIGN KEY (agency_id) REFERENCES `seller_agency` (`id`);
 ALTER TABLE `locations` ADD FOREIGN KEY (hotel_id) REFERENCES `seller_hotel` (`id`);
 ALTER TABLE `locations` ADD FOREIGN KEY (trip_id) REFERENCES `agency_trips` (`id`);
@@ -245,8 +243,8 @@ ALTER TABLE `wishlist_items` ADD FOREIGN KEY (item_id) REFERENCES `hotel_rooms` 
 -- ('','','');
 -- INSERT INTO `pictures` (`id`,`imagefile`) VALUES
 -- ('','');
--- INSERT INTO `agency_trips` (`id`,`identificator`,`agency_id`,`trip_type`,`price`) VALUES
--- ('','','','','');
+-- INSERT INTO `agency_trips` (`id`,`agency_id`,`trip_type`,`price`) VALUES
+-- ('','','','');
 
 -- INSERT INTO `locations` (`id`,`location_name`,`hotel_id`,`period`) VALUES
 -- ('','','','');
