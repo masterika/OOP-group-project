@@ -48,15 +48,13 @@ public class SellerAccountCreateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
-		String adress = request.getParameter("adress");
-		String telephone = request.getParameter("telephone");
+		String adress = request.getParameter("adress");		
 		int identificator = Integer.parseInt(request.getParameter("identificator"));
 		String s = request.getParameter("type");
 		String serAdress = "goto" + s;
 		Sellers seller = new Sellers();
 		seller.setName(name);
-		seller.setAdress(adress);
-		seller.setTelephone(telephone);
+		seller.setAdress(adress);		
 		seller.setIdentificator(identificator);
 		int userId = (Integer)request.getAttribute("userId");
 		int sellerId = StaticStorage.saveSeller(seller,userId);

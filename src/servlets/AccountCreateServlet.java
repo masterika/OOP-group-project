@@ -44,14 +44,16 @@ public class AccountCreateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
+		String username = request.getParameter("username");		
 		String email = request.getParameter("email");
+		String telephone = request.getParameter("telephone");
 		String password = StringToMD5.generate(request.getParameter("password"));
 		String serAdress = request.getParameter("type");		
 		User user = new User();
 		user.setUsername(username);
 		user.setEmail(email);
-		user.setPassword(password);		
+		user.setPassword(password);	
+		user.setTelephone(telephone);
 		int id = StaticStorage.saveUser(user);
 		request.setAttribute("userId", id);
 		RequestDispatcher rd = request.getRequestDispatcher(serAdress);

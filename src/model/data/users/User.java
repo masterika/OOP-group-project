@@ -7,6 +7,7 @@ public class User{
 	private String email;
 	private String username;
 	private String password;
+	private String telephone;
 	private boolean isApproved;
 	private Date date;
 
@@ -60,5 +61,13 @@ public class User{
 	
 	public Date getDate(){
 		return date;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 }

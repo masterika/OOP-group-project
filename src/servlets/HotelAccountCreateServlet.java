@@ -11,10 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
 
-
-
-
-import model.data.db.HotelStorage;
 import model.data.db.StaticStorage;
 import model.data.users.Hotel;
 

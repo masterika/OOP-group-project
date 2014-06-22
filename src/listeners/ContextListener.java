@@ -6,9 +6,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-
-import model.data.db.HotelStorage;
-import model.data.db.AgencyStorage;
 import model.data.users.Agency;
 import model.data.users.Hotel;
 
@@ -30,14 +27,14 @@ public class ContextListener implements ServletContextListener {
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent arg0) {
-    	HotelStorage hotelStorage = new HotelStorage();
-    	ArrayList<Hotel> hotelsList =  hotelStorage.getHotelsFromDB();
-    	ServletContext context = arg0.getServletContext();
-    	context.setAttribute("hotels", hotelsList);
-    	
-    	AgencyStorage agencyStorage = new AgencyStorage();
-    	ArrayList<Agency> agencyList = agencyStorage.getAgenciesFromDB();
-    	context.setAttribute("agencies", agencyList);
+//    	HotelStorage hotelStorage = new HotelStorage();
+//    	ArrayList<Hotel> hotelsList =  hotelStorage.getHotelsFromDB();
+//    	ServletContext context = arg0.getServletContext();
+//    	context.setAttribute("hotels", hotelsList);
+//    	
+//    	AgencyStorage agencyStorage = new AgencyStorage();
+//    	ArrayList<Agency> agencyList = agencyStorage.getAgenciesFromDB();
+//    	context.setAttribute("agencies", agencyList);
     }
 
 	/**

@@ -11,10 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
 
-
-
-
-import model.data.db.ClientStorage;
 import model.data.db.StaticStorage;
 import model.data.users.Client;
 
@@ -47,8 +43,7 @@ public class ClientAccountCreateServlet extends HttpServlet {
 		Client client = new Client();		
 		int userId =(Integer)request.getAttribute("userId");
 		client.setName(request.getParameter("name"));
-		client.setSurName(request.getParameter("surname"));
-		client.setTelephone(request.getParameter("telephone"));
+		client.setSurName(request.getParameter("surname"));		
 		int clientId = StaticStorage.saveClient(client,userId);
 		if(clientId !=-1){
 			RequestDispatcher rd = request.getRequestDispatcher("/LoginServlet");

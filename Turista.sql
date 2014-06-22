@@ -22,6 +22,7 @@ CREATE TABLE `users` (
   `username` VARCHAR(20) NULL,
   `password` VARCHAR(64) NULL,
   `email` VARCHAR(20) NULL,
+  `telephone` VARCHAR(20) NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -36,8 +37,7 @@ CREATE TABLE `user_seller` (
   `id` INTEGER NULL AUTO_INCREMENT,
   `user_id` INTEGER NULL,
   `name` VARCHAR(50) NULL,
-  `adress` VARCHAR(50) NULL,
-  `telephone` VARCHAR(15) NULL,
+  `adress` VARCHAR(50) NULL,  
   `identificator` INTEGER NULL,
   PRIMARY KEY (`id`)
 );
@@ -67,8 +67,7 @@ CREATE TABLE `user_client` (
   `id` INTEGER NULL AUTO_INCREMENT,
   `user_id` INTEGER NULL,
   `name` VARCHAR(30) NULL,
-  `surname` VARCHAR(40) NULL,
-  `telephone` VARCHAR(20) NULL,
+  `surname` VARCHAR(40) NULL,  
   PRIMARY KEY (`id`)
 );
 
@@ -227,14 +226,14 @@ ALTER TABLE `wishlist_items` ADD FOREIGN KEY (item_id) REFERENCES `hotel_rooms` 
 -- Test Data
 -- ---
 
--- INSERT INTO `users` (`id`,`username`,`password`,`email`) VALUES
--- ('','','','');
--- INSERT INTO `user_seller` (`id`,`user_id`,`name`,`adress`,`telephone`,`identificator`) VALUES
--- ('','','','','','');
+-- INSERT INTO `users` (`id`,`username`,`password`,`email`,`telephone`) VALUES
+-- ('','','','','');
+-- INSERT INTO `user_seller` (`id`,`user_id`,`name`,`adress`,`identificator`) VALUES
+-- ('','','','','');
 -- INSERT INTO `user_hotel` (`id`,`seller_id`,`stars`) VALUES
 -- ('','','');
--- INSERT INTO `user_client` (`id`,`user_id`,`name`,`surname`,`telephone`) VALUES
--- ('','','','','');
+-- INSERT INTO `user_client` (`id`,`user_id`,`name`,`surname`) VALUES
+-- ('','','','');
 -- INSERT INTO `user_agency` (`id`,`seller_id`) VALUES
 -- ('','');
 -- INSERT INTO `hotel_rooms` (`id`,`hotel_id`,`room_type`,`price`,`gallery_id`) VALUES
