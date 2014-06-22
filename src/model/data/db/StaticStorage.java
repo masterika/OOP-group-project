@@ -24,11 +24,12 @@ public class StaticStorage {
 		conn = DBConnection.createConnection();
 		int retVal = -1;
 		try {
-			String query = "INSERT INTO users (username,password,email) VALUES (?,?,?);";
+			String query = "INSERT INTO users (username,password,email,telephone) VALUES (?,?,?,?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setString(1, user.getUsername());
 			statement.setString(2, user.getPassword());
 			statement.setString(3, user.getEmail());
+			statement.setString(4, user.getTelephone());
 			statement.execute();
 			retVal = getUserId(user.getUsername()); // insert_id unda sinqronizebuli ogond!!!
 		} catch (SQLException e) {			
@@ -41,13 +42,12 @@ public class StaticStorage {
 		conn = DBConnection.createConnection();
 		int retVal = -1;
 		try {
-			String query = "INSERT INTO user_seller (user_id,name,adress,telephone,identificator) VALUES (?,?,?,?,?);";
+			String query = "INSERT INTO user_seller (user_id,name,adress,identificator) VALUES (?,?,?,?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, userid);
 			statement.setString(2, seller.getName());
-			statement.setString(3, seller.getAdress());
-			statement.setString(4, seller.getTelephone());
-			statement.setInt(5,seller.getIdentificator());
+			statement.setString(3, seller.getAdress());			
+			statement.setInt(4,seller.getIdentificator());
 			statement.execute();
 			retVal = getSellerId(userid); // insert_id unda sinqronizebuli ogond!!!
 		} catch (SQLException e) {			
@@ -140,12 +140,11 @@ public class StaticStorage {
 		conn = DBConnection.createConnection();
 		int retVal = -1;
 		try {
-			String query = "INSERT INTO user_client (user_id,name,surname,telephone) VALUES (?,?,?,?);";
+			String query = "INSERT INTO user_client (user_id,name,surname) VALUES (?,?,?);";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, userid);
 			statement.setString(2, client.getName());
-			statement.setString(3, client.getSurName());
-			statement.setString(4, client.getTelephone());
+			statement.setString(3, client.getSurName());			
 			statement.execute();			
 			retVal = getClientId(userid);         
 		} catch (SQLException e) {			
@@ -335,7 +334,8 @@ public class StaticStorage {
 			user.setId(rs.getInt("user_id"));		
 			user.setUsername(rs.getString("username"));
 	    	user.setEmail(rs.getString("email"));
-	    	user.setPassword(rs.getString("password"));	    	
+	    	user.setPassword(rs.getString("password"));
+	    	user.setTelephone(rs.getString("telephone"));
 		} catch (SQLException e) {
 			System.out.println("useris catch shevida");
 			// TODO Auto-generated catch block
@@ -346,8 +346,7 @@ public class StaticStorage {
 		fillUser(client,rs);
 		try {
 			client.setName(rs.getString("name"));
-			client.setSurName(rs.getString("surname"));
-	    	client.setTelephone(rs.getString("telephone"));
+			client.setSurName(rs.getString("surname"));	    	
 	    	client.setClientId(rs.getInt("id"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -358,9 +357,14 @@ public class StaticStorage {
 		fillUser(seller,rs);
 		try {
 			seller.setName(rs.getString("name"));
+<<<<<<< HEAD
 			seller.setAdress(rs.getString("adress"));
 	    	seller.setTelephone(rs.getString("telephone"));
 	    	seller.setSellerId(rs.getInt("id"));
+=======
+			seller.setAdress(rs.getString("adress"));	    	
+	    	seller.setSellerId(rs.getInt("seller_id"));
+>>>>>>> 7813c3a15bfb0b5a26ca8ae59432b297468af762
 	    	seller.setIdentificator(rs.getInt("identificator"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

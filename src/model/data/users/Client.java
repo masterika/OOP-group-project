@@ -6,7 +6,7 @@ public class Client extends User{
 
 	private Wishlist wishlist;
 	private int clientId;
-	private String name, surname,telephone;
+	private String name, surname;
 	public Client() {	
 		
 	}
@@ -25,11 +25,7 @@ public class Client extends User{
 	
 	public void setSurName(String surname){
 		this.surname = surname;
-	}
-	
-	public void setTelephone(String telephone){
-		this.telephone = telephone;
-	}
+	}	
 	
 	public String getName() {
 		return name;
@@ -37,10 +33,6 @@ public class Client extends User{
 	
 	public String getSurName() {
 		return surname;
-	}
-	
-	public String getTelephone() {
-		return telephone;
 	}
 	
 	public Wishlist getWishlist (){

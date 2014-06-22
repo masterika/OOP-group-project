@@ -7,7 +7,12 @@ public class User{
 	private String email;
 	private String username;
 	private String password;
+<<<<<<< HEAD
 
+=======
+	private String telephone;
+	private boolean isApproved;
+>>>>>>> 7813c3a15bfb0b5a26ca8ae59432b297468af762
 	private Date date;
 
 
@@ -54,5 +59,13 @@ public class User{
 	
 	public Date getDate(){
 		return date;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 }

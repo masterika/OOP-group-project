@@ -5,8 +5,7 @@ package model.data.users;
  */
 public class Sellers extends User {
 	private String name;
-	private String adress;
-	private String telephone;
+	private String adress;	
 	private int identificator;
 	private int SellerId;
 	private boolean isApproved;
@@ -29,6 +28,7 @@ public class Sellers extends User {
 	}
 	public void setAdress(String adress) {
 		this.adress = adress;
+<<<<<<< HEAD
 	}
 	
 	public String getTelephone() {
@@ -47,6 +47,9 @@ public class Sellers extends User {
 	public boolean getApprStatus(){
 		return isApproved;
 	}
+=======
+	}	
+>>>>>>> 7813c3a15bfb0b5a26ca8ae59432b297468af762
 	
 	/* these last to methods doesn't take part in registration */
 	public void setRating() {}
