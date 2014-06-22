@@ -19,16 +19,12 @@
 <title><%=trip.getName()%> view</title>
 </head>
 <body>
-<<<<<<< HEAD
-	<a href=<%="agency.jsp?id="+trip.getAgencyId() %>> agency page </a>
-=======
 	<a href=<%="agency.jsp?ID="+trip.getAgencyId()%>> agency page </a>
->>>>>>> b0606d7a4e2ed7070891b8b3512285e790d4c1d8
 	<h1><%=trip.getName()%></h1>
 	<p> price: <%=trip.getPrice()%> </p>
 	<p> trip type: <%=trip.getType()%> </p>	
 	<% 					
-		for (int i=0; i<locations.size(); i++) {
+		for (int i=0; i<locations.size(); i++) {			
 			Location location = locations.get(i);
 	%>
 			<p> <%="Location "+(i+1) %>  </p>
