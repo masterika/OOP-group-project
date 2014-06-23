@@ -3,6 +3,7 @@
 <%@page import = "model.data.Trip" %>
 <%@page import = "model.data.users.Hotel" %>
 <%@page import = "model.data.db.StaticTripStorage" %>
+<%@page import = "model.data.db.StaticUserIdGetterStorage" %>
 <%@page import = "model.data.db.StaticStorage" %>
 <%@page import = "model.data.Location" %>
 <%@page import = "java.util.List" %>
@@ -12,13 +13,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <%			
-	Trip trip = StaticTripStorage.loadTrip((Integer)request.getAttribute("tripId"));
+	Trip trip = StaticTripStorage.loadTrip(Integer.parseInt(request.getParameter("id")));
 	List<Location> locations = trip.getLocations();
 %>
 <title><%=trip.getName()%> view</title>
 </head>
 <body>
-	<a href=<%="agency.jsp?ID="+trip.getAgencyId()%>> agency page </a>
+	<a href=<%="agency.jsp?ID="+StaticUserIdGetterStorage.getAgencyUserId(trip.getAgencyId())%>> agency page </a>
 	<h1><%=trip.getName()%></h1>
 	<p> price: <%=trip.getPrice()%> </p>
 	<p> trip type: <%=trip.getType()%> </p>	
@@ -28,7 +29,7 @@
 	%>
 			<p> <%="Location "+(i+1) %>  </p>
 				City: <%=location.getCity() %> 
-				<% Hotel hotel = StaticTripStorage.loadHotel(location.getHotelId());// cudi arqiteqtura %>
+				<% Hotel hotel = StaticStorage.loadHotel(StaticUserIdGetterStorage.getHotelUserId(location.getHotelId()));// cudi arqiteqtura %>
 				Hotel: <a href=<%="ShowPhoto?ID="+hotel.getId()%>> <%=hotel.getName() %></a>				
 				Period: <%=location.getDuration() %>
 		<%}%>
