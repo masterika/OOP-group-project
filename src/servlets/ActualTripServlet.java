@@ -50,7 +50,7 @@ public class ActualTripServlet extends HttpServlet {
 		trip.setAgencyId(agencyId);	
 		int tripId= StaticTripStorage.saveTrip(trip);
 		if(tripId != -1){					
-			RequestDispatcher r = request.getRequestDispatcher("trip_view.jsp?id="+tripId);// aq tributis nacvlad ? it ro gadavcet jobia
+			RequestDispatcher r = request.getRequestDispatcher("trip_view.jsp?id="+tripId);
 			r.forward(request, response);
 		}else{
 			RequestDispatcher r = request.getRequestDispatcher("create_failed.jsp");

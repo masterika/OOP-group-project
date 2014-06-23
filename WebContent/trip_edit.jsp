@@ -20,17 +20,13 @@
 %>
 <title><%=trip.getName()%> view</title>
 </head>
-<body>
-	<a href=<%="agency.jsp?ID="+trip.getAgencyId()%>> agency page </a>
+<body>	
 	<h1><%=trip.getName()%></h1>
-	<p> price: <%=trip.getPrice()%> </p>
-	
-	
+	<p> price: <%=trip.getPrice()%> </p>	
 	<form action="ChangeTripPriceServlet" method="post">	
 		New Price : <input type="text" name="newprice"><br>
 		<input type="submit" value="Change Price"><br>
-		<input type="hidden" name="type" value="<%=trip.getId() %>" />
-		
+		<input type="hidden" name="type" value="<%=trip.getId() %>" />		
 	</form>
 	
 	<p> trip type: <%=trip.getType()%> </p>	

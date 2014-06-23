@@ -34,4 +34,6 @@
 				Period: <%=location.getDuration() %>
 		<%}%>
 </body>
-</html>
+</html>	
+
+
