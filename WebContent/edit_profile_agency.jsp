@@ -33,6 +33,13 @@
 		<%@include file="/seller_name_change.jsp"%>
 		<input type="hidden" name="user" value="Agency" />
 	</form>	
+	
+	
+	<form action="ChangeUserTelephoneServlet" method="post">	
+		<%@include file="/seller_telephone_change.jsp"%>
+		<input type="hidden" name="user" value="Agency" />
+	</form>	
+	
 	<a href = "trips_edit.jsp" > Trips </a>
 </body>
 </html>

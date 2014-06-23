@@ -26,12 +26,18 @@
 		<input type="hidden" name="user" value="Hotel" />
 	</form>	
 		
-		<form action="ChangeSellerNameServlet" method="post">	
+	<form action="ChangeSellerNameServlet" method="post">	
 		<%@include file="/seller_name_change.jsp"%>
 		<input type="hidden" name="user" value="Hotel" />
 	</form>	
 
+
+	<form action="ChangeUserTelephoneServlet" method="post">	
+		<%@include file="/seller_telephone_change.jsp"%>
+		<input type="hidden" name="user" value="Hotel" />
+	</form>	
 	
+		
 	<a href = <%="gallery.jsp?ID=" + request.getParameter("id")%> > My Gallery </a>
 	
 	<form action="UploadPhoto" method="post" enctype="multipart/form-data">
