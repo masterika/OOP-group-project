@@ -192,4 +192,21 @@ public class StaticTripStorage {
 	    }
 		return hotel;		
 	}
+	
+	public static void changeTripPrice(int tripId,String price){ 
+		conn = DBConnection.createConnection();
+		try {
+			String query = "UPDATE agency_trips SET price = ? where id = ?;";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setString(1, price);
+			statement.setInt(2, tripId);
+			statement.execute();
+	    } catch (SQLException e) {
+	       e.printStackTrace();
+	    }finally{
+	    	DBConnection.closeConnection();
+	    }
+			
+	}
+	
 }

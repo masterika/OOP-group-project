@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <%			
-	Trip trip = StaticTripStorage.loadTrip((Integer)request.getAttribute("tripId"));
+	Trip trip = StaticTripStorage.loadTrip(Integer.parseInt(request.getParameter("id")));
 	List<Location> locations = trip.getLocations();
 %>
 <title><%=trip.getName()%> view</title>
