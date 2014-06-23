@@ -1,3 +1,4 @@
+<%@page import="model.data.users.Agency"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
@@ -14,15 +15,12 @@
 		<a href=index.jsp> main page </a>
 
 	<form action="search" method="get">
-
-		<input type="radio" name="type" value="Hotel" checked="checked">Hotel
-		<input type="radio" name="type" value="Agency">Agency <br>
 		<input name="keyword" type="text"> <input value="Search"
 			type="submit" id="searchBtn">
 
 	</form>
 	<br>
-	<div id="list">
+	<div id="hotel_list">
 		<%
 			if (request.getAttribute("hotels") != null) {
 		%>
@@ -32,6 +30,23 @@
 		for (int i = 0; i < hotels.size(); i++) {
 		%>
 		<li><a href=<%="ShowHotel?ID="+hotels.get(i).getId()%>> <%=hotels.get(i).getName() %></a></li>
+		<%} %>
+		</ul>
+		<%
+			}
+		%>
+	</div>
+	
+		<div id="agency_list">
+		<%
+			if (request.getAttribute("agencies") != null) {
+		%>
+		<ul>
+		<%
+		ArrayList<Agency> agencies = (ArrayList<Agency>)request.getAttribute("agencies");
+		for (int i = 0; i < agencies.size(); i++) {
+		%>
+		<li><a href=<%="ShowAgency?ID="+agencies.get(i).getId()%>> <%=agencies.get(i).getName() %></a></li>
 		<%} %>
 		</ul>
 		<%

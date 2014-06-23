@@ -37,26 +37,13 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String keyword = request.getParameter("keyword");
-		String type = request.getParameter("type");
-		
-		if (type.equals("Hotel")) {
-			ArrayList<Hotel> hotels = StaticStorage.getHotelsFromDB(keyword);
-			
-			request.setAttribute("hotels", hotels);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
-			
-			rd.forward(request, response);
-		}else
-		if(type.equals("Agency")){
-			ArrayList<Agency> agencies = StaticStorage.getAgenciesFromDB(keyword);
-			request.setAttribute("hotels", agencies);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
-			
-			rd.forward(request, response);
-		}
 
+		ArrayList<Hotel> hotels = StaticStorage.getHotelsFromDB(keyword);
+		request.setAttribute("hotels", hotels);
+		RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
+		ArrayList<Agency> agencies = StaticStorage.getAgenciesFromDB(keyword);
+		request.setAttribute("hotels", agencies);
+		rd.forward(request, response);
 	}
 
 	/**
