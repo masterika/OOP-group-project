@@ -24,7 +24,12 @@
 		
 		<input type="submit" value="Change Password">
 	</form>
-
+		
+	
+	<form action="ChangeUserTelephoneServlet" method="post">	
+		<%@include file="/seller_telephone_change.jsp"%>
+		<input type="hidden" name="user" value="Client" />
+	</form>		
 
 	<a href=<%="wishlist.jsp?userId=" + session.getAttribute("userId")%>>
 		My Wishlist </a>
