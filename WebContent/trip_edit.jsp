@@ -28,8 +28,16 @@
 		<input type="submit" value="Change Price"><br>
 		<input type="hidden" name="type" value="<%=trip.getId() %>" />		
 	</form>
-	
-	<p> trip type: <%=trip.getType()%> </p>	
+		<p>CREATE NEW LOCATION </p>
+	<form action="AddLocationServlet" method="post">	
+		New City : <input type="text" name="newcity"><br>
+		New Hotel : <input type="text" name="newhot"><br>
+		New period: <input type="text" name="newper"><br>
+		<input type="submit" value="Add Location"><br>
+		<input type="hidden" name="type" value="<%=trip.getId() %>" />
+		
+	</form>
+
 	<% 					
 		for (int i=0; i<locations.size(); i++) {			
 			Location location = locations.get(i);
@@ -39,7 +47,31 @@
 				<% Hotel hotel = StaticTripStorage.loadHotel(location.getHotelId()); %>
 				Hotel: <a href=<%="ShowPhoto?ID="+hotel.getId()%>> <%=hotel.getName() %></a>				
 				Period: <%=location.getDuration() %>
+		
+		
+			<form action="ChangeLocationPeriodServlet" method="post">	
+					New Period : <input type="text" name="newper"><br>
+					<input type="submit" value="Change Period"><br>
+					<input type="hidden" name="type" value="<%=location.getId() %>" />
+		
+				</form>
+				<form action="ChangeLocationHotelServlet" method="post">	
+					New Hotel : <input type="text" name="newiden"><br>
+					<input type="submit" value="Change Hotel"><br>
+					<input type="hidden" name="type" value="<%=location.getId() %>" />
+		
+				</form>
+				
+				<form action="LocationDeleteServlet" method="post">	
+					<input type="submit" value="Delete"><br>
+					<input type="hidden" name="type" value="<%=location.getId() %>" />
+		
+				</form>
+		
+		
+		
 		<%}%>
+	
 </body>
 
 

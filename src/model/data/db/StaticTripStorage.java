@@ -159,6 +159,7 @@ public class StaticTripStorage {
 				location.setCity(rs.getString("location_name"));
 				location.setDuration(rs.getInt("period"));
 				location.setHotelId(rs.getInt("hotel_id"));
+				location.setId(rs.getInt("id"));
 				locations.add(location);
 			}
 		} catch (SQLException e) {
@@ -209,4 +210,84 @@ public class StaticTripStorage {
 			
 	}
 	
+	public static void changeLocationPeriod(int locationId,int period){ 
+		conn = DBConnection.createConnection();
+		try {
+			String query = "UPDATE locations SET period = ? where id = ?;";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setInt(1, period);
+			statement.setInt(2, locationId);
+			statement.execute();
+	    } catch (SQLException e) {
+	       e.printStackTrace();
+	    }finally{
+	    	DBConnection.closeConnection();
+	    }
+			
+	}
+	
+	public static int getHotelID(int identificator){ 
+		conn = DBConnection.createConnection();
+		int id = -1;
+		try {
+			String q = "select seller_hotel.id from seller_hotel,users,user_seller where  identificator = ? and users.id = user_seller.user_id and user_seller.user_id = seller_hotel.seller_id;";
+			PreparedStatement statement = conn.prepareStatement(q);
+			statement.setInt(1, identificator);		
+			ResultSet rs = statement.executeQuery();
+			if (rs.next())
+				id = rs.getInt("id");			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+	    	DBConnection.closeConnection();
+	    }
+		return id;	
+	}
+	
+	public static void changeLocationHotel(int hotelId,int locationId){ 
+		conn = DBConnection.createConnection();
+		try {
+			String query = "UPDATE locations SET hotel_id = ? where id = ?;";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setInt(1, hotelId);
+			statement.setInt(2, locationId);
+			statement.execute();
+	    } catch (SQLException e) {
+	       e.printStackTrace();
+	    }finally{
+	    	DBConnection.closeConnection();
+	    }
+	}
+	
+	public static void DeleteLocation(int locationId){ 
+		conn = DBConnection.createConnection();
+		try {
+			String query = "DELETE FROM locations WHERE id = ?;";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setInt(1, locationId);
+			statement.execute();
+	    } catch (SQLException e) {
+	       e.printStackTrace();
+	    }finally{
+	    	DBConnection.closeConnection();
+	    }
+	}
+	
+	
+	public static void AddLocation(String locationName,int hotelId,int tripId,int period){ 
+		conn = DBConnection.createConnection();
+		try {
+			String query = "INSERT INTO locations (location_name,hotel_id,trip_id,period) VALUES (?,?,?,?);";
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setString(1, locationName);
+			statement.setInt(2, hotelId); 
+			statement.setInt(3, tripId);
+			statement.setInt(4,period);
+			statement.execute();
+	    } catch (SQLException e) {
+	       e.printStackTrace();
+	    }finally{
+	    	DBConnection.closeConnection();
+	    }
+	}
 }
