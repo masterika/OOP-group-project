@@ -11,8 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<%		
-	System.out.print(request.getAttribute("tripId"));
+<%			
 	Trip trip = StaticTripStorage.loadTrip((Integer)request.getAttribute("tripId"));
 	List<Location> locations = trip.getLocations();
 %>

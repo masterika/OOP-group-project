@@ -45,12 +45,12 @@ public class ActualTripServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Trip trip = new Trip();
 		fillTrip(trip, request);		
-		 Agency agency = (Agency)request.getSession().getAttribute("agency");		 
+		Agency agency = (Agency)request.getSession().getAttribute("agency");		 
 		int agencyId = agency.getAgencyId();
 		trip.setAgencyId(agencyId);	
 		int tripId= StaticTripStorage.saveTrip(trip);
 		if(tripId != -1){			
-			request.setAttribute("tripId",tripId);			
+			request.setAttribute("tripId",tripId);				
 			RequestDispatcher r = request.getRequestDispatcher("trip_view.jsp");// aq tributis nacvlad ? it ro gadavcet jobia
 			r.forward(request, response);
 		}else{

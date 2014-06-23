@@ -101,6 +101,22 @@ CREATE TABLE `hotel_rooms` (
 );
 
 -- ---
+-- Table 'comment'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `comment`;
+		
+CREATE TABLE `comment` (
+  `id` INTEGER NULL AUTO_INCREMENT,
+  `text` MEDIUMTEXT NULL, 
+  `object` INTEGER NULL, -- 1 for hotels, 2 for agencies, 3 for trips
+  `object_id` INTEGER NULL, -- hotelis an agencys id USERS IS CXILIDAN!(wupaki arqiteqturis bralia)
+  `user_id` INTEGER NULL, -- user id of commenter
+  PRIMARY KEY (`id`) -- foreign keybi ar davade jer.
+);
+
+-- ---
 -- Table 'galleries'
 -- 
 -- ---
@@ -254,13 +270,10 @@ ALTER TABLE `wishlist_items` ADD FOREIGN KEY (item_id) REFERENCES `hotel_rooms` 
 
 
 ALTER TABLE `turista`.`users` 
-ADD COLUMN `is_approved` INT NULL DEFAULT 1 AFTER `email`,
-
+ADD COLUMN `is_approved` INT NULL DEFAULT 1 AFTER `email`;
 ALTER TABLE `turista`.`users` 
 CHANGE COLUMN `is_approved` `is_banned` INT(11) NULL DEFAULT '1' ;
-ADD COLUMN `date` DATE NULL AFTER `is_approved`;
-
 ALTER TABLE `turista`.`user_seller` 
 ADD COLUMN `is_approved` INT NULL DEFAULT 1 AFTER `identificator`;
 ALTER TABLE `turista`.`user_seller` 
-
+ADD COLUMN `date` DATE NULL AFTER `is_approved`;

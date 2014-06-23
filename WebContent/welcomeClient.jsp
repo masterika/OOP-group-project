@@ -20,6 +20,7 @@
 <title>Welcome <%=name%></title>
 </head>
 <body>
+	<a href=index.jsp> main page </a>
 	<h1>
 		Welcome
 		<%=name%></h1>
