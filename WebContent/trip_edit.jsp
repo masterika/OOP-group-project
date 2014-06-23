@@ -1,12 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import = "model.data.users.Agency" %>
+<%@page import = "model.data.users.Agency" %>
+<%@page import = "model.data.Trip" %>
+<%@page import = "model.data.users.Hotel" %>
+<%@page import = "model.data.db.StaticTripStorage" %>
+<%@page import = "model.data.db.StaticStorage" %>
+<%@page import = "model.data.Location" %>
+<%@page import = "java.util.List" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>tripis editi</title>
 </head>
-<body>
+
+<%			
+	Trip trip = StaticTripStorage.loadTrip(Integer.parseInt(request.getParameter("id")));
+	List<Location> locations = trip.getLocations();
+%>
+<title><%=trip.getName()%> view</title>
+</head>
+<body>	
+	<h1><%=trip.getName()%></h1>
+	<p> price: <%=trip.getPrice()%> </p>	
+	<form action="ChangeTripPriceServlet" method="post">	
+		New Price : <input type="text" name="newprice"><br>
+		<input type="submit" value="Change Price"><br>
+		<input type="hidden" name="type" value="<%=trip.getId() %>" />		
+	</form>
+	
+	<p> trip type: <%=trip.getType()%> </p>	
+	<% 					
+		for (int i=0; i<locations.size(); i++) {			
+			Location location = locations.get(i);
+	%>
+			<p> <%="Location "+(i+1) %>  </p>
+				City: <%=location.getCity() %> 
+				<% Hotel hotel = StaticTripStorage.loadHotel(location.getHotelId()); %>
+				Hotel: <a href=<%="ShowPhoto?ID="+hotel.getId()%>> <%=hotel.getName() %></a>				
+				Period: <%=location.getDuration() %>
+		<%}%>
+</body>
+
+
+
 
 </html>
