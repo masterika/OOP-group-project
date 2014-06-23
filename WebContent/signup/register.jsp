@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<script src="jquery-1.11.1.min.js"></script>
+<script src="../JS/jquery-1.11.1.min.js"></script>
 <!--<link rel="stylesheet" type="text/css" href="/Turista/styles/registerStyles.css">-->
 <link rel="stylesheet" type="text/css" href="/Turista/styles/inputStyles.css">
 

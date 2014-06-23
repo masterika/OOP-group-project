@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.eclipse.jdt.internal.compiler.ast.Statement;
+
 import model.data.users.Agency;
 import model.data.users.Client;
 import model.data.users.Hotel;
@@ -252,6 +254,7 @@ public class StaticStorage {
         }
 		return hotel;
 	}
+	
 	public static Agency loadAgency(int userid) {
 		conn = DBConnection.createConnection();
 		Agency agency = null;
@@ -272,14 +275,41 @@ public class StaticStorage {
         }        
 		return agency;
 	}
+	
+	public static ArrayList<Hotel> getHotelsFromDB(String keyword){
+		return getHotels(keyword);
+	}
+	
 	public static ArrayList<Hotel> getHotelsFromDB(){
+		return getHotels("");
+	}
+	
+	
+	public static ArrayList<Agency> getAgenciesFromDB(){	
+		return getAgencies("");
+	}
+	
+	public static ArrayList<Agency> getAgenciesFromDB(String keyword){	
+		return getAgencies(keyword);
+	}
+	
+	private static ArrayList<Hotel> getHotels(String keyword){
 		conn = DBConnection.createConnection();
 		ArrayList<Hotel> list =  new ArrayList<Hotel>();
 		try {
-			String query = "SELECT * FROM seller_hotel, user_seller, users WHERE users.id = user_seller.user_id and user_seller.id=seller_hotel.seller_id;";
-            PreparedStatement statement = conn.prepareStatement(query);
+			String query = "SELECT * FROM users join seller_hotel on users.id=seller_hotel.seller_id join user_seller on user_seller.id=seller_hotel.seller_id";
+			PreparedStatement statement = null;
+			if(keyword.equals("")){
+				statement = conn.prepareStatement(query);
+			}else{
+				keyword = "%"+keyword+"%";
+				query += " where name like ? or adress like ?;";
+				statement = conn.prepareStatement(query);
+	            statement.setString(1, keyword);
+	            statement.setString(2, keyword);
+			}
+            
             ResultSet rs = statement.executeQuery();
-
             while (rs.next()) {
             	Hotel hotel = new Hotel();
             	fillHotel(hotel,rs);
@@ -294,12 +324,23 @@ public class StaticStorage {
 		return list;
 	}
 	
-	public static ArrayList<Agency> getAgenciesFromDB(){	
+	private static ArrayList<Agency> getAgencies(String keyword){	
 		conn = DBConnection.createConnection();
 		ArrayList<Agency> list =  new ArrayList<Agency>();
 		try {
-            String query = "SELECT * FROM seller_agency,user_seller, users WHERE users.id = user_seller.user_id and user_seller.id=seller_agency.seller_id;";
-            PreparedStatement statement = conn.prepareStatement(query);
+            String query = "SELECT * FROM users join seller_agency on users.id=seller_agency.seller_id join user_seller on user_seller.id=seller_agency.seller_id";
+            
+			PreparedStatement statement = null;
+			if(keyword.equals("")){
+				statement = conn.prepareStatement(query);
+			}else{
+				keyword = "%"+keyword+"%";
+				query += " where name like ? or adress like ?;";
+				statement = conn.prepareStatement(query);
+	            statement.setString(1, keyword);
+	            statement.setString(2, keyword);
+			}
+            
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
             	Agency agency = new Agency();
