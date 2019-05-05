@@ -1,0 +1,162 @@
+.cover {
+	width: 100%;
+	height: 430px;
+	background-image: url('../IMG/cover.jpg');
+	background-repeat: no-repeat;
+}
+
+.searchW {
+	width: 1000px;
+	height: 100%;
+}
+
+.searchT {
+	width: 60%;
+}
+
+.search_inputW {
+	padding: 0px 12px;
+	background-image: url('../IMG/FFFFFF-0.7.png');
+	border-radius: 3px;
+}
+
+.search_input {
+	margin: 0px;
+	padding: 12px 0px;
+	border: none;
+	width: 100%;
+	outline: none;
+	font-family: arial, sans-serif;
+	font-size: 20px;
+	color: #29413B;
+	background-color: transparent;
+}
+
+.expand_search_additionalW span {
+	margin-top: 5px;
+	font-family: arial, sans-serif;
+	font-size: 13px;
+	color: #FFF;
+	float: right;
+	margin-right: 5px;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.search_additionalW {
+	padding-top: 5px;
+	display: none;
+}
+
+.search_additionalT {
+	width: 320px;
+	background-image: url('../IMG/FFFFFF-0.7.png');
+	border-radius: 3px;
+}
+
+.search_additional_desc {
+	font-family: arial, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #29413B;
+}
+
+.search_additional_val {
+	text-align: right;
+	overflow: auto;
+}
+
+.search_additional_val input, .search_additional_val select {
+	margin: 0px;
+	padding: 5px;
+	border: none;
+	width: 100%;
+	outline: none;
+	font-family: arial, sans-serif;
+	font-size: 12px;
+	color: #29413B;
+	background-color: transparent;
+	border: 1px solid #555;
+	border-radius: 3px;
+}
+
+.search_additional_val input {
+	width: 40%;
+	float: left;
+	margin-right: 10px;
+}
+
+.search_additional_submitW {
+	padding-top: 5px;
+}
+
+.search_additional_submit {
+	border: none;
+	padding: 10px 15px;
+	font-family: arial, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	border-radius: 3px;
+	color: #FFF;
+	background-color: #06C;
+	float: right;
+	margin-right: 20px;
+	outline: none;
+	cursor: pointer;
+}
+
+.search_additional_submit:hover {
+	background-color: #0001FF;
+}
+
+
+.tops {
+	width: 100%;
+}
+
+.top_objects {
+	width: 50%;
+	text-align: center;
+	font-family: arial, sans-serif;
+	color: #2B3D4F;
+}
+
+.top_objectsT {
+	width: 100%;
+}
+
+.top_object {
+	width: 33.3%;
+	vertical-align: top;
+}
+
+.top_objectT {
+	width: 100%;
+	border-top: 1px solid #AAA;
+	border-right: 1px solid #AAA;
+}
+
+.top_objectT:hover {
+	opacity: 0.8;
+}
+
+.top_object_img {
+	display: block;
+	width: 100%;
+}
+
+.top_object_title {
+	padding: 8px 0px;
+}
+
+.top_object_title a {
+	font-family: arial, sans-serif;
+	font-size: 14px;
+	text-decoration: none;
+	color: #2B3D4F;
+	font-weight: bold;
+}
+
+.top_object_title a:hover {
+	text-decoration: underline;
+}

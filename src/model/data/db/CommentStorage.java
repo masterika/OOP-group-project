@@ -34,7 +34,7 @@ public class CommentStorage {
 		conn = DBConnection.createConnection();
 		List<Comment> comments = new ArrayList<Comment>();
 		try {
-			String query = "SELECT * FROM comment WHERE object = ? and object_id = ?;";
+			String query = "SELECT * FROM comment WHERE object = ? and object_id = ? and is_banned = 1;";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, type);
 			statement.setInt(2,objectId);

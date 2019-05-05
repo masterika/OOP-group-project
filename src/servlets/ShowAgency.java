@@ -31,6 +31,7 @@ public class ShowAgency extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		ArrayList<String> images = PicturesStorage.getPicturesByID(Integer.parseInt(request.getParameter("ID")));
     	request.setAttribute("images", images);
     	RequestDispatcher rd = request.getRequestDispatcher("agency.jsp");

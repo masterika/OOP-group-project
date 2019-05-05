@@ -1,53 +1,145 @@
-<%@page import="model.data.db.StaticStorage"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.ArrayList" %>
-<%@page import="model.data.db.CommentStorage"%>
-<%@page import="model.data.db.StaticStorage"%>
-<%@page import="model.data.users.Agency"%>
 <%@page import="java.util.List" %>
-<%@page import="model.data.users.Hotel"%>
-<%@page import="model.data.users.Client"%>
-<%@page import="model.data.Comment"%>
-<%@page import="helper.CommentConstants"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page import="model.data.Comment" %>
+<%@page import="model.data.users.User" %>
+<%@page import="model.data.users.Agency" %>
+<%@page import="model.data.db.CommentStorage" %>
+<%@page import="model.data.db.StaticStorage" %>
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title> view</title>
-</head>
-<body>
-	<div id="content">
-	
-		<a href=index.jsp> main page </a>
-		<%
-		Agency agency = StaticStorage.loadAgency(Integer.parseInt(request.getParameter("ID")));
-		%>
-		<p> Name: <%=agency.getName()%> </p>
-		<p> Phone: <%=agency.getTelephone()%> </p>
-		<p> Address: <%=agency.getAdress()%> </p>
-		<p> Email: <%=agency.getEmail()%> </p>
-	</div>
-		<%
-			List<Comment> comments = CommentStorage.loadComments(2, agency.getId()); // 1iani constantebit minda
-			for (int i = 0; i < comments.size(); i++) {				
-				Comment comment = comments.get(i);
-				Client client = StaticStorage.loadClient(comment.getUserId());
-			%>
-			<p> <%=client.getName()+" : "+comment.getText()%></p>
-			<%} 
-		%>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Turista</title>
+		<!--CSS-->
+		<link type="text/css" rel="stylesheet" href="CSS/jquery-ui.css">
+		<link type="text/css" rel="stylesheet" href="CSS/common.css" />
+		<link type="text/css" rel="stylesheet" href="CSS/object.css" />
+		<link type="text/css" rel="stylesheet" href="CSS/bjqs.css">
+		<!--JS-->
+		<script type="text/javascript" src="JS/jquery.min.js"></script>
+		<script type="text/javascript" src="JS/jquery-ui.js"></script>
+		<script type="text/javascript" src="JS/common.js"></script>
+		<script type="text/javascript" src="JS/bjqs-1.3.min.js"></script>
+		<script type="text/javascript" src="JS/object.js"></script>
+	</head>
+
+	<body>
+
+		<div class="popups">
+			<div class="pop_background"></div>
+			<%@include file="signin/login.jsp" %>
+			<%@include file="signup/index.jsp" %>
+		</div>
 		
-	<form action="CommentServlet" method="post">
-		<input type="hidden" name="id" value="<%=agency.getId()%>" />
-		<%
-			int commenterId = ((Client)request.getSession().getAttribute("client")).getId();
-		
-		%>
-		<input type="hidden" name="commenterId" value="<%= commenterId %>" />
-		<input type="hidden" name="type" value="<%=2 %>" /> <%//es 2 constantit minda %>
-		<input type="text" name="text"/>
-		<input type="submit" value="Add Comment" />
-	</form>
-</body>
+		<%@include file="/header.jsp" %>
+
+		<div class="cover">
+			<table class="searchT" cellpadding="0" cellspacing="0" border="0" align="center">
+				<tr>
+					<td class="search_inputW">
+						<input class="search_input" type="text" spellcheck="false" autocomplete="off" placeholder="Search" />
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="object">
+			<table class="objectT" cellpadding="0" cellspacing="0" border="0" align="center">
+				<tr>
+					<td class="object_title" colspan="2">
+						<h2>Agency</h2>
+					</td>
+				</tr>
+				<tr>
+					<td class="object_info">
+					<%
+						Agency agency = StaticStorage.loadAgency(Integer.parseInt(request.getParameter("ID")));
+					%>
+						<table class="object_infoT" cellpadding="0" cellspacing="0" border="0">
+							<tr>
+								<td class="object_info_desc">Name:</td>
+								<td class="object_info_val"><%=agency.getName()%></td>
+							</tr>
+							<tr>
+								<td class="object_info_desc">Phone:</td>
+								<td class="object_info_val"><%=agency.getTelephone()%></td>
+							</tr>
+							<tr>
+								<td class="object_info_desc">Address:</td>
+								<td class="object_info_val"><%=agency.getAdress()%></td>
+							</tr>
+							<tr>
+								<td class="object_info_desc">Email:</td>
+								<td class="object_info_val"><%=agency.getEmail()%></td>
+							</tr>
+							
+							
+						</table>
+
+						<table class="commentsT" cellpadding="0" cellspacing="0" border="0">
+							<%
+					 			User us =  ((User)request.getSession().getAttribute("user"));
+					 			if (us != null) {
+					 			int commenterId = us.getId();
+					  		%>			
+							<form action="CommentServlet" method="post">
+							<input type="hidden" name="id" value="<%=agency.getId()%>" />
+							<input type="hidden" name="commenterId" value="<%= commenterId %>" />
+  							<input type="hidden" name="type" value="<%=1 %>" /> <%}%>
+								<tr>
+									<td class="comment_inputW">
+										<textarea class="comment_input" spellcheck="false" placeholder="Write Comment" name="text"></textarea>
+										<button class="comment_submit">Post</button>
+									</td>
+								</tr>
+								
+							</form>
+							
+							<tr>
+								<td class="commentsW">
+									<%
+									List<Comment> comments = CommentStorage.loadComments(1, agency.getId()); 	
+									for (int i = 0; i < comments.size(); i++) {				
+										Comment comment = comments.get(i);
+										User user1 = StaticStorage.loadUser(comment.getUserId());	
+									%>
+									<div class="comment">
+										<table class="commentT" cellpadding="0" cellspacing="0" border="0">
+											<tr>
+												<td class="commentW">
+													<a href="#"><%=user1.getUsername()%>  </a>
+													:   <%=comment.getText()%>
+													
+												</td>
+											</tr>
+										</table>
+									</div>
+									<%}%>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td class="object_gallery">
+						<div class="object_galleryW">
+					        <ul class="bjqs">
+					     		<%
+					     		ArrayList<String> images = (ArrayList<String>)request.getAttribute("images");
+								for (int i = 0; i < images.size(); i++) {
+								%>
+								<li><img src="data:image/gif;base64,<%=images.get(i) %>" /></li>
+								<%}%>
+					        </ul>
+					    </div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="footer">
+			© 2014 TURISTA. All Rights Reserved
+		</div>
+
+	</body>
 </html>

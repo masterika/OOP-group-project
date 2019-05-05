@@ -1,0 +1,72 @@
+.cover {
+	width: 100%;
+	padding: 55px 0px;
+	background-image: url("../IMG/cover2.jpg");
+	background-position: 0px -100px;
+}
+
+.searchT {
+	width: 600px;
+	height: 100%;
+}
+
+.search_inputW {
+	padding: 0px 12px;
+	background-image: url('../IMG/FFFFFF-0.7.png');
+	border-radius: 3px;
+}
+
+.search_input {
+	margin: 0px;
+	padding: 12px 0px;
+	border: none;
+	width: 100%;
+	outline: none;
+	font-family: arial, sans-serif;
+	font-size: 20px;
+	color: #29413B;
+	background-color: transparent;
+}
+
+.objects_header {
+	text-align: center;
+	font-family: arial, sans-serif;
+	color: #2B3D4F;
+}
+
+.objectsT {
+	width: 800px;
+}
+
+.object {
+	width: 33.3%;
+	vertical-align: top;
+}
+
+.objectT {
+	width: 100%;
+	background-color: #FFF;
+	box-shadow: 0px 4px 5px #CCC;
+}
+
+.object_img {
+	display: block;
+	width: 100%;
+}
+
+.object_title {
+	text-align: center;
+	padding: 8px 0px;
+}
+
+.object_title a {
+	font-family: arial, sans-serif;
+	font-size: 14px;
+	text-decoration: none;
+	color: #2B3D4F;
+	font-weight: bold;
+}
+
+.object_title a:hover {
+	text-decoration: underline;
+}

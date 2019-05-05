@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import = "model.data.users.User" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,7 +20,7 @@
 		New Password: <input type="password" name="newpass"><br>
 		Confirm Password: <input type="password" name="confnewpass"><br>
 		
-		<input type="hidden" name="type" value="<%=request.getParameter("id") %>" />
+		<input type="hidden" name="type" value="<%=request.getParameter("id") %>" />		
 		<input type="hidden" name="user" value="Client" />
 		
 		<input type="submit" value="Change Password">
@@ -30,10 +31,10 @@
 		<%@include file="/seller_telephone_change.jsp"%>
 		<input type="hidden" name="user" value="Client" />
 	</form>		
-
-	<a href=<%="wishlist.jsp?userId=" + session.getAttribute("userId")%>>
-		My Wishlist </a>
-
-
+	<%User user = ((User)session.getAttribute("user"));		
+		int id = user.getId();
+	%>
+	<a href=<%="wishlist.jsp?id="+id%>>My Wishlist </a>
+	
 </body>
 </html>

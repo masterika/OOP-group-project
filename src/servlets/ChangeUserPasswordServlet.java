@@ -42,9 +42,13 @@ public class ChangeUserPasswordServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//select * from users,user_seller,seller_hotel where users.id = user_seller.user_id and user_seller.id = seller_hotel.seller_id;
 		//select * from  users,user_client where users.id = user_client.user_id;
+		System.out.println("eeeeeeeeeeee");
 		int id = Integer.parseInt(request.getParameter("type"));
+		
 		String previousPassword = ChangeStorage.getPassword(id);
+		System.out.println(previousPassword);
 		String userType = request.getParameter("user");
+		System.out.println(userType);
 		String adress = "welcome" + userType + ".jsp";
 		String typedPrevPass = StringToMD5.generate(request.getParameter("prevpass"));
 		if (previousPassword.equals(typedPrevPass) && request.getParameter("newpass").equals(request.getParameter("confnewpass"))){

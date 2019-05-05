@@ -44,7 +44,7 @@
 	%>
 			<p> <%="Location "+(i+1) %>  </p>
 				City: <%=location.getCity() %> 
-				<% Hotel hotel = StaticTripStorage.loadHotel(location.getHotelId()); %>
+				<% Hotel hotel = StaticStorage.loadHotel(location.getUserId()); %>
 				Hotel: <a href=<%="ShowPhoto?ID="+hotel.getId()%>> <%=hotel.getName() %></a>				
 				Period: <%=location.getDuration() %>
 		
@@ -53,19 +53,20 @@
 					New Period : <input type="text" name="newper"><br>
 					<input type="submit" value="Change Period"><br>
 					<input type="hidden" name="type" value="<%=location.getId() %>" />
+					<input type="hidden" name="trip" value="<%=trip.getId() %>" />
 		
 				</form>
 				<form action="ChangeLocationHotelServlet" method="post">	
 					New Hotel : <input type="text" name="newiden"><br>
 					<input type="submit" value="Change Hotel"><br>
 					<input type="hidden" name="type" value="<%=location.getId() %>" />
-		
+					<input type="hidden" name="trip" value="<%=trip.getId() %>" />
 				</form>
 				
 				<form action="LocationDeleteServlet" method="post">	
 					<input type="submit" value="Delete"><br>
 					<input type="hidden" name="type" value="<%=location.getId() %>" />
-		
+					<input type="hidden" name="trip" value="<%=trip.getId() %>" />
 				</form>
 		
 		

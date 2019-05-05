@@ -26,14 +26,7 @@ public class SessionListener implements HttpSessionListener {
      * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
      */
     public void sessionCreated(HttpSessionEvent arg0) {
-       User user  = new User();
-       Client client = new Client();
-       Agency agency = new Agency();
-       Hotel hotel = new Hotel();
-       arg0.getSession().setAttribute("user", user);
-       arg0.getSession().setAttribute("client", client);
-       arg0.getSession().setAttribute("agency", agency);
-       arg0.getSession().setAttribute("hotel", hotel);
+
     }
 
 	/**

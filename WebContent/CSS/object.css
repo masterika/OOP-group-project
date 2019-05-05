@@ -1,0 +1,167 @@
+.cover {
+	width: 100%;
+	padding: 55px 0px;
+	background-image: url("../IMG/cover2.jpg");
+	background-position: 0px -100px;
+}
+
+.searchT {
+	width: 600px;
+	height: 100%;
+}
+
+.search_inputW {
+	padding: 0px 12px;
+	background-image: url('../IMG/FFFFFF-0.7.png');
+	border-radius: 3px;
+}
+
+.search_input {
+	margin: 0px;
+	padding: 12px 0px;
+	border: none;
+	width: 100%;
+	outline: none;
+	font-family: arial, sans-serif;
+	font-size: 20px;
+	color: #29413B;
+	background-color: transparent;
+}
+
+.object {
+	margin-bottom: 50px;
+}
+
+.objectT {
+	width: 900px;
+}
+
+.object_title {
+	text-align: center;
+	font-family: arial, sans-serif;
+	color: #2B3D4F;
+}
+
+.object_info {
+	width: 30%;
+	vertical-align: top;
+}
+
+.object_infoT {
+	width: 100%;
+	padding: 0px 10px;
+	background-color: #FFF;
+	border-radius: 4px;
+	box-shadow: inset 0px 0px 10px #AAA;
+}
+
+.object_info_desc {
+	padding: 10px 0px;
+	font-family: arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #444;
+	border-bottom: 1px dotted #AAA;
+}
+
+.object_info_val {
+	padding: 10px 0px;
+	font-family: arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #008BC0;
+	border-bottom: 1px dotted #AAA;
+	text-align: right;
+}
+
+.object_infoT tr:last-child td {
+	border-bottom: none;
+}
+
+.object_gallery {
+	vertical-align: top;
+	padding-left: 20px;
+}
+
+.bjqs {
+	box-shadow: 0px 0px 30px #555;
+}
+
+.bjqs img {
+	border-radius: 3px;
+}
+
+.commentsT {
+	width: 100%;
+	margin-top: 20px;
+	background-color: #FFF;
+	border-radius: 4px;
+	box-shadow: inset 0px 0px 10px #AAA;
+	padding: 10px;
+}
+
+.comment_inputW {}
+
+.comment_input {
+	width: 100%;
+	height: 40px;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	border-bottom: 1px solid #CCC;
+	outline-color: #06C;
+	font-family: arial, sans-serif;
+	font-size: 13px;
+	color: #444;
+	resize: none;
+}
+
+.comment_submit {
+	border: none;
+	padding: 7px 15px;
+	font-family: arial, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	border-radius: 3px;
+	color: #FFF;
+	background-color: #06C;
+	float: right;
+	margin: 0px;
+	margin-top: 3px;
+	outline: none;
+	cursor: pointer;
+}
+
+.commentsW {
+	padding-top: 15px;
+}
+
+.commentsW div:nth-child(even) {
+	background-color: #F0F0F0;
+}
+
+.comment {
+	margin-top: 1px;
+	background-color: #E5E5E5;
+}
+
+.commentT {
+	width: 100%;
+}
+
+.commentW {
+	padding: 7px;
+	font-family: arial, sans-serif;
+	font-size: 13px;
+	color: #444;
+}
+
+.commentW a {
+	color: #3B5998;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.commentW a:hover {
+	text-decoration: underline;
+}

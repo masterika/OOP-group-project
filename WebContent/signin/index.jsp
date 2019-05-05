@@ -18,6 +18,6 @@
 		}
 	%>
 
-	<%@include file="../login.jsp"%>
+	<%@include file="login.html"%>
 </body>
 </html>

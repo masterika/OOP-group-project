@@ -5,9 +5,10 @@ import model.data.users.Product;
 public class Trip implements Product{
 	private int id;
 	private String name;
-	private int agencyId;
+	private int userId;// userId corresponding to trip owner agency 
 	private String type; // 2 men trip, 10 men group team or ect.
-	private int identificator; // unique to all trip	
+	private String sDate;
+	private String eDate;
 	public String getType() {
 		return type;
 	}
@@ -45,17 +46,22 @@ public class Trip implements Product{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getIdentificator() {
-		return identificator;
+	public int getUserId() {
+		return userId;
 	}
-	public void setIdentificator(int identificator) {
-		this.identificator = identificator;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public int getAgencyId() {
-		return agencyId;
+	public String getsDate() {
+		return sDate;
 	}
-	public void setAgencyId(int agencyId) {
-		this.agencyId = agencyId;
-	}		
-	
+	public void setsDate(String sDate) {
+		this.sDate = sDate;
+	}
+	public String geteDate() {
+		return eDate;
+	}
+	public void seteDate(String eDate) {
+		this.eDate = eDate;
+	}	
 }

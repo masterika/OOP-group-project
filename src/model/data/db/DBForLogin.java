@@ -21,7 +21,7 @@ public class DBForLogin {
 			ResultSet res = statement.executeQuery();
 			if (res.next()) {
 				int user_id = res.getInt("id");
-				String client =getClient(user_id);
+				String client = getClient(user_id);
 				String seller = getSeller(user_id);
 				if(!client.equals("")){
 					st = client;

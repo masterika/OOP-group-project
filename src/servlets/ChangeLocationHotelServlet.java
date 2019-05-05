@@ -40,11 +40,9 @@ public class ChangeLocationHotelServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("type"));
 		int identificator = Integer.parseInt(request.getParameter("newiden"));
-		int hotelId = StaticTripStorage.getHotelID(identificator);
-		StaticTripStorage.changeLocationHotel(hotelId, id);
-		
-		
-		RequestDispatcher r = request.getRequestDispatcher("trip_view.jsp?id="+id);
+		StaticTripStorage.changeLocationHotel(identificator, id);		
+		int tripId = Integer.parseInt(request.getParameter("trip"));
+		RequestDispatcher r = request.getRequestDispatcher("trip_view.jsp?id="+tripId);		
 		r.forward(request, response);
 	}
 

@@ -1,0 +1,112 @@
+.cover {
+	width: 100%;
+	padding: 55px 0px;
+	background-image: url("../IMG/cover2.jpg");
+	background-position: 0px -100px;
+}
+
+.searchT {
+	width: 600px;
+	height: 100%;
+}
+
+.search_inputW {
+	padding: 0px 12px;
+	background-image: url('../IMG/FFFFFF-0.7.png');
+	border-radius: 3px;
+}
+
+.search_input {
+	margin: 0px;
+	padding: 12px 0px;
+	border: none;
+	width: 100%;
+	outline: none;
+	font-family: arial, sans-serif;
+	font-size: 20px;
+	color: #29413B;
+	background-color: transparent;
+}
+
+.edit {
+	width: 400px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 20px;
+	box-shadow: inset 0px 0px 10px #AAA;
+	border-radius: 5px;
+}
+
+.editT {
+	width: 100%;
+}
+
+.profile_imgW {}
+
+.profile_img {
+	display: block;
+	margin: 0 auto;
+	height: 120px;
+	padding: 10px;
+	box-shadow: inset 0px 0px 10px #AAA;
+	border-radius: 5px;
+}
+
+.edit_profile_imgW {
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
+
+.edit_profile_img {
+	border: none;
+	padding: 7px 15px;
+	font-family: arial, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	border-radius: 3px;
+	color: #FFF;
+	background-color: #BA1213;
+	margin: 0px;
+	outline: none;
+	cursor: pointer;
+}
+
+.edit_profile_img:active {
+	background-color: #F00;
+}
+
+.edit_profile_img_input {
+	display: none;
+}
+
+.edit_inputW {
+	padding-top: 10px;
+}
+
+.edit_input {
+	margin: 0px;
+	border: none;
+	width: 90%;
+	outline: none;
+	padding: 10px;
+	font-family: arial, sans-serif;
+	font-size: 12px;
+	color: #222;
+	border: 1px solid #AAA;
+	border-radius: 3px;
+}
+
+.edit_inputW button {
+	border: none;
+	padding: 10px 30px;
+	font-family: arial, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	border-radius: 3px;
+	color: #FFF;
+	background-color: #06C;
+	margin: 0px;
+	outline: none;
+	cursor: pointer;
+}

@@ -59,4 +59,9 @@ public class Sellers extends User {
 	public void setSellerId(int sellerId) {
 		SellerId = sellerId;
 	}
+	
+	@Override
+	public String toString() {
+		return "name= "+name+", adress= "+adress;
+	}
 }

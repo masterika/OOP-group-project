@@ -37,14 +37,113 @@
 		<input type="hidden" name="user" value="Hotel" />
 	</form>	
 	
-		
 	<a href = <%="gallery.jsp?ID=" + request.getParameter("id")%> > My Gallery </a>
-	
-	<form action="UploadPhoto" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="userId" value='<%=request.getParameter("id")%>' />
-		<input type="file" name="image[]" multiple />
-		<input type="submit" />
-	</form>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Turista</title>
+	
+		<link type="text/css" rel="stylesheet" href="CSS/jquery-ui.css">
+		<link type="text/css" rel="stylesheet" href="CSS/common.css" />
+		<link type="text/css" rel="stylesheet" href="CSS/object.css" />
+		<link type="text/css" rel="stylesheet" href="CSS/edit.css">
+		
+		<script type="text/javascript" src="JS/jquery.min.js"></script>
+		<script type="text/javascript" src="JS/jquery-ui.js"></script>
+		<script type="text/javascript" src="JS/common.js"></script>
+		<script type="text/javascript" src="JS/edit.js"></script>
+		<script type="text/javascript" src="JS/bjqs-1.3.min.js"></script>
+	</head>
+ 
+	<body>
+
+		<div class="popups">
+			<div class="pop_background"></div>
+			<%@include file="signin/login.jsp" %>
+			<%@include file="signup/index.jsp" %>
+		</div>
+		
+		<%@include file="/header.jsp" %>
+
+		<div class="cover">
+			<table class="searchT" cellpadding="0" cellspacing="0" border="0" align="center">
+				<tr>
+					<td class="search_inputW">
+						<input class="search_input" type="text" spellcheck="false" autocomplete="off" placeholder="Search" />
+					</td>
+				</tr>
+			</table>
+		</div>
+
+
+		<div class="edit">
+			<table class="editT" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td class="profile_imgW">
+						<img class="profile_img" src="IMG/no_avatar.jpg" />
+					</td>
+				</tr>
+				<tr>
+					<td align="center" class="edit_profile_imgW">
+						<button class="edit_profile_img">Change Profile Picture</button>
+						<input class="edit_profile_img_input" type="file" />
+					</td>
+				</tr>
+				<tr>
+					<td class="edit_inputW" align="center">
+						<input class="edit_input" type="text" spellcheck="false" autocomplete="off" placeholder="Something" />
+					</td>
+				</tr>
+				<tr>
+					<td class="edit_inputW" align="center">
+						<input class="edit_input" type="text" spellcheck="false" autocomplete="off" placeholder="Something" />
+					</td>
+				</tr>
+				<tr>
+					<td class="edit_inputW" align="center">
+						<input class="edit_input" type="text" spellcheck="false" autocomplete="off" placeholder="Something" />
+					</td>
+				</tr>
+				<tr>
+					<td class="edit_inputW" align="center">
+						<button>EDIT</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+
+		<div class="footer">
+			© 2014 TURISTA. All Rights Reserved
+		</div>
+
+	</body>
+</html>
+
+
+
+
+-->

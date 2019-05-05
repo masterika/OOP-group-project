@@ -1,12 +1,21 @@
 package model.data;
 
 public class Comment {
+	private int id;
 	private String text; // comment
 	private int userId; // user which has commented
 	private int objectId;// object where user has commented
 	private int type; // type of object on what has been commented (1 = hotel, 2=agency 3=trip);
 	public Comment(){
 				
+	}
+	
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id = id;
 	}
 	public String getText() {
 		return text;

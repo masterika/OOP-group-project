@@ -32,5 +32,4 @@ public class Hotel extends Sellers{
 		return roomsNum;
 	}
 	
-	
 }

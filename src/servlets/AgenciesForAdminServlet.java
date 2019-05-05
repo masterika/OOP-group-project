@@ -32,8 +32,8 @@ public class AgenciesForAdminServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//ArrayList<Agency> agenciesList =  StaticStorage.getAgenciesFromDB(); 
-    	//request.setAttribute("agencies", agenciesList);
+		ArrayList<Agency> agenciesList =  StaticStorage.getAgenciesFromDB(); 
+    	request.setAttribute("agencies", agenciesList);
 	}
 
 	/**

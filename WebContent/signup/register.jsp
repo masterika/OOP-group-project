@@ -6,7 +6,7 @@
 <head>
 <script src="../JS/jquery-1.11.1.min.js"></script>
 <!--<link rel="stylesheet" type="text/css" href="/Turista/styles/registerStyles.css">-->
-<link rel="stylesheet" type="text/css" href="/Turista/styles/inputStyles.css">
+<link rel="stylesheet" type="text/css" href="/Turista/CSS/inputStyles.css">
 
 </head>
 <body>

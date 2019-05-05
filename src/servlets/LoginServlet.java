@@ -4,23 +4,15 @@ import helper.StringToMD5;
 
 import java.io.IOException;
 
-
-
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-
-
-
-import model.data.users.Agency;
-import model.data.users.User;
 import model.data.db.StaticStorage;
-import model.data.db.DBForLogin;
+import model.data.users.User;
 
 /**
  * Servlet implementation class LoginServlet
@@ -53,28 +45,14 @@ public class LoginServlet extends HttpServlet {
 		user.setPassword(StringToMD5.generate(request.getParameter("password")));
 		
 		int userId = StaticStorage.isValidUser(user);
-		String st = DBForLogin.getTtype(request.getParameter("username"),StringToMD5.generate(request.getParameter("password")));
 		
-		if(userId != -1 && !st.equals("") ){
-			if(st.equals("client")){
-				request.getSession().setAttribute("client", StaticStorage.loadClient(userId));
-				RequestDispatcher rd = request.getRequestDispatcher("welcomeClient.jsp");
-			    rd.forward(request, response);
-				//response.sendRedirect("welcomeClient.jsp");
-			}else if(st.equals("hotel")){
-				request.getSession().setAttribute("hotel", StaticStorage.loadHotel(userId));
-				RequestDispatcher rd = request.getRequestDispatcher("welcomeHotel.jsp");
-			    rd.forward(request, response);
-				//response.sendRedirect("welcomeHotel.jsp");
-			}else if(st.equals("agency")){
-				request.getSession().setAttribute("agency", StaticStorage.loadAgency(userId));
-				RequestDispatcher rd = request.getRequestDispatcher("welcomeAgency.jsp");
-			    rd.forward(request, response);
-				//response.sendRedirect("welcomeAgency.jsp");
-			}
-		}else{
-			response.sendRedirect("/Turista/signin/?failed");
+		if(userId != -1){
+			user.setId(userId);
+			HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            session.setMaxInactiveInterval(10*60);
 		}
+		response.sendRedirect("");
 	}
 
 }

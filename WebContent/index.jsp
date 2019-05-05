@@ -1,19 +1,59 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
+<%@page import="model.data.users.User"%>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MainPage</title>
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Turista</title>
+		<!--CSS-->
+		<link type="text/css" rel="stylesheet" href="CSS/jquery-ui.css">
+		<link type="text/css" rel="stylesheet" href="CSS/common.css" />
+		<link type="text/css" rel="stylesheet" href="CSS/home.css" />
+		<!--JS-->
+		<script type="text/javascript" src="JS/jquery.min.js"></script>
+		<script type="text/javascript" src="JS/jquery-ui.js"></script>
+		<script type="text/javascript" src="JS/common.js"></script>
+	</head>
 
-<h1> Welcome to TURISTA!!!  </h1>
+	<body>
 
-<a href="/Turista/signin">Log In</a><br>
-<a href="/Turista/signup">Registration</a><br>
-<a href="/Turista/HotelsServlet">Hotels</a><br>
-<a href="/Turista/AgenciesServlet">Agencies</a><br>
+		<div class="popups">
+			<div class="pop_background"></div>
+			<%@include file="signin/login.jsp" %>
+			<%@include file="signup/index.jsp" %>
+		</div>
+			<%@include file="/header.jsp" %>
+		<div class="cover">
+			<%@include file="search/index.jsp" %>
+		</div>
 
-</body>
+		<table class="tops" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td class="top_objects" style="border-right: 1px solid #AAA;">
+					<h2>Top Agencies</h2>
+					<table class="top_objectsT" cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<%@include file="agency/links.jsp" %>
+							<%@include file="agency/links.jsp" %>
+							<%@include file="agency/links.jsp" %>
+						</tr>
+					</table>
+				</td>
+				<td class="top_objects">
+					<h2>Top Hotels</h2>
+					<table class="top_objectsT" cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<%@include file="hotel/links.jsp" %>
+							<%@include file="hotel/links.jsp" %>
+							<%@include file="hotel/links.jsp" %>	
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+
+		<div class="footer">
+			© 2014 TURISTA. All Rights Reserved
+		</div>
+
+	</body>
 </html>

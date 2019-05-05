@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import model.data.Location;
 import model.data.Trip;
 import model.data.db.StaticTripStorage;
-import model.data.users.Agency;
+
+import model.data.users.User;
 
 
 /**
@@ -43,11 +44,11 @@ public class ActualTripServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Trip trip = new Trip();
+		Trip trip = new Trip();		
 		fillTrip(trip, request);		
-		Agency agency = (Agency)request.getSession().getAttribute("agency");		 
-		int agencyId = agency.getAgencyId();
-		trip.setAgencyId(agencyId);	
+		User user = (User)request.getSession().getAttribute("user");		
+		int userId = user.getId();
+		trip.setUserId(userId);	
 		int tripId= StaticTripStorage.saveTrip(trip);
 		if(tripId != -1){					
 			RequestDispatcher r = request.getRequestDispatcher("trip_view.jsp?id="+tripId);
@@ -61,7 +62,9 @@ public class ActualTripServlet extends HttpServlet {
 	private void fillTrip(Trip trip, HttpServletRequest request) {		
 		trip.setName(request.getParameter("name"));			
 		trip.setPrice(Integer.parseInt(request.getParameter("price")));		
-		trip.setType(request.getParameter("type"));			
+		trip.setType(request.getParameter("type"));		
+		trip.setsDate(request.getParameter("sDate"));	
+		trip.seteDate(request.getParameter("eDate"));		
 		trip.setLocations(getLocations(request));
 	}
 

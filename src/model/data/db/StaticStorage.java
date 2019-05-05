@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Statement;
 
-import org.eclipse.jdt.internal.compiler.ast.Statement;
-
+import model.data.Comment;
 import model.data.users.Agency;
 import model.data.users.Client;
 import model.data.users.Hotel;
@@ -70,7 +70,7 @@ public class StaticStorage {
 			e.printStackTrace();
 		} 
 		return id;	
-		
+
 	}
 	public static int saveHotel(Hotel hotel, int sellerid) {
 		conn = DBConnection.createConnection();
@@ -171,11 +171,11 @@ public class StaticStorage {
 		}		
 		return id;	
 	}
-	private static int getUserId(String username) {
+	public static int getUserId(String username) {
 		conn = DBConnection.createConnection();
 		int id = -1;
 		try {
-			String q = "SELECT * FROM users WHERE username = ?;"; // aq pirdapir select id minda 1 xazzshi ar sheileba?
+			String q = "SELECT * FROM users WHERE username = ?;"; 
 			PreparedStatement statement = conn.prepareStatement(q);
 			statement.setString(1, username);		
 			ResultSet rs = statement.executeQuery();
@@ -187,7 +187,7 @@ public class StaticStorage {
 			DBConnection.closeConnection();
 		}		
 		return id;			
-	}
+	}	
 	/*
 	 * this method is created for login.
 	 * returns -1 if user with given username and password doesn't exist
@@ -254,7 +254,26 @@ public class StaticStorage {
         }
 		return hotel;
 	}
-	
+	public static User loadUser(int userid){
+		conn = DBConnection.createConnection();
+		User user = null;
+		try {
+            String query = "SELECT * FROM  users WHERE users.id = "+userid;
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+            	user = new User();
+            	fillUser(user,rs);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+        	DBConnection.closeConnection();
+        }        
+		return user;
+
+	}
 	public static Agency loadAgency(int userid) {
 		conn = DBConnection.createConnection();
 		Agency agency = null;
@@ -275,35 +294,37 @@ public class StaticStorage {
         }        
 		return agency;
 	}
-	
+
 	public static ArrayList<Hotel> getHotelsFromDB(String keyword){
 		return getHotels(keyword);
 	}
-	
+
 	public static ArrayList<Hotel> getHotelsFromDB(){
 		return getHotels("");
 	}
-	
-	
+
+
 	public static ArrayList<Agency> getAgenciesFromDB(){	
 		return getAgencies("");
 	}
-	
+
 	public static ArrayList<Agency> getAgenciesFromDB(String keyword){	
 		return getAgencies(keyword);
 	}
-	
+
 	private static ArrayList<Hotel> getHotels(String keyword){
 		conn = DBConnection.createConnection();
 		ArrayList<Hotel> list =  new ArrayList<Hotel>();
 		try {
-			String query = "SELECT * FROM users join seller_hotel on users.id=seller_hotel.seller_id join user_seller on user_seller.id=seller_hotel.seller_id";
+			String query = "SELECT * FROM users join user_seller on users.id=user_seller.user_id  join seller_hotel on user_seller.id = seller_hotel.seller_id";
 			PreparedStatement statement = null;
 			if(keyword.equals("")){
+				query += " where is_banned='1';";
+				//and is_banned=1
 				statement = conn.prepareStatement(query);
 			}else{
 				keyword = "%"+keyword+"%";
-				query += " where name like ? or adress like ?;";
+				query += " where name like ? or adress like ? and is_banned='1';";
 				statement = conn.prepareStatement(query);
 	            statement.setString(1, keyword);
 	            statement.setString(2, keyword);
@@ -323,19 +344,21 @@ public class StaticStorage {
         }
 		return list;
 	}
-	
-	private static ArrayList<Agency> getAgencies(String keyword){	
+
+	private static ArrayList<Agency> getAgencies(String keyword){
+		
 		conn = DBConnection.createConnection();
 		ArrayList<Agency> list =  new ArrayList<Agency>();
 		try {
-            String query = "SELECT * FROM users join seller_agency on users.id=seller_agency.seller_id join user_seller on user_seller.id=seller_agency.seller_id";
-            
-			PreparedStatement statement = null;
+            String query = "SELECT * FROM users join user_seller on users.id=user_seller.user_id  join seller_agency on user_seller.id = seller_agency.seller_id";
+            PreparedStatement statement = null;
 			if(keyword.equals("")){
+				query += " where is_banned='1';";
 				statement = conn.prepareStatement(query);
 			}else{
+				//and is_banned=1;
 				keyword = "%"+keyword+"%";
-				query += " where name like ? or adress like ?;";
+				query += " where name like ? or adress like ? and is_banned='1'";
 				statement = conn.prepareStatement(query);
 	            statement.setString(1, keyword);
 	            statement.setString(2, keyword);
@@ -355,7 +378,7 @@ public class StaticStorage {
         }        
 		return list;
 	}
-	
+
 	public static boolean isValidUsername(String username) {
 		conn = DBConnection.createConnection();
 		boolean p = true;
@@ -390,14 +413,16 @@ public class StaticStorage {
 		}
 		return p;	
 	}
-	
+
 	private synchronized static void fillUser(User user,ResultSet rs){		
 		try {			
-			user.setId(rs.getInt("user_id"));		
+			user.setId(rs.getInt("users.id"));		
 			user.setUsername(rs.getString("username"));
 	    	user.setEmail(rs.getString("email"));
 	    	user.setPassword(rs.getString("password"));
 	    	user.setTelephone(rs.getString("telephone"));
+            user.setBannStatus(rs.getInt("is_banned"));
+
 		} catch (SQLException e) {
 			System.out.println("useris catch shevida");
 			// TODO Auto-generated catch block
@@ -420,7 +445,7 @@ public class StaticStorage {
 		try {
 			seller.setName(rs.getString("name"));
 			seller.setAdress(rs.getString("adress"));
-			seller.setSellerId(rs.getInt("seller_id"));
+			seller.setSellerId(rs.getInt("user_seller.id"));
 	    	seller.setIdentificator(rs.getInt("identificator"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -430,7 +455,7 @@ public class StaticStorage {
 	private synchronized static void fillAgency(Agency agency, ResultSet rs) {
 		fillSeller(agency,rs);
 		try {
-			agency.setAgencyId(rs.getInt("id"));
+			agency.setAgencyId(rs.getInt("seller_agency.id"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -440,11 +465,120 @@ public class StaticStorage {
 		fillSeller(hotel,rs);
 		try {
 			hotel.setStars(rs.getInt("stars"));
-			hotel.setHotelId(rs.getInt("id"));
+			hotel.setHotelId(rs.getInt("seller_hotel.id"));
 		} catch (SQLException e) {
 			System.out.println("catch");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}	
+
+    public static ArrayList<Client> getClientsFromDB(){    
+        conn = DBConnection.createConnection();
+        ArrayList<Client> list =  new ArrayList<Client>();
+        try {
+            String query = "SELECT * FROM user_client, users WHERE users.id = user_client.id";
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Client client = new Client();
+                fillClient(client,rs);
+                list.add(client);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+            DBConnection.closeConnection();
+        }        
+        return list;
+    }
+
+    public synchronized static ArrayList<Sellers> getSellersToApprove(){
+
+        conn = DBConnection.createConnection();
+        ArrayList<Sellers> list =  new ArrayList<Sellers>();
+        try {
+            String query = "SELECT * FROM user_seller, users WHERE users.id = user_seller.id AND user_seller.is_approved = 1";
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Sellers seller = new Sellers();
+                fillSeller(seller,rs);
+                list.add(seller);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+            DBConnection.closeConnection();
+        }
+        return list;
+    }
+
+    public synchronized static boolean approveSeller(int id){
+        conn = DBConnection.createConnection();
+        boolean res = false;
+        try {
+            String query = "UPDATE user_seller SET is_approved = 0 WHERE id = "+id;
+            Statement statement = conn.createStatement();
+           
+            boolean k = statement.execute(query);
+            System.out.println(k);
+            res = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+            DBConnection.closeConnection();
+        }
+        System.out.println("in aproveSeller");
+        return res;
+    }
+    
+    public synchronized static boolean BanUser(int id){
+        conn = DBConnection.createConnection();
+        boolean res = false;
+
+        try {
+            String query = "UPDATE users SET is_banned = 0 WHERE id = "+id;
+            Statement statement = conn.createStatement();
+           
+           statement.execute(query);
+  
+            res = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+            DBConnection.closeConnection();
+        }
+
+        return res;
+    }
+    
+    public synchronized static ArrayList<Comment> getCommentsFromDB(){
+    	conn = DBConnection.createConnection();
+		ArrayList<Comment> list =  new ArrayList<Comment>();
+		try {
+            String query = "SELECT * FROM comment";    
+			PreparedStatement statement = conn.prepareStatement(query);            
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+            	Comment comment = new Comment();
+            	comment.setObjectId(rs.getInt("object_id"));
+            	comment.setText(rs.getString("text"));
+            	comment.setType(rs.getInt("object"));
+            	comment.setUserId(rs.getInt("user_id"));
+            	comment.setId(rs.getInt("id"));
+            	list.add(comment);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+        	DBConnection.closeConnection();
+        }        
+		return list;    	
+    }
+
 }

@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DBConnection {
 	private static final String MYSQL_USERNAME = "root";
-	private static final String MYSQL_PASSWORD = "liverpool";
+	private static final String MYSQL_PASSWORD = "irakli500";
 	private static final String MYSQL_DATABASE_SERVER = "localhost";
-	private static final String MYSQL_DATABASE_NAME = "turistadb";
+	private static final String MYSQL_DATABASE_NAME = "turista";
 
 
 	private static Connection conn;

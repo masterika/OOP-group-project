@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -69,5 +70,9 @@ public class UploadPhoto extends HttpServlet {
 				e.printStackTrace();
 			}
         }
+		DBConnection.closeConnection();
+		
+		RequestDispatcher r = request.getRequestDispatcher("edit_profile_hotel.jsp?id="+request.getParameter("ID"));
+		r.forward(request, response);
 	}
 }

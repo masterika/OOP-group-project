@@ -30,7 +30,13 @@
 	 border-radius: 5px;
 	border: 2px solid #C2D6D6;
 }
-
+#activities{
+	height: 100px;
+	 width: 500px ;
+	 border-radius: 5px;
+	border: 2px solid #C2D6D6;
+}
+}
 #reg-users-tabs {
 	height: 100px;
 	 width: 500px ;
@@ -43,4 +49,26 @@
 	 width: 500px;
 	  border-radius: 5px;
 	border: 2px solid #C2D6D6;
+}
+
+.bann-button{
+    height: 25px;
+    width: 80px;
+    border-radius: 5px;
+    background-color: #FF4747;
+    color: black;
+    text-align:center;
+    font-family: cursive;
+    text-align: center;
+    
+}
+.bann-button-hover{
+    background-color: #B23232;
+    font-size: 20px
+    
+}
+.bann-button-clicked{
+    background-color: #C97070;
+
+    
 }

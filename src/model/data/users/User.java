@@ -11,6 +11,8 @@ public class User{
 	protected String telephone;
 	private boolean isApproved;
 	private Date date;
+    private boolean bannStatus;
+
 
 
 	public User() {
@@ -65,4 +67,18 @@ public class User{
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+	
+
+    public void setBannStatus(int i) {
+        if (i == 0)
+            this.bannStatus = true;
+        else
+            this.bannStatus = false;
+    }
+
+    public boolean getBannStatus() {
+        return bannStatus;
+    }
+
+
 }

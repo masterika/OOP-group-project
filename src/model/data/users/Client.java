@@ -1,10 +1,8 @@
 package model.data.users;
 
-import model.data.Wishlist;
 
 public class Client extends User{
-
-	private Wishlist wishlist;
+	
 	private int clientId;
 	private String name, surname;
 	public Client() {	
@@ -33,11 +31,8 @@ public class Client extends User{
 	
 	public String getSurName() {
 		return surname;
-	}
+	}	
 	
-	public Wishlist getWishlist (){
-		return wishlist;
-	}
 }
 	
 

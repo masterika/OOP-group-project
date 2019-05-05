@@ -7,10 +7,10 @@ package model.data;
  * hotel - where you are staying, duration - how many days are you staying and city
  */
 public class Location { // this class is trip helper class
-	private int hotel; // hotel name, where you are staying
+	private int hotel; 
 	private int duration; // duration in days
 	private String city; // name of the city
-	private int hotelId;
+	private int userId; // userId corresponding to hotel.
 	private int id;
 	public int getHotel() { // returns hotel's identification 
 		return hotel;
@@ -30,17 +30,17 @@ public class Location { // this class is trip helper class
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public int getHotelId() {
-		return hotelId;
-	}
-	public void setHotelId(int hotelId) {
-		this.hotelId = hotelId;
-	}	
 	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}	
 }
